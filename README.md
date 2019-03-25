@@ -1,8 +1,8 @@
-# Microservices Architecture
+# Microservices architecture
 
 Contoso Events is an online service for concerts, sporting and other event ticket sales. They are redesigning their solution for scale with a microservices strategy and want to implement a proof of concept (POC) for the path that receives the most traffic; ticket ordering.
 
-## Target Audience
+## Target audience
 
 - Application developer
 - Infrastructure architect
@@ -15,13 +15,13 @@ In this workshop, you will look at the process of developing a proof of concept 
 
 By the end of this workshop you will be better able to design and deploy solutions based on Service Fabric and Azure Functions, in conjunction with other Azure features.
 
-### Whiteboard Design Session
+### Whiteboard design session
 
 In this whiteboard design session, you will work in a group to design a solution that leverages aspects from microservices and serverless architectures to help an online concert ticket vendor survive the first five minutes of crushing load. You will handle the client's scaling needs through microservices built on top of Service Fabric and apply smooth updates or roll back failing updates. Finally, your group will design an implementation of load testing to optimize the architecture for handling spikes in traffic.
 
 At the end of this whiteboard design session, you will better be able to design scalable microservices solutions involving Service Fabric and Azure Functions.
 
-### Hands-on Lab
+### Hands-on lab
 
 In this hands-on lab, you will construct an end-to-end Proof of concept for ticket ordering based on a microservices architecture based on Service Fabric and Azure Functions, alongside other supporting Azure features such as API Management, Web Apps, Azure Active Directory and Cosmos DB.
 
