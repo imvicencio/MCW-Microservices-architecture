@@ -54,7 +54,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
     -   Azure Development workload enabled in Visual Studio 2017 (enabled by default on the VM)
 
-    -   Service Fabric SDK 3.1 or later for Visual Studio 2017
+    -   Service Fabric SDK 3.3 or later for Visual Studio 2017
 
     -   Google Chrome browser (Swagger commands do not work in IE)
 
@@ -80,19 +80,19 @@ In this task, you will provision the Service Fabric Cluster in Azure.
 
 3.  On the Basics blade of the Create Service Fabric cluster screen, enter the following:
 
--   Cluster name: Enter contosoeventssf-SUFFIX, replacing SUFFIX with your alias, initials, or another value to make the name unique (indicated by a green check in the text box).
+-   Cluster name: Enter **contosoeventssf-SUFFIX**, replacing SUFFIX with your alias, initials, or another value to make the name unique (indicated by a green check in the text box).
 
 -   Operating system: Set to WindowsServer 2016-Datacenter.
 
--   User name: Enter holuser.
+-   User name: Enter **holuser**
 
--   Password: Enter Password.1!!
+-   Password: Enter **Password.1!!**
 
 -   Subscription: Select the subscription you are using for this lab.
 
--   Resource Group: Select Create new, and enter hands-on-labs for the resource group name. You can add -SUFFIX, if needed to make resource group name unique. This is the resource group you will use for all resources you create for this hands-on lab.
+-   Resource Group: Select Create new, and enter **hands-on-lab** for the resource group name. You can add -SUFFIX, if needed to make resource group name unique. This is the resource group you will use for all resources you create for this hands-on lab.
 
--   Location: Select the region to use.
+-   Location: Select the region to use.  Opt to select the closest region to your current location.
 
 -   Select OK.
 
@@ -137,10 +137,10 @@ In this task, you will provision the Service Fabric Cluster in Azure.
 
 -   On the "Create key vault" configuration blade enter:
 
-    -   Name: hands-on-lab-SUFFIX
+    -   Name: **hands-on-lab-SUFFIX**
 
-    -   Resource Group: hands-on-lab2-SUFFIX
-
+    -   Resource Group: Select "Create new" and set the name as **hands-on-lab**
+    
     -   Location: Use the same location as the first resource group you created.
 
         ![Create a new vault in selected in the Key vault blade, and the values specified above are entered into the Create key vault blade.](media/b4-image9.png "Key vault and Create key vault blades")
