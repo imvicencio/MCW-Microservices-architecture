@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-November 2018
+May 2019
 </div>
     
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2018 Microsoft Corporation. All rights reserved.
+© 2016 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -99,7 +99,7 @@ The following figures are intended to help you keep track of all the technologie
 
 1.  Microsoft Azure subscription must be pay-as-you-go or MSDN
 
-    -   Trial subscriptions will not work
+    -   Trial subscriptions will not work.
 
 2.  A virtual machine configured with (see Before the hands-on lab):
 
@@ -216,17 +216,17 @@ In these steps, you will provision a Web App in a new App Service Plan.
 
     e.  App Service plan/Location: Click to open the App Service plan blade, then select **Create new**.
 
-        - App service plan: Enter **contosoeventsplan-SUFFIX**
+       - App service plan: Enter **contosoeventsplan-SUFFIX**
 
-        - Location: Select the same location you have been using for other resources in this lab.
+       - Location: Select the same location you have been using for other resources in this lab.
 
-        - Pricing tier: Select **S1 Standard**.
+       - Pricing tier: Select **S1 Standard**.
 
-        - Select **OK**.
+       - Select **OK**.
     
     f.  Publish: Select **Code**
     
-    g.  Application Insights: Click to open the Application Insights blade, then select **Disable**.  Select **Apply**
+    g.  Application Insights: Click to open the Application Insights blade, then select **Disable**.  Select **Apply**.
     
     h.  Select **Create** to provision the Web App.
 
@@ -330,15 +330,15 @@ In this section, you will provision a Cosmos DB account, a Cosmos DB Database an
 
     b.  Resource group: Select the **hands-on-lab** resource group previously created.
 
-    c.  Account Name: Enter a unique value, such as **contosoeventsdb-SUFFIX**
+    c.  Account Name: Enter a unique value, such as **contosoeventsdb-SUFFIX**.
 
     d.  API: Select **Core (SQL)**.
 
     e.  Location: Select the location used for the hands-on-lab resource group. If this location is not available, select one close to that location that is available.
     
-    f.  Geo-Redundancy: Select **Disable**
+    f.  Geo-Redundancy: Select **Disable**.
     
-    g.  Multi-region Writes: Select **Disable**
+    g.  Multi-region Writes: Select **Disable**.
 
     h.  Select **Review + create**.
 
@@ -360,17 +360,17 @@ In this section, you will provision a Cosmos DB account, a Cosmos DB Database an
 
 6.  On the Add Container dialog, enter the following:
 
-    a.  Database id: Select **Create new** and enter **TicketManager**
+    a.  Database id: Select **Create new** and enter **TicketManager**.
 
     b.  Provision database throughput: Leave unchecked.
 
-    c.  Container id: Enter **Orders**
+    c.  Container id: Enter **Orders**.
     
     d.  Partition key: **/EventId**
     
-    e.  My partition key is larger than 100 bytes: Leave unchecked
+    e.  My partition key is larger than 100 bytes: Leave unchecked.
 
-    f.  Throughput: Enter **2500**
+    f.  Throughput: Enter **2500**.
 
     g.  Select **OK** to create the new container.
 
@@ -828,12 +828,13 @@ You will also create a second function that will be used to generate load agains
 
 11.  In the Create Function blade, enter the following:
     
-    a.  Name: **ProcessOrderExternalizations**
+   a.  Name: **ProcessOrderExternalizations**
     
-    b.  Queue name: **contosoevents-externalization-requests**
+   b.  Queue name: **contosoevents-externalization-requests**
 
-    c.  Storage account connection: Select **contosoeventsstore**
-    d.  Select **Create**
+   c.  Storage account connection: Select **contosoeventsstore**
+   
+   d.  Select **Create**
     
 ![The values above are entered into the Azure Queue Storage trigger settings.](media/create-queue-storage-trigger.png  "Queue trigger settings")
 
@@ -841,7 +842,7 @@ You will also create a second function that will be used to generate load agains
 
     a. On the Integrate screen, set Message parameter name to **orderItem**.
 
-    b. Select **Save**
+    b. Select **Save**.
 
     ![The Message parameter name is set to orderItem and Save is circled. ](media/integrate-screen.png "Integrate screen")
 
@@ -857,19 +858,19 @@ You will also create a second function that will be used to generate load agains
 
 15. On the Azure Cosmos DB output screen, enter the following:
 
-    a.  Document parameter name: Enter **orderDocument**
+    a.  Document parameter name: Enter **orderDocument**.
     
-    b.  Use function return value: Leave unchecked
+    b.  Use function return value: Leave unchecked.
 
-    c.  Collection name: Enter **Orders**
+    c.  Collection name: Enter **Orders**.
 
-    d.  Partition key: Leave empty
+    d.  Partition key: Leave empty.
 
-    e.  Database name: Enter **TicketManager**
+    e.  Database name: Enter **TicketManager**.
 
     f.  Azure Cosmos DB account connection: Select **new** next to the text box, and select the Cosmos DB you created in Exercise 1, Task 6.
     
-    g.  Collection throughput: Leave empty
+    g.  Collection throughput: Leave empty.
 
     ![Screenshot of Azure Cosmos DB output window with the values specified above entered into the fields.](media/cosmos-db-output-window.png "Azure Cosmos DB output window")
    
@@ -909,9 +910,9 @@ You will also create a second function that will be used to generate load agains
 
 25. In the Queue trigger dialog, enter the following:
 
-    a.  Name: Enter **ProcessSimulationRequests**
+    a.  Name: Enter **ProcessSimulationRequests**.
 
-    b.  Queue name: Enter your simulation queue name, from Cloud explorer in Visual Studio. The value should be **contosoevents-simulation-requests**
+    b.  Queue name: Enter your simulation queue name, from Cloud explorer in Visual Studio. The value should be **contosoevents-simulation-requests**.
 
     c.  Storage account connection: Select **contosoeventsstore** from the drop down.
 
@@ -926,11 +927,11 @@ You will also create a second function that will be used to generate load agains
 
 27. Make sure Azure Queue Storage is selected under Triggers, then enter the following:
 
-    a.  Message parameter name: Enter **simulationRequest**
+    a.  Message parameter name: Enter **simulationRequest**.
 
-    b.  Storage account connection: Leave set to **contosoeventsstore**
+    b.  Storage account connection: Leave set to **contosoeventsstore**.
 
-    c.  Queue name: Leave as **contosoevents-simulation-requests**
+    c.  Queue name: Leave as **contosoevents-simulation-requests**.
 
     d.  Select **Save**.
 
@@ -944,13 +945,13 @@ You will also create a second function that will be used to generate load agains
 
     a. Scroll all the way to the right until you the View Files link is displayed.
 
-    b. Select **View Files**
+    b. Select **View Files**.
     
     !["An arrow pointing to the View Files link in the far corner of the screen"](media/view-files-link.png "View files link")
 
-    c. Select **+ Add**
+    c. Select **+ Add**.
 
-    d. Name the new file **run.ps1**
+    d. Name the new file **run.ps1**.
 
     ![Add is selected and a file named run.ps1 has been added in the View File screen. ](media/add-file-powershell.png "Add run powershell file")
 
@@ -989,11 +990,11 @@ In this task, you will test the ticket order processing back-end, to validate th
 
     ![In the function apps pane, under Function, the ProcessOrderExternalizations ID parameter value is circled. under Logs, the same ID value is circled.](media/image132.png "Function apps pane")
 
-    >**Note**: If when selecting the Monitor tab a request to configure Application Insights is displayed, choose Switch to classic view.
+    >**Note**: If when selecting the Monitor tab, a request to configure Application Insights is displayed, choose Switch to classic view.
   
     ![In the Monitor tab, the Switch to classic view is circled.](media/image132a.png "Monitor tab Application Insights request")
 
-7.  In the Azure portal, navigate to your Cosmos DB account, and from the top menu of the Overview blade, select Data Explorer
+7.  In the Azure portal, navigate to your Cosmos DB account, and from the top menu of the Overview blade, select Data Explorer.
 
     ![In the Azure Cosmos DB account pane, the Data Explorer button is circled.](media/image133.png "Azure Cosmos DB account pane")
 
@@ -1142,7 +1143,7 @@ In this task, you will import the Web API description to your API Management ser
 
     c. Enter **events** in the API URL suffix textbox.
     
-    d. Tags: Leave empty
+    d. Tags: Leave empty.
 
     e. Select **Unlimited** in the Products.
 
@@ -1439,7 +1440,7 @@ Now that the upgrade is completed successfully, you will submit a new order, and
 
     ![In the POST method for api/orders section, the order field now contains the previous JSON. At the bottom, the Try it out button is circled.](media/image175.png "POST /api/orders section")
 
-4.  Once you get back a 200 response code, the order id will be returned in the Response Body.
+4.  Once you get back a 200-response code, the order id will be returned in the Response Body.
 
     ![In the Try it out section, the Response Body unique order ID is circled.](media/image176.png "Try it out section")
 
