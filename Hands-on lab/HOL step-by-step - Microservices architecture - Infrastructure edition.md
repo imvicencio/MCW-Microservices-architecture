@@ -702,14 +702,14 @@ You will also create a second function that will be used to generate load agains
     a. Continue to install any additional extensions required.
 
 11.  In the Create Function blade, enter the following:
-    
-   a.  Name: **ProcessOrderExternalizations**
-    
-   b.  Queue name: **contosoevents-externalization-requests**
 
-   c.  Storage account connection: Select **contosoeventsstore**.
+     a.  Name: **ProcessOrderExternalizations**
+    
+     b.  Queue name: **contosoevents-externalization-requests**
+
+     c.  Storage account connection: Select **contosoeventsstore**.
    
-   d.  Select **Create**.
+     d.  Select **Create**.
     
 ![The values above are entered into the Azure Queue Storage trigger settings.](media/create-queue-storage-trigger.png  "Queue trigger settings")
 
@@ -816,7 +816,7 @@ You will also create a second function that will be used to generate load agains
 
     ![Under Functions, ProcessSimulation Requests is circled.](media/image128.png "Functions section")
 
-29. In this step we will manually add an empty powershell file to allow us to paste in an existing powershell script for our function.
+29. In this step we will manually add an empty PowerShell file to allow us to paste in an existing PowerShell script for our function.
 
     a. Scroll all the way to the right until you the View Files link is displayed.
 
@@ -867,7 +867,7 @@ In this task, you will test the ticket order processing back-end, to validate th
 
     ![In the function apps pane, under Function, the ProcessOrderExternalizations ID parameter value is circled. under Logs, the same ID value is circled.](media/image132.png "Function apps pane")
 
-    >**Note**: If when selecting the Monitor tab a request to configure Application Insights is displayed, choose Switch to classic view.
+    >**Note**: If when selecting the Monitor tab, a request to configure Application Insights is displayed, choose Switch to classic view.
     
     ![In the Monitor tab, the Switch to classic view is circled.](media/image132a.png "Monitor tab Application Insights request")
 
@@ -1316,7 +1316,7 @@ Now that the upgrade is completed successfully, you will submit a new order, and
 
     ![In the POST method for api/orders section, the order field now contains the previous JSON. At the bottom, the Try it out button is circled.](media/image175.png "POST /api/orders section")
 
-4.  Once you get back a 200 response code, the order id will be returned in the Response Body.
+4.  Once you get back a 200-response code, the order id will be returned in the Response Body.
 
     ![In the Try it out section, the Response Body unique order ID is circled.](media/image176.png "Try it out section")
 
@@ -1749,7 +1749,7 @@ In this task, you will set up the Azure Active Directory B2C directory for your 
 
     ![On the Settings blade, under Policies, Sign-up policies is selected. in the Sign-up policies pane, the Add button is selected. In the Add sign-up policy pane, the Name field is set to signup.](media/image200.png "Settings blade")
 
-18. Under **Identity providers**, check the **User ID Signup** chekcbox
+18. Under **Identity providers**, check the **User ID Signup** checkbox.
 
 19. Select **Create**.
 
@@ -1946,7 +1946,7 @@ In this task, you will test the web application and register yourself as a user 
 
 Duration: 10 minutes
 
-In this exercise, attendees will deprovision any Azure resources that were created in support of the lab. You should follow all steps provided after attending the Hands-on lab.
+In this exercise, attendees will deprovision any Azure resources that were created in support of the lab. 
 
 ### Task 1: Delete the resource group
 
