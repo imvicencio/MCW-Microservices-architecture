@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 using Owin;
-using Microsoft.Practices.Unity;
+using Unity;
 using System.Web.Http.Cors;
 using System.Net.Http.Formatting;
 using System.Web.Http.Dependencies;

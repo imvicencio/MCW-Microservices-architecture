@@ -35,7 +35,7 @@ namespace ContosoEvents.Web.Controllers
                     UserName = ClaimsPrincipal.Current?.GetUserId(),
                     Email = ClaimsPrincipal.Current?.Identity?.Name,
                     EventId = eventData.Id,
-                    PaymentProcessorTokenId = order.PaymentProcessorToken,
+                    PaymentProcessorTokenId = string.IsNullOrWhiteSpace(order.PaymentProcessorToken) ? Guid.NewGuid().ToString(): order.PaymentProcessorToken, //We need to send a payment processor token
                     Tickets = order.TicketCount
                 };
                 if (string.IsNullOrWhiteSpace(data.Email)) data.Email = order.DeliveryEmail;

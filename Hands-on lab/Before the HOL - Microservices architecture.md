@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-November 2018
+May 2019
 </div>
 
 
@@ -19,7 +19,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2018 Microsoft Corporation. All rights reserved.
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -46,7 +46,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 1.  Microsoft Azure subscription must be pay-as-you-go or MSDN
 
-    -   Trial subscriptions will not work
+    -   Trial subscriptions will not work.
 
 2.  A virtual machine configured with:
 
@@ -54,7 +54,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
     -   Azure Development workload enabled in Visual Studio 2017 (enabled by default on the VM)
 
-    -   Service Fabric SDK 3.1 or later for Visual Studio 2017
+    -   Service Fabric SDK 3.3 or later for Visual Studio 2017
 
     -   Google Chrome browser (Swagger commands do not work in IE)
 
@@ -80,19 +80,19 @@ In this task, you will provision the Service Fabric Cluster in Azure.
 
 3.  On the Basics blade of the Create Service Fabric cluster screen, enter the following:
 
--   Cluster name: Enter contosoeventssf-SUFFIX, replacing SUFFIX with your alias, initials, or another value to make the name unique (indicated by a green check in the text box).
+-   Cluster name: Enter **contosoeventssf-SUFFIX**, replacing SUFFIX with your alias, initials, or another value to make the name unique (indicated by a green check in the text box).
 
 -   Operating system: Set to WindowsServer 2016-Datacenter.
 
--   User name: Enter holuser.
+-   Username: Enter **holuser**.
 
--   Password: Enter Password.1!!
+-   Password: Enter **Password.1!!**
 
 -   Subscription: Select the subscription you are using for this lab.
 
--   Resource Group: Select Create new, and enter hands-on-labs for the resource group name. You can add -SUFFIX, if needed to make resource group name unique. This is the resource group you will use for all resources you create for this hands-on lab.
+-   Resource Group: Select Create new, and enter **hands-on-lab** for the resource group name. You can add -SUFFIX, if needed to make resource group name unique. This is the resource group you will use for all resources you create for this hands-on lab.
 
--   Location: Select the region to use.
+-   Location: Select the region to use. Select the closest region to your current location.
 
 -   Select OK.
 
@@ -100,9 +100,9 @@ In this task, you will provision the Service Fabric Cluster in Azure.
 
 4.  On the Cluster configuration blade, set the following:
 
--   Node type count: Select 1.
+-   Node type count: **Select 1**.
 
--   Node type 1 (Primary): Select to configure required settings. On the Node type configuration blade enter:
+-   Node type 1 (Primary): **Select to configure required settings**. On the Node type configuration blade enter:
 
     -   Node type name: Enter **Web**.
 
@@ -137,10 +137,10 @@ In this task, you will provision the Service Fabric Cluster in Azure.
 
 -   On the "Create key vault" configuration blade enter:
 
-    -   Name: hands-on-lab-SUFFIX
+    -   Name: **hands-on-lab-SUFFIX**
 
-    -   Resource Group: hands-on-lab2-SUFFIX
-
+    -   Resource Group: Select "Create new" and set the name as **hands-on-lab**
+    
     -   Location: Use the same location as the first resource group you created.
 
         ![Create a new vault in selected in the Key vault blade, and the values specified above are entered into the Create key vault blade.](media/b4-image9.png "Key vault and Create key vault blades")
@@ -189,9 +189,9 @@ In this task, you will provision a virtual machine (VM) in Azure. The VM image u
 
     -   VM disk type: Leave Premium SSD selected.
 
-    -   User name: Enter holuser.
+    -   Username: Enter **holuser**.
 
-    -   Password: Enter Password.1!!
+    -   Password: Enter **Password.1!!**
 
     -   Subscription: Select the subscription you are using for this lab.
 
@@ -244,9 +244,9 @@ In this step, you will open an RDP connection to your Lab VM and disable Interne
 
 7.  Enter the following credentials (or the non-default credentials if you changed them):
 
-    a.  User name: holuser
+    a.  Username: Enter **holuser**
 
-    b.  Password: Password.1!!
+    b.  Password: Enter **Password.1!!**
 
     ![The Windows Security Credentials page displays](media/b4-image21.png "Windows Security Credentials page")
 
@@ -343,7 +343,7 @@ In this task, you will download the required certificate and install it on your 
 
 6.  Copy the downloaded certificate into the Lab VM.
 
-7.  On the Lab VM, double-click the copied certificate to initiate it's installation. Select Local Machine as the Store Location and select Next.
+7.  On the Lab VM, double-click the copied certificate to initiate its installation. Select Local Machine as the Store Location and select Next.
 
     ![Double-click the certificate to install, select Local Machine and select Next.](media/b4-image38.png "Certificate Import Wizard")
 
@@ -367,7 +367,7 @@ In this task, you will download the required certificate and install it on your 
 
     ![Import success.](media/b4-image43.png "Import successful")
 
-13. On the Lab VM, double-click the copied certificate once again to initiate it's installation. Select Current User as the Store Location and select Next.
+13. On the Lab VM, double-click the copied certificate once again to initiate its installation. Select Current User as the Store Location and select Next.
 
     ![Double-click the certificate to install, select Local Machine and select Next.](media/b4-image44.png "Certificate Import Wizard")
 
@@ -417,11 +417,11 @@ In this task, you will validate that the ports are open and if not, fix the issu
 
 6.  On the Add health probe blade, enter the following:
 
-    -   Name: Enter WebApiPortProbe.
+    -   Name: Enter **WebApiPortProbe**.
 
     -   Protocol: Select TCP.
 
-    -   Port: Enter 8082.
+    -   Port: Enter **8082**.
 
     -   Interval: Leave the default value.
 
@@ -441,7 +441,7 @@ In this task, you will validate that the ports are open and if not, fix the issu
 
 9.  On the Add Load balancing rules blade, enter the following:
 
-    -   Name: Enter LBWebApiPortRule
+    -   Name: Enter **LBWebApiPortRule**.
 
     -   IP Version: Leave IPv4 selected.
 
@@ -449,9 +449,9 @@ In this task, you will validate that the ports are open and if not, fix the issu
 
     -   Protocol: Leave as TCP.
 
-    -   Port: Set to 8082.
+    -   Port: Set to **8082**.
 
-    -   Backend port: Set to 8082.
+    -   Backend port: Set to **8082**.
 
     -   Backend pool: Leave the default value selected.
 
