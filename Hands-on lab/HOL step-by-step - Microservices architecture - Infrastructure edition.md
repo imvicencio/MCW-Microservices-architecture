@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-November 2018
+May 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2018 Microsoft Corporation. All rights reserved.
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -112,7 +112,7 @@ The following figures are intended to help you keep track of all the technologie
 
 1.  Microsoft Azure subscription must be pay-as-you-go or MSDN
 
-    -   Trial subscriptions will not work
+    -   Trial subscriptions will not work.
 
 2.  A virtual machine configured with (see Before the hands-on lab):
 
@@ -260,13 +260,13 @@ In these steps, you will provision a Web App in a new App Service Plan.
 
     e.  App Service plan/Location: Click to open the App Service plan blade, then select Create new.
 
-        - App service plan: Enter **contosoeventsplan-SUFFIX**.
+       - App service plan: Enter **contosoeventsplan-SUFFIX**.
 
-        - Location: Select the same location you have been using for other resources in this lab.
+       - Location: Select the same location you have been using for other resources in this lab.
 
-        - Pricing tier: Select **S1 Standard**.
+       - Pricing tier: Select **S1 Standard**.
 
-        - Select **OK**.
+       - Select **OK**.
 
     f.  Select Code for the Publish setting.
 
@@ -460,6 +460,7 @@ The purpose of this task is to make sure that the source code compiles, and that
 1.  On the Lab VM, make sure the local Service Fabric environment is running by selecting the arrow in the system tray, and checking for the appearance of the Service Fabric icon. 
 
 >**Note**: You may need to restart your VM if you've recently installed the Service Fabric Local Cluster Manager, for the icon to appear.
+
     ![In the Lab VM, the arrow and the Service Fabric icon are circled.](media/image72.png "Lab VM")
 
 2.  If it is not there, you will need to start the local Service Fabric cluster. To do this, select the Start menu, scroll down to the apps listed under "S," and select Service Fabric Local Cluster Manager. The icon (Step 1) should now appear.
@@ -702,12 +703,13 @@ You will also create a second function that will be used to generate load agains
 
 11.  In the Create Function blade, enter the following:
     
-    a.  Name: **ProcessOrderExternalizations**
+   a.  Name: **ProcessOrderExternalizations**
     
-    b.  Queue name: **contosoevents-externalization-requests**
+   b.  Queue name: **contosoevents-externalization-requests**
 
-    c.  Storage account connection: Select **contosoeventsstore**
-    d.  Select **Create**
+   c.  Storage account connection: Select **contosoeventsstore**.
+   
+   d.  Select **Create**.
     
 ![The values above are entered into the Azure Queue Storage trigger settings.](media/create-queue-storage-trigger.png  "Queue trigger settings")
 
@@ -1185,9 +1187,9 @@ This task will illustrate the mechanism that Service Fabric provides for upgradi
 
 In Service Fabric, deployments can be either regular or upgrade. A regular deployment erases any previous deployment data while the upgrade deployment preserves it. There are advantages to upgrades:
 
--   Stateful service data will not be lost during upgrade.
+   a. Stateful service data will not be lost during upgrade.
 
--   Availability remains during the upgrade.
+   b. Availability remains during the upgrade.
 
 The following figure illustrates the deployment hierarchy:
 
@@ -1719,9 +1721,9 @@ In this task, you will set up the Azure Active Directory B2C directory for your 
 
 7.  Select **Yes** for Allow implicit flow.
 
-8.  Add a reply URL for local testing: <https://localhost:44327/>
+8.  Add a reply URL for local testing: <https://localhost:44327/>.
 
-9.  Add a reply URL for the hosted Web App as you named it, for example: <https://contosoeventsweb-SUFFIX.azurewebsites.net/>
+9.  Add a reply URL for the hosted Web App as you named it, for example: <https://contosoeventsweb-SUFFIX.azurewebsites.net/>.
 
     > **Note**: Make sure to include the closing / or the configuration will not work.
 
@@ -1767,9 +1769,9 @@ In this task, you will set up the Azure Active Directory B2C directory for your 
 
     ![In the Edit Policy pane, Token, session & SSO config (Default) is selected. In the Token, session & SSO config pane, the Claim representing policy ID toggle button is set to acr, and is circled.](media/image204.png "Edit Policy pane")
 
-26. In the Settings blade, select **+ New user flow**, then select **All**
+26. In the Settings blade, select **+ New user flow**, then select **All**.
 
-27. Select **Sign in**
+27. Select **Sign in**.
 
 28. Set the policy name to **signin**.
 
@@ -1789,7 +1791,7 @@ In this task, you will set up the Azure Active Directory B2C directory for your 
 
 36. Choose **Save**.
 
-43. In the Settings blade, select **+ New user flow**, then select **All**
+43. In the Settings blade, select **+ New user flow**, then select **All**.
 
 44. Select **Profile editing**.
 
@@ -1959,3 +1961,6 @@ In this exercise, attendees will deprovision any Azure resources that were creat
     ![Screenshot of the Active Directory icon.](media/image217.png "Active Directory icon")
 
 5.  Select the tenant to delete, and delete it.
+
+
+You should follow all steps provided *after* attending the Hands-on lab.
