@@ -634,11 +634,11 @@ In this exercise, you will configure the API Management service in the Azure por
 
 In this task, you will import the Web API description to your API Management service to create an endpoint.
 
-1.  In the Azure portal, navigate to the hands-on-lab resource group, and select your API Management Service from the list of resources.
+1.  In the Azure portal, navigate to the **hands-on-lab** resource group, and select your API Management Service from the list of resources.
 
     ![In the Resource group list of resources, the contosoevents-SUFFIX API Management service is circled.](media/image141.png "Resource group list of resources")
 
-2.  In the API Management blade, select **APIs** under Api Management.
+2.  In the API Management blade, select **APIs** under API Management.
 
     ![In the API Management blade, on the left, under Api Management, APIs is circled.](media//image142.png "API Management blade")
 
