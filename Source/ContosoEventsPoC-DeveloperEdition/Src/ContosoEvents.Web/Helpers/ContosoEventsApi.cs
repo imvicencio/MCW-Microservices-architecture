@@ -37,7 +37,7 @@ namespace ContosoEvents.Web.Helpers
 
         public static IList<Event> GetEvents()
         {
-            var request = new RestRequest("api/events", Method.GET);
+            var request = new RestRequest("events/api/Events", Method.GET);
 
             return Execute<List<Event>>(request);
         }
