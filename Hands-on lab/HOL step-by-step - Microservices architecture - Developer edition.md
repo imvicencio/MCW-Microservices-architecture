@@ -85,7 +85,7 @@ Contoso Events is an online service for concerts, sporting and other event ticke
 
 In this hands-on lab, you will construct an end-to-end POC for ticket ordering. You will leverage Service Fabric, API Management, Function Apps, Web Apps, and Cosmos DB.
 
-![The Event Ticket sales flowchart begins with Azure AD B2C, which points to Contoso Events Site Web App. A bi-directional arrow points between the Web App and API Manager, which in turn has a bi-direction arrow pointing between it and Web API (Stateless Service). An arrow points from there to Ticket Order Service (Stateful Service), which points to Ticket Order Actor (Processor). The Web API, Ticket Order Service, and Ticket Order Actor are all part of the Contoso Events Service Fabric App. from Ticket Order Actor, an arrow points to Order Externalization (Queue), then on to Process Order Externalization (Azure Function), and ends at Cosmos DB (Orders Collection). ](media/image2.png "Event Ticket sales flowchart")
+![The Event Ticket sales flowchart begins with Azure AD B2C, which points to Contoso Events Site Web App. A bi-directional arrow points between the Web App and API Manager, which in turn has bi-directional arrows pointing between it and the Events microservice and the Orders microservice. Two bi-directional arrows point from the microservices to the Container Registry.  The Orders microservice has an arrow that points to Order Externalization (Queue), then on to Process Order Externalization (Azure Function), and ends at Cosmos DB (Events and Orders). ](media/image2.png "Event Ticket sales flowchart")
 
 ## Solution architecture
 
