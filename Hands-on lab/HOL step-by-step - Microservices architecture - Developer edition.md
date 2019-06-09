@@ -630,9 +630,9 @@ Duration: 15 minutes
 
 In this exercise, you will configure the API Management service in the Azure portal.
 
-### Task 1: Import API
+### Task 1: Import Events API
 
-In this task, you will import the Web API description to your API Management service to create an endpoint.
+In this task, you will import the Events API description to your API Management service to create an endpoint.
 
 1.  In the Azure portal, navigate to the **hands-on-lab** resource group, and select your API Management Service from the list of resources.
 
@@ -646,9 +646,9 @@ In this task, you will import the Web API description to your API Management ser
 
     ![In the APIs blade, OpenAPI specification is circled.](media//image143.png "APIs blade")
 
-4.  Return to your Swagger browser window, and copy the URL from the textbox at the top of the screen, next to the Swagger logo, as shown in the screen shot below.
+4.  In a browser window, open the Contoso Events API - Events Swagger page, by navigating to `http://contosoeventssf-SUFFIX.southcentralus.cloudapp.azure.com:8082/swagger`.  Copy the Swagger document location by right-clicking the **/swagger/v1/swagger.json** link.
 
-    ![In the Swagger browser window, the URL is circled.](media/image144.png "Swagger browser window")
+    ![In the Swagger browser window, the Copy Link Location option is circled.](media/swagger-events.png "Swagger browser window")
 
 5.  Return to the Create from OpenAPI specification window, click the **Full** link and do the following:
 
@@ -668,17 +668,58 @@ In this task, you will import the Web API description to your API Management ser
 
     > **Note**: You would typically create a new product for each environment in a scenario like this one. For example, Development, Testing, Acceptance and Production (DTAP) and issue a key for your internal application usage for each environment, managed accordingly.
 
-6.  Select **Settings** in the ContosoEvents.WebApi toolbar, update **Web Service URL** to point to your published API endpoint.  Ensure that it uses HTTP instead of HTTPS, and select **Save**.
+6.  Select **Settings** in the Contoso Events API - Events toolbar, update **Web Service URL** to point to your published API endpoint.  Ensure that it uses HTTP instead of HTTPS, and select **Save**.
 
-    ![On the right of ContosoEvents.WebApi api blade, the Settings tab is selected, and Web Service URL and Save are circled.](media/image145a.png "")
+    ![On the right of Contoso Events API item, the Settings tab is selected, and Web Service URL and Save are circled.](media/eventsapi-settings.png "")
 
-    > **Note**: Notice the URL under "Base URL". You will use this URL in your website configuration in the next exercise.
+    > **Note**: After saving, notice the URL under "Base URL". You will use this URL in your website configuration in the next exercise.
+    
+### Task 2:  Import Orders API
 
-7.  Select **Design**. you will see your API backend endpoint.
+In this task, you will import the Orders API description to your API Management service to create an endpoint.
 
-    ![In the APIs blade, ContosoEvents.WebApi is circled. On the right, the Design tab is selected, and the ContosoEvents.WebApi Backend endpoint URL is circled.](media/image146.png "Publisher portal")
+1.  In the Azure portal, navigate to the **hands-on-lab** resource group, and select your API Management Service from the list of resources.
 
-### Task 2: Retrieve the user subscription key
+    ![In the Resource group list of resources, the contosoevents-SUFFIX API Management service is circled.](media/image141.png "Resource group list of resources")
+
+2.  In the API Management blade, select **APIs** under API Management.
+
+    ![In the API Management blade, on the left, under Api Management, APIs is circled.](media//image142.png "API Management blade")
+
+3.  In the APIs blade, select **OpenAPI**.
+
+    ![In the APIs blade, OpenAPI specification is circled.](media//image143.png "APIs blade")
+
+4.  In a browser window, open the Orders Events API - Events Swagger page, by navigating to `http://contosoeventssf-SUFFIX.southcentralus.cloudapp.azure.com:8083/swagger`.  Copy the Swagger document location by right-clicking the **/swagger/v1/swagger.json** link.
+
+    ![In the Swagger browser window, the Copy Link Location option is circled.](media/swagger-orders.png "Swagger browser window")
+
+5.  Return to the Create from OpenAPI specification window, click the **Full** link and do the following:
+
+    a. Paste the URL copied from Swagger into the OpenAPI specification textbox.
+
+    b. Select **HTTPs** as the URL scheme.
+
+    c. Enter **events** in the API URL suffix textbox.
+    
+    d. Tags: Leave empty.
+
+    e. Select **Unlimited** in the Products.
+
+    f. Select **Create**.
+    
+    ![On the Create from OpenAPI specification window, fields are set to previously defined settings.](media/ordersapi-creation.png "Create from OpenAPI specification")
+
+    > **Note**: You would typically create a new product for each environment in a scenario like this one. For example, Development, Testing, Acceptance and Production (DTAP) and issue a key for your internal application usage for each environment, managed accordingly.
+
+6.  Select **Settings** in the Contoso Events API - Orders toolbar, update **Web Service URL** to point to your published API endpoint.  Ensure that it uses HTTP instead of HTTPS, and select **Save**.
+
+    ![On the right of Contoso Events API item, the Settings tab is selected, and Web Service URL and Save are circled.](media/ordersapi-settings.png "")
+
+    > **Note**: After saving, notice the URL under "Base URL". You will use this URL in your website configuration in the next exercise.
+
+
+### Task 3: Retrieve the user subscription key
 
 In this task, you will retrieve the subscription key for the client applications to call the new API Management endpoint.
 
@@ -700,7 +741,7 @@ In this task, you will retrieve the subscription key for the client applications
 
 5.  You now have the API Management application key you will need to configure the Function App settings.
 
-### Task 3: Configure the Function App with the API Management key
+### Task 4: Configure the Function App with the API Management key
 
 In this task, you will provide the API Management key in a setting for the Function App, so it can reach the Web API through the API Management service.
 
@@ -735,14 +776,14 @@ In this task, you will update configuration settings to communicate with the API
     <add key="apimng:BaseUrl" value="" \>
     <add key="apimng:SubscriptionKey" value="" \>
     ```
-
+    
     ![In Solution Explorer, the following folders are expanded: Web\\ContosoEvents.Web\\Web.config.](media/image152.png "Solution Explorer")
 
-2.  For the apimng:BaseUrl key, enter the base URL of the API you created in the API Management Publisher Portal (Exercise 5, Task 1, Step 5), such as <https://contosoevents-SUFFIX.azure-api.net/events/>
+2.  For the apimng:BaseUrl key, enter the base URL of the API you created in the API Management Publisher Portal (Exercise 5, Task 1, Step 5), such as <https://contosoevents-SUFFIX.azure-api.net/>
 
-    > **Note**: Make sure to include a trailing "/" or the exercise will not work.
+    > **Note**: Make sure to use only the domain name, and include a trailing "/" or the exercise will not work.
 
-3.  For the apimng:SubscriptionKey key, enter the subscription key you revealed in API Management developer portal (Exercise 5, Task 2, Step 4).
+3.  For the apimng:SubscriptionKey key, enter the subscription key you revealed in API Management developer portal (Exercise 5, Task 3, Step 3).
 
 4.  Save Web.config. You should have values for two of the API Management app settings.
 
@@ -755,6 +796,8 @@ In this task, you will test the web application calls to API Management by creat
 1.  Using Solution Explorer in Visual Studio, expand the Web folder, then right-click the ContosoEvents.Web project, select **Debug**, and then **Start new instance**.
 
     ![In Solution Explorer, ContosoEvents.Web is circled, and its right-click menu displays.](media/image154.png "Solution Explorer")
+    
+    > **Note:** If you receive an error regarding roslyn\csc.exe path, clean the Solution and rebuild.
 
 2.  If prompted about whether you would like to trust the IIS Express SSL certificate, select **Yes**, then select **Yes** again at the Security Warning prompt.
 
