@@ -137,7 +137,7 @@ Because this is a "born in Azure" solution, it depends on many Azure resources. 
     
 2.  Unzip the contents to the folder **C:\\**.
 
-3.  Locate the solution file (C:\\MCW-Microservices-architecture-master\\Source\\ContosoEventsPoC-DeveloperEdition\\Src\\ContosoEventsPOC.sln), and double-click it to open it with Visual Studio 2019.
+3.  Locate the solution file (C:\\MCW-Microservices-architecture-master\\Source\\ContosoEventsPoC-InfrastructureEdition\\Src\\ContosoEventsPOC.sln), and double-click it to open it with Visual Studio 2019.
 
 4.  If prompted about how you want to open the file, select **Visual Studio 2019**, and select **OK**.
 
@@ -483,7 +483,7 @@ In this exercise, you will create the Docker images for each of the microservice
 
 1.  Open a Command Prompt by clicking the Start menu then typing cmd
 
-2.  Change the directory to C:\MCW-Microservices-architecture-master\Source\ContosoEventsPoC-DeveloperEdition\Src
+2.  Change the directory to C:\MCW-Microservices-architecture-master\Source\ContosoEventsPoC-InfrastructureEdition\Src
 
 3.  In the Src folder as the root, type the following command in the Command Prompt: `docker build --tag [YOUR CONTAINER REGISTRY].azurecr.io/contosoevents-events:latest --file ContosoEvents.Api.Events\Dockerfile .`  Replace [YOUR CONTAINER REGISTRY] with the container registry name that you selected in Exercise 1, Task 7, Step 2.  Press Enter to execute the command and start the Docker container image creation process for the Events microservice.
 
