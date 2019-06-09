@@ -64,12 +64,14 @@ namespace ContosoEvents.Shared.Services
 
             try
             {
-                // Enqueue the event to a queue so it can be processed by an Azure function or whatever
-                if (_simulationQueue != null)
-                {
-                    var queueMessage = new CloudQueueMessage(JsonConvert.SerializeObject(request));
-                    await _simulationQueue.AddMessageAsync(queueMessage);
-                }
+                //TODO: Task 7 BEGIN - Enqueue the simulation request
+                //// Enqueue the event to a queue so it can be processed by an Azure function or whatever
+                //if (_simulationQueue != null)
+                //{
+                //    var queueMessage = new CloudQueueMessage(JsonConvert.SerializeObject(request));
+                //    await _simulationQueue.AddMessageAsync(queueMessage);
+                //}
+                //TODO: Task 7 END
             }
             catch (Exception ex)
             {

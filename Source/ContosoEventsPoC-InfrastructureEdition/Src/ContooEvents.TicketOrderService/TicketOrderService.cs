@@ -43,10 +43,6 @@ namespace ContosoEvents.TicketOrderService
             this.LoggerService = ServiceFactory.GetInstance().GetLoggerService();
             this.ActorLocationService = ServiceFactory.GetInstance().GetActorLocationService();
             this.HealthReporterService = ServiceFactory.GetInstance().GetHealtheReporterService(this.SettingService, this.LoggerService, Context.PartitionId, Context.ReplicaId, Context.NodeContext.NodeName, Context.ServiceName.ToString());
-
-            //TODO: Exercise 7 - Task 1
-            // Uncomment this line to cause a simulated failure upon upgrade!
-            //this.HealthReporterService.SendReportForService(HealthState.Error, "Simulated Error");
         }
 
         /// <summary>
@@ -105,15 +101,19 @@ namespace ContosoEvents.TicketOrderService
                     order.Id = orderId;
                     handler.Info("Processing order - Event Id: " + order.EventId + " - Order Id: " + orderId + " - tickets: " + order.Tickets);
 
-                    // Gets (or creates) a replicated queue called "OrderQueue" in this partition.
-                    var requests = await this.StateManager.GetOrAddAsync<IReliableQueue<TicketOrder>>(OrderQueueName);
+                    //TODO: Task 2.1 - Get (or create) a reliable queue called "OrderQueue" in this partition.
+                    //var requests = await this.StateManager./*...complete this...*/<IReliableQueue<TicketOrder>>(OrderQueueName);
 
-                    using (var tx = this.StateManager.CreateTransaction())
-                    {
-                        await requests.EnqueueAsync(tx, order);
-                        await tx.CommitAsync();
-                    }
+                    //TODO: Task 2.2 - Create a new transaction scope
+                    //using (var tx = this.StateManager./*...complete this...*/)
+                    //{
+                        // TODO: Task 2.3 - Enqueue the order to the reliable queue within the transaction
+                        //await requests.EnqueueAsync(/*...complete this...*/, /*...complete this...*/); 
 
+                        // TODO: Task 2.4 - Commit the transaction if enqueue was successful 
+                        //await tx./*...complete this...*/();
+                    //}
+                    
                 }
             }
             catch (Exception ex)

@@ -184,9 +184,14 @@ namespace ContosoEvents.WebApi.Controllers
 
             try
             {
-                IActorLocationService locator = ServiceFactory.GetInstance().GetActorLocationService();
-                ITicketOrderActor orderActor = locator.Create<ITicketOrderActor>(new ActorId(id), Constants.ContosoEventsApplicationName);
-                await orderActor.CancelOrder();
+                //TODO: Task 3.1 - Get the actor location service
+                //IActorLocationService locator = ServiceFactory.GetInstance()./*...complete this...*/;
+
+                //TODO: Task 3.2 - Acquire the Order Actor instance
+                //ITicketOrderActor orderActor = locator./*...complete this...*/(new ActorId(id), Constants.ContosoEventsApplicationName);
+                
+                //TODO: Task 3.3 - Cancel the order
+                //await orderActor./*...complete this...*/;
  
                 return Ok("Ok");
             }

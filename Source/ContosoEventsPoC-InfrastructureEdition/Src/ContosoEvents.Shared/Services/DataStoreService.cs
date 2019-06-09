@@ -191,7 +191,7 @@ namespace ContosoEvents.Shared.Services
 
                     var query = $"SELECT * FROM Orders o WHERE o.EventId = '{eventId}'";
                     var queryDefinition = new CosmosSqlQueryDefinition(query);
-                    var iterator = containerResponse.Container.Items.CreateItemQuery<TicketOrder>(queryDefinition, maxConcurrency: 1);
+                    var iterator = containerResponse.Container.Items.CreateItemQuery<TicketOrder>(queryDefinition, maxConcurrency:1);
 
                     var ticketOrders = new List<TicketOrder>();
 
@@ -217,7 +217,7 @@ namespace ContosoEvents.Shared.Services
                         Orders = ticketOrders.Count
                     };
                 }
-
+                
             }
             catch (Exception ex)
             {
@@ -339,7 +339,7 @@ namespace ContosoEvents.Shared.Services
                         var ticketEventCreationResponse = await containerResponse.Container.Items.CreateItemAsync(event1.Id, event1);
                     }
                 }
-
+               
             }
             catch (Exception ex)
             {

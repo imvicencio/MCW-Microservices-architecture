@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using Owin;
-using Unity;
 using System.Web.Http.Cors;
 using System.Net.Http.Formatting;
 using System.Web.Http.Dependencies;
@@ -9,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.Application;
+using Unity;
 
 namespace ContosoEvents.WebApi
 {
