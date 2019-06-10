@@ -9,7 +9,7 @@ Whiteboard design session trainer guide
 </div>
 
 <div class="MCWHeader3">
-November 2018
+June 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,41 +18,41 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2018 Microsoft Corporation. All rights reserved.
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
 **Contents**
 
-<!-- TOC -->
+<!-- Start Document Outline -->
 
-- [Trainer information](#trainer-information)
-    - [Role of the trainer](#role-of-the-trainer)
-    - [Whiteboard design session flow](#whiteboard-design-session-flow)
-    - [Before the whiteboard design session: How to prepare](#before-the-whiteboard-design-session-how-to-prepare)
-    - [During the whiteboard design session: Tips for an effective whiteboard design session](#during-the-whiteboard-design-session-tips-for-an-effective-whiteboard-design-session)
-- [Microservices architecture whiteboard design session student guide](#microservices-architecture-whiteboard-design-session-student-guide)
-    - [Abstract and learning objectives](#abstract-and-learning-objectives)
-    - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
-        - [Customer situation](#customer-situation)
-        - [Customer needs](#customer-needs)
-        - [Customer objections](#customer-objections)
-        - [Infographic for common scenarios](#infographic-for-common-scenarios)
-    - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
-    - [Step 3: Present the solution](#step-3-present-the-solution)
-    - [Wrap-up](#wrap-up)
-    - [Additional references](#additional-references)
-- [Microservices architecture whiteboard design session trainer guide](#microservices-architecture-whiteboard-design-session-trainer-guide)
-    - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study-1)
-    - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution-1)
-    - [Step 3: Present the solution](#step-3-present-the-solution-1)
-    - [Wrap-up](#wrap-up-1)
-    - [Preferred target audience](#preferred-target-audience)
-    - [Preferred solution](#preferred-solution)
-    - [Checklist of preferred objection handling](#checklist-of-preferred-objection-handling)
-    - [Customer quote (to be read back to the attendees at the end)](#customer-quote-to-be-read-back-to-the-attendees-at-the-end)
+* [Trainer information](#trainer-information)
+	* [Role of the trainer](#role-of-the-trainer)
+	* [Whiteboard design session flow](#whiteboard-design-session-flow)
+	* [Before the whiteboard design session: How to prepare](#before-the-whiteboard-design-session-how-to-prepare)
+	* [During the whiteboard design session: Tips for an effective whiteboard design session](#during-the-whiteboard-design-session-tips-for-an-effective-whiteboard-design-session)
+* [Microservices architecture whiteboard design session student guide](#microservices-architecture-whiteboard-design-session-student-guide)
+	* [Abstract and learning objectives](#abstract-and-learning-objectives)
+	* [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
+		* [Customer situation](#customer-situation)
+		* [Customer needs](#customer-needs)
+		* [Customer objections](#customer-objections)
+		* [Infographic for common scenarios](#infographic-for-common-scenarios)
+	* [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
+	* [Step 3: Present the solution](#step-3-present-the-solution)
+	* [Wrap-up](#wrap-up)
+	* [Additional references](#additional-references)
+* [Microservices architecture whiteboard design session trainer guide](#microservices-architecture-whiteboard-design-session-trainer-guide)
+	* [Step 1: Review the customer case study](#step-1-review-the-customer-case-study-1)
+	* [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution-1)
+	* [Step 3: Present the solution](#step-3-present-the-solution-1)
+	* [Wrap-up](#wrap-up-1)
+	* [Preferred target audience](#preferred-target-audience)
+	* [Preferred solution](#preferred-solution)
+	* [Checklist of preferred objection handling](#checklist-of-preferred-objection-handling)
+	* [Customer quote (to be read back to the attendees at the end)](#customer-quote-to-be-read-back-to-the-attendees-at-the-end)
 
-<!-- /TOC -->
+<!-- End Document Outline -->
 
 # Trainer information
 
@@ -170,9 +170,9 @@ When participants are doing activities, you can **look ahead to refresh your mem
 
 ## Abstract and learning objectives 
 
-In this whiteboard design session, you will work in a group to design a solution that leverages aspects from microservices and serverless architectures to help an online concert ticket vendor survive the first five minutes of crushing load. You will handle the client's scaling needs through microservices built on top of Service Fabric and apply smooth updates or roll back failing updates. Finally, your group will design an implementation of load testing to optimize the architecture for handling spikes in traffic.
+In this whiteboard design session, you will work in a group to design a solution that leverages aspects from microservices and serverless architectures to help an online concert ticket vendor survive the first five minutes of crushing load. You will handle the client's scaling needs through containerized microservices running on top of Service Fabric, and delegate the workload of tickets processing by using a storage queue for asynchronous processing and a globally distributed, high-performance database.
 
-At the end of this whiteboard design session, you will better be able to design scalable microservices solutions involving Service Fabric and Azure Functions.
+At the end of this whiteboard design session, you will be able to design scalable microservices solutions involving .NET Core, Docker, Service Fabric, Azure Functions and Cosmos DB.
 
 ## Step 1: Review the customer case study 
 
@@ -196,11 +196,11 @@ Contoso Events is an online service provider for concerts, sporting and other la
 
 Contoso Events has experienced consistent growth trends and now has almost 1 million customers. They intend to further grow market share and increase sales by redesigning their current web sites to improve usability and conversion rates, improve responsiveness across devices. In addition, they will create mobile apps for iPhone, Android and Windows Phone devices. Following this, Contoso Events plans to extend its reach through partners by exposing its core event ticket sales and reporting APIs to partners. The plan is to retire and replace the existing solution to serve customers with a better experience, preserving code where possible but migrating to a decoupled design with improved business agility.
 
-To meet demand during peak periods they rely on a combination of auto-scaling and manual intervention to scale in advance of expected bursts of traffic, such as when a popular event has tickets first go on sale. The CIO, Steve Dormer, is concerned about system performance, scalability and associated costs. The company has already been experiencing more frequent, peak traffic periods and this has increased hosting costs. He would like to investigate ways to control exponential increases in hosting and related operational costs as they grow.
+To meet demand during peak periods they rely on a combination of auto-scaling and manual intervention to scale in advance of expected bursts of traffic, such as when a popular event has tickets first go on sale. The CIO, Steve Dormer, is concerned about system performance, scalability and associated costs.  In the other hand, the company is looking forward to adopt a DevOps culture by implementing modern software architectures and development platforms.
 
 The company also has challenges rolling out new features and supporting new events on demand. Features have evolved in situ to where the solution has many interdependencies that increase the risk of regressions across features when changes are introduced. This is particularly challenging with the ticket ordering process as the data model for new events is often slightly different, which means that supporting new events may have impact on the user experience and UI, the middle tier and storage. Rolling out changes that impact this area while upwards of 50,000 users are actively placing orders, has proven to be a fragile process and requires them to schedule down time to ensure safe deployment.
 
-The CIO has heard about microservices and serverless architectures, and is interested in exploring how Service Fabric and Azure Functions may help the team to be more agile in their development cycle with impact across features, support their goals for continuous delivery, help them with a lean and effective DevOps strategy, and ultimately help with cost control as they grow and support peak periods. The solution must be capable of supporting increased ongoing and peak loads yet also control costs by making better use of available infrastructure. The team also needs tools for monitoring health and more easily managing deployments, rollbacks and recovery in the event of failure.
+The CIO has heard about microservices and serverless architectures, and is interested in exploring how Docker, .NET Core, Service Fabric and Azure Functions may help the team to be more agile in their development cycle with impact across features, support their goals for continuous delivery, help them with a lean and effective DevOps strategy, and ultimately help with cost control as they grow and support peak periods. The solution must be capable of supporting increased ongoing and peak loads yet also control costs by making better use of available infrastructure.
 
 In addition, the CIO is looking for a solid strategy around securely exposing and managing solution APIs for both internal and partner consumption. For partners, he is looking for a way to support a partner ecosystem that is easy to setup and manage.
 
@@ -220,13 +220,13 @@ According to the CIO, the current system topology handles the following core use
 
         -   This is currently the focus of peak load and scale concerns.
 
-        -   The CIO believes they should implement an asynchronous ordering process with email notifications, a pattern many busy ecommerce sites follow whereby the credit card is validated, but the actual order is not confirmed until processed from a queue.
+        -   The CIO believes they should implement an asynchronous ordering process with email notifications, a pattern many busy e-commerce sites follow whereby the credit card is validated, but the actual order is not confirmed until processed from a queue.
 
     -   **Payment**: Credit card payments are handled via a third-party payment processing service.
 
 -   **Storage**: The event catalog, customer accounts, users and orders are currently stored in a relational SQL Server database.
 
-    -   The CIO feels that a solution that reduces the overhead of state management and keeps the data closer to the compute functionality for faster retrieval will help them with future scale. 
+    -   The CIO feels that a high-available and globally distributed solution will help them with future scale. 
 
 ### Customer needs
 
@@ -254,15 +254,11 @@ According to the CIO, the current system topology handles the following core use
 
 1.  While we are interested in the microservices approach, we are still comparing Service Fabric with PaaS features such as App Services and SQL DB. How mature is Service Fabric by comparison?
 
-2.  Microservices architectures are completely new to the Contoso Events team. If we were to go forward with Service Fabric, we would like to understand what skills the team can carry forward, and how much of a learning curve exists.
+2.  Microservices architectures are completely new to the Contoso Events team. If we were to go forward with containerized microservices running on Service Fabric, we would like to understand what skills the team can carry forward, and how much of a learning curve exists.
 
-3.  We would like to understand if stateful services or stateful actors will help us with ticket ordering throughput, workflow and state management, and easier rollouts of changes to this process
+3.  Could we consider Azure Functions as an alternative back end implementation for our APIs?
 
-4.  We are not clear how and where to incorporate stateful services and actors alongside other storage such as Cosmos DB. We need the ability to support robust ad-hoc queries against our system data such as events, customers, orders and related metrics -- but would like to take advantage of the performance and reliability of Service Fabric stateful options as well.
-
-5.  Could we consider Azure Functions as an alternative back end implementation for our APIs?
-
-1.  We would like to understand more about the benefits of serverless architectures. In Azure, does it mean only using Azure Functions or is there more to it?
+4.  We would like to understand more about the benefits of serverless architectures. In Azure, does it mean only using Azure Functions or is there more to it?
 
 ### Infographic for common scenarios
 
@@ -277,14 +273,6 @@ A monolithic application contains domain-specific functionality and is normally 
 A microservice application separates functionality into separate smaller services (3). The microservices approach scales out by deploying each service independently, creating instances of these services across servers/virtual machines/containers (4).
 
 Reference: [https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-overview-microservices](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-overview-microservices)
-
-![This diagram presents a comparison of State storage in monolithic versus microservices approaches, as described in the text following this graphic.](media/image4.png "State in Monolithic vs. State in Microservices approaches")
-
-***Storage State between Monolithic and Microservices Approaches***
-
-The monolithic approach has a single database and tiers of specific technologies. The microservices approach has a graph of interconnected microservices where state is typically scoped to the microservice and various approaches are used to manage state.
-
-Source: <https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-overview-microservices>
 
 ## Step 2: Design a proof of concept solution
 
@@ -316,15 +304,13 @@ Directions: With all participants at your table, respond to the following questi
 
 1.  Illustrate in more detail the Service Fabric services and components participating in a ticket order request.
 
-2.  Describe the scalability features of this design, including any partitioning strategies that are applicable.
+2.  Describe the resiliency of this use case. How can you create an asynchronous ticket order request and guarantee processing? Are there any potential points of failure? How will you address those?
 
-3.  Describe the resiliency of this use case. How can you create an asynchronous ticket order request and guarantee processing? Are there any potential points of failure? How will you address those?
-
-4.  Describe how you will enable external clients to reach stateless HTTP services exposed from the Azure load balancer.
+3.  Describe how you will enable external clients to reach stateless HTTP services exposed from the Azure Load Balancer.
 
 *Improving DevOps workflows*
 
-1.  How would you structure the Visual Studio solution so that developers can run, debug, and publish the entire solution but also be able to publish and upgrade individual microservices (could be one or more service grouped together)?
+1.  How would you structure the Visual Studio solution so that developers can run, debug, and publish the entire solution but also be able to publish and upgrade individual microservices?
 
 2.  Describe to the customer how they can upgrade services in situ and preserve state; handle rollback and roll forward; and service self-healing features.
 
@@ -392,7 +378,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 |    |            |       
 |----------|:-------------:|
 | **Description** | **Links** |
-| Service Fabric - Overview of load balancing and addressing services | <https://azure.microsoft.com/en-us/documentation/articles/service-fabric-connect-and-communicate-with-services/> |
+| Service Fabric and containers | <https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-containers-overview> |
 | Service Fabric - HA Configuration | <https://alexandrebrisebois.wordpress.com/2016/05/31/deploy-a-geo-ha-service-fabric-cluster-on-azure/> |
 | Azure Functions | <https://azure.microsoft.com/en-us/services/functions/> |
 | Cosmos DB | <https://azure.microsoft.com/en-us/documentation/articles/documentdb-introduction/> |
@@ -478,23 +464,21 @@ After evaluating the benefits of Service Fabric, with the team at Microsoft, Con
 
     -   Requests to HTTP Web APIs at the front end will go through Azure Load Balancer and distribute across the available Service Fabric nodes in the cluster.
 
-    -   Business functionality will be implemented with stateful services and actors (microservices). Web APIs call to those microservices.
+    -   Business functionality will be implemented with containerized microservices based on Linux Docker container images. Web APIs call to those microservices.
 
-    -   Stateful services will sync their data back to the Cosmos DB instance for ad-hoc queries. They will write the job to an Azure queue.
+    -   Microservices will sync their data back to the Cosmos DB instance for ad-hoc queries. They will write the job to an Azure queue.
 
     -   An Azure Function will handle processing the queue and updating the TicketOrders and related collections in Cosmos DB according to business rules.
 
 2.  Based on the customer situation, what core services would you propose as part of the new microservices architecture? What state, if any, would those services hold? Illustrate with a diagram.
 
-    ![Diagram of a high-level architecture of the core services that compose the new microservices architecture, as well as the state they hold. The diagram is made up of external services, microservices and state, and externalized state. External services is payment processing, external state is Orders/Events/CustomerAccounts, and Microservices and state is: Event Catalog, Customer Accounts, and Ticket Orders services, Queue, Ticket Actor Service, Ticket, Email Service, and Payment Service. In the diagram, Two arrows labeled \"Read from Externalized state\" point from Externalized state to Customer Accounts Services and Event Catalog Service. The remaining microservices and state have an arrow labeled \"Esternalize state for aggregation\" pointing back to Externalized state.](media/image6.png "High-level architecture diagram")
+    ![Diagram of a high-level architecture of the core services that compose the new microservices architecture, as well as the state they hold.](media/image6.png "High-level architecture diagram")
 
-    The Ticket Orders Service will take advantage of reliable queues provided by Service Fabric to persist requests. The Ticket Actor Service processes orders in the queue, and represents a single instance of an order and its processing workflow and state. When an order is processed, the state is externalized for shared read only services to support aggregation across other data and to optimize reads.
+    When an order is processed, the state is externalized for shared read only services to support aggregation across other data and to optimize reads.
 
 *Scalability of ticket orders*
 
-1.  Illustrate in more detail the Service Fabric services and components participating in a ticket ordering request.
-    
-    ![This Scalability of Ticket Orders diagram illustrates in more detail the Service Fabric services and components participating in a ticket ordering request. The diagram is discussed in slightly more detail in the text following this diagram. However, at this time, we are unable to capture all of the information in the diagram. Future versions of this course should address this.](media/image7.png "Scalability of Ticket Orders diagram")
+1.  Describe in more detail the Service Fabric services and components participating in a ticket ordering request.
 
     Summary of technologies in the topology:
 
@@ -504,29 +488,15 @@ After evaluating the benefits of Service Fabric, with the team at Microsoft, Con
 
     -   All ticket order requests will call the Ticket Order API via the API Management layer.
 
-    -   The stateless Ticket Order API will queue the request to process an order, passing the token for credit card validation, order details, and any user details required to complete the request asynchronously.
+    -   The Orders microservice will receive the request to process an order.  The request contains the token for credit card validation, order details, and any user details required to complete the request asynchronously.
 
-    -   The Ticket Order Queue stateful service will process requests by instantiating a Ticket Order Actor to handle the processing workflow. This actor is responsible for charging the credit card, finalizing the order, and notifying the customer to give them access to their order.
-
-    -   The actor will also write to a Ticket Order Sync queue to offload sending order data to Cosmos DB for reports, analytics and related ad-hoc queries.
+    -   The Orders microservice will also write to a Ticket Order Sync queue to offload sending order data to Cosmos DB for reports, analytics and related ad-hoc queries.
 
     -   An Azure Function will read from the queue and handle updates to Cosmos DB. To ensure the latest data is always persisted, the function will retrieve the latest order state and update the Cosmos DB Ticket Orders collection.
 
     -   Web APIs will expose data from Cosmos DB for additional ad-hoc queries against ticket orders.
 
-2.  Describe the scalability features of this design, including any partitioning strategies that are applicable.
-    
-    When an event is published, and a flurry of customers arrive to the site to order tickets, a flood of requests (potentially in the 100,000s) will be sent from the web front end or various other client channels through the API Management gateway. API Management Premium features support scaling and multi-region topologies to meet demand and high availability requirements.
-
-    The stateless Ticket Order API offloads valid requests to the stateful Ticket Order Queue. This queue is partitioned by instance count (from 1 to n in the diagram below) and requests are randomly distributed by Service Fabric across partitions. Choosing an instance count (partition size) up front is important as today it requires a full redeploy to change this, however with a queue there are other rollover strategies you could employ to work around this. This removes the bottleneck of writes to the queue as it can distribute this load across all partitions in parallel.
-    
-    ![In this Ticket order Scalability diagram an arrow labeled Partition Key equals Random, points right, to a vertical bar labeled 64-bit Addressable Range. To the side of this bar are three gray boxes labeled Partition 1, Partition 2, and Partition n. Each of these boxes has a blue box within labeled \"Ticket Order Queue Service.\" The three gray boxes also have a Reliable Queue section, with differing Order numbers.. ](media/image8.png "Ticket order Scalability diagram")
-
-    The stateful Ticket Order Actor handles processing from this queue and, given the number of parallel orders, helps the solution to scale by maintaining the state of any number of parallel orders. The actor is able to negotiate payment, send notifications, persist its own state at each stage of processing, and send the final order data to the order synchronization queue on the back end. The actor is partitioned by order Id, which allows for very fine-grained distribution of state, per order, across the cluster. Any number of concurrent orders may be concurrently available to active requests for fast retrieval. Millions of these can exist and distribute across the cluster and inactive actors are evicted from memory automatically to conserve resources.
-
-    ![The Stateful Ticket Order Actor diagram has three partitions/actors: Partition 1, with Actor 1, Partition 2 with Actor 2, and Partition n with Actor n. Three Order IDs have arrows pointing through a 64-bit Addressable Range bar, to the Partition/Actors.](media/image9.png "Stateful Ticket Order, Actor diagram")
-
-3.  Describe the resiliency of this use case. How can you create an asynchronous ticket order request and guarantee processing? Are there any potential points of failure? How will you address those?
+2.  Describe the resiliency of this use case. How can you create an asynchronous ticket order request and guarantee processing? Are there any potential points of failure? How will you address those?
 
     Web applications will not report success unless the Payment Processing service returns a token for the request, and the ticket order reaches the Ticket Order Queue.
 
@@ -534,19 +504,19 @@ After evaluating the benefits of Service Fabric, with the team at Microsoft, Con
 
     The queue does not report successful receipt of the message until a quorum is reached across the queue partition replicas (more on this in Customer Objections section).
 
-    The Ticket Order Actor does not remove the order from the queue unless it can successfully process payment, send notifications, and save the order. In addition, it must confirm successfully sending the order to the Order Sync Queue. Saving the order to the actor state requires a quorum across replicas.
+    The Orders microservice must confirm successfully sending the order to the Order Sync Queue.
 
     The Azure Function that processes the Order Sync Queue will remove messages from the queue if processing is successful, which means successfully writing to the Cosmos DB collection. Any messages that can't be processed are moved to a poison queue. Those messages can be retried, or code can be written to pull from the poison queue for special processing, for example to move them to a data store for analysis of issues.
 
     For additional visibility into queue / function processing errors it is good practice to monitor queue sizes that pass a reasonable threshold of standard solution behavior.
 
-4.  Describe how you will enable external clients to reach stateless HTTP services exposed from the Azure load balancer.
+3.  Describe how you will enable external clients to reach stateless HTTP services exposed from the Azure Load Balancer.
 
     When you publish a stateless HTTP service the Service Fabric provides a relative URL to the service according to the configuration you supply. This way, multiple HTTP services can be deployed to a single node and still be uniquely addressable at port 80 or 443. In the case of this solution, the API Management layer will consume those endpoints and forward requests.
 
 *Improving DevOps Workflows*
 
-1.  How would you structure the Visual Studio solution so that developers can run, debug and publish the entire solution but also be able to publish and upgrade individual microservices (could be one or more service grouped together)?
+1.  How would you structure the Visual Studio solution so that developers can run, debug and publish the entire solution but also be able to publish and upgrade individual microservices?
 
     A typical Service Fabric solution has a top-level application that can be used to publish all services associated with it. To publish the entire suite of services in a solution you can add all services to this top-level application, however this is not always ideal for distributed teams and certainly not appropriate for upgrading individual services.
 
@@ -554,7 +524,7 @@ After evaluating the benefits of Service Fabric, with the team at Microsoft, Con
 
 2.  Describe to the customer how they can upgrade services in situ and preserve state; handle rollback and roll forward; and service self-healing features.
 
-    When an application is deployed, you can choose to "upgrade" the application. This preserves any state associated with stateful services if applicable. This will retire previous versions once they complete requests in process, while sending new requests to the new version of the service.
+    When an application is deployed, you can choose to "upgrade" the application. This preserves any state associated with services (if applicable). This will retire previous versions once they complete requests in process, while sending new requests to the new version of the service.
 
     If during the upgrade process there is a problem with the services being deployed, the upgrade is rolled back, and the previous version of the services continue to operate.
 
@@ -566,19 +536,25 @@ After evaluating the benefits of Service Fabric, with the team at Microsoft, Con
 
     What Service Fabric offers is better utilization of each node in the cluster prior to demanding a scale action that adds nodes and cost. This boosts your ROI in particular as the number of nodes in the cluster increases. At the same time, the naming service removes the complexity of this utilization with built-in service discovery.
 
-    Dynamic discovery, or addressing, of service endpoints is a feature that enables the Service Fabric runtime to utilize resources as it sees fit. As such, when you deploy services, they are distributed across the available nodes in the Service Fabric cluster, including replicas for stateful services. Clients use the naming service to reach the correct service instance and related state, according to partitioning strategies, and the location of the service instance and related addressing is transparent. Service Fabric will ensure that services are distributed across nodes according to any placement constraints, while ensuring that nodes are densely populated. Greater density helps to reduce scaling requirements and related costs.
+    Dynamic discovery, or addressing, of service endpoints is a feature that enables the Service Fabric runtime to utilize resources as it sees fit. As such, when you deploy services, they are distributed across the available nodes in the Service Fabric cluster. Clients use the naming service to reach the correct service instance and related state, according to partitioning strategies, and the location of the service instance and related addressing is transparent. Service Fabric will ensure that services are distributed across nodes according to any placement constraints, while ensuring that nodes are densely populated. Greater density helps to reduce scaling requirements and related costs.
 
 4.  How would you plan for high availability (HA) for Service Fabric in this solution?
 
     Service Fabric inherently provides high availability within the cluster region.
 
-    You achieve multi-region high availability for disaster recovery scenarios by using the backup/restore capability of stateful services. You can also create real time high availability across regions by configuring Traffic Manager to route traffic to both regions. In this case, any stateful services should be capable of reloading their latest state from external storage if not present in the region's cluster.
+    You obtain real time high availability across regions by configuring Traffic Manager to route traffic to both regions.
 
 5.  Explain to the customer how Service Fabric can help the customer have visibility into overall solution health.
 
-    Azure Service Fabric introduces a health model that provides rich, flexible and extensible health evaluation and reporting. Service Fabric components use this health model to report their current state and the same mechanism can be used to report application health state. When your services encounter problems, your ability to respond to and fix incidents and outages depends on your ability to detect the issues quickly. If you report problems and failures to the Azure Service Fabric health manager from your service code, you can use standard health monitoring tools that Service Fabric provides to check the health status.
-
-    For example, you can report configuration errors that would prevent the solution from reliable operation, and report these as exceptions to the Service Fabric. Exceptions that are detected while the Service Fabric tries to perform upgrades will trigger a rollback operation to avoid introducing this failure into the system.
+    Azure Service Fabric introduces a health model that provides rich, flexible, and extensible health evaluation and reporting. The model allows near-real-time monitoring of the state of the cluster and the services running in it.  You can easily obtain health information and correct potential issues before they cascade and cause massive outages.
+    
+    ***Cluster health policy***
+    
+    The cluster health policy is used to evaluate the cluster health state and node health states. The policy can be defined in the cluster manifest.
+    
+    ***Application health policy***
+    
+    The application health policy describes how the evaluation of events and child-states aggregation is done for applications and their children. It can be defined in the application manifest, ApplicationManifest.xml, in the application package.
 
 6.  How can you update cluster settings after the fact? What kind of settings might you want to update?
 
@@ -632,11 +608,11 @@ After evaluating the benefits of Service Fabric, with the team at Microsoft, Con
 
     -   The ability to deploy individual application services without concern over the target infrastructure, let Service Fabric decide the target nodes appropriate for each tier and service type.
 
-    -   Simplified approach to managing data persistence with stateful services.
-
     -   Microservices design from the ground up on a platform that is specifically designed for that purpose, with the ability to scale.
 
     -   The capability to deploy Service Fabric clusters in Azure and on-premises, across both Windows and Linux hosts.
+    
+    -   Docker containers ensure portability to another container orchestrator.
 
 2. Microservices concepts are completely new to the Contoso Events team. If we were to go forward with Service Fabric as our microservices platform, we would like to understand what skills the team can carry forward, and how much of a learning curve exists.
 
@@ -644,52 +620,24 @@ After evaluating the benefits of Service Fabric, with the team at Microsoft, Con
 
     -   They can continue to use Visual Studio for development, debugging and publishing applications.
 
-    -   They can continue to develop ASP.NET and Web API applications and can leverage Service Fabric project templates to kick-start their understanding of the specifics of Service Fabric services.
+    -   They can continue to develop ASP.NET and Web API applications and can leverage Docker tools in Visual Studio to kick-start their understanding about containers and their principles.
 
-    -   The programming model for services is familiar in that it leverages features of existing .NET technologies and related concepts such as WCF endpoints (simplified), channels and serialization.
+    -   Working with containerized services is also familiar in the sense that they can run locally on their machine.
 
-    -   Working with stateful services is also familiar in the sense that state is defined via objects (POCO) and serialized as part of the service implementation. Saving and retrieving state is just a few lines of code and the robustness, availability and reliability of that state is a feature of the stateful service.
-
-3. We'd like to understand if stateful services or stateful actors will help us with ticket ordering throughput, workflow and state management, and easier rollouts of changes to this process.
-
-   Stateful services are very powerful as they make it very easy for developers to define state for any service by using familiar serializable types (POCO) and a few simple instructions to handle saving and retrieving state when the service is accessed. This allows for scenarios where compute and data are collocated reducing the latency of accessing this data.
-
-   This simplicity is backed by robust and reliable storage. When data (state) is saved by the service, it is not confirmed (committed) unless a quorum is reached, for example at least 3 replicas have successfully persisted the data. Furthermore, if a replica becomes unavailable, a new replica is automatically created to maintain the required number of replicas for reliable storage.
-
-   By using the stateful actor, not only is the persistence of the actual ticket order handled by the Service Fabric at scale, but the actor can be wholly responsible for the workflow required to complete the order including:
-
-    -   Completing the payment processing purchase with token.
-
-    -   Securing the ticket based on availability.
-
-    -   Notifying the user of the result, success or failure.
-
-    -   Preserving the state of the workflow as it progresses.
-
-   When updates to this actor are required, the existing state is preserved, any active instances can continue completing their work, and the new actor functionality or state requirements can be rolled out safely by Service Fabric across the nodes in the cluster, eventually retiring the previous version.
-
-   While this solution may not be a typical example of an "Actor Model" in the parallel computing sense, it makes sense to leverage Service Fabric actors for a few reasons. The very nature of the ticket order, its internal workflow and state machine, and the granularity with which the partition is defined (by order) could not as easily be achieved with a traditional stateful service.
-
-4. We are not clear how and where to incorporate stateful services and actors alongside other storage such as Cosmos DB. We need the ability to support robust ad-hoc queries against our system data such as events, customers, orders and related metrics, but would like to take advantage of the performance and reliability of Service Fabric stateful options as well.
-
-   Stateful services make it easy to save and retrieve state, and distribute that state for higher availability by using a partitioning strategy. Each partition has its own replica set for reliability. While you can retrieve data from all partitions and potentially use this for aggregation and metrics, the recommended way to support alternate query patterns is to store the data to an externally accessible location.
-
-   Most Service Fabric solutions can benefit from offloading stateful service state to an external store. This supports not only alternate query patterns and ad-hoc querying from the solution, but also analytics and disaster recovery. In this solution we are employing Azure Function to de-couple the Service Fabric app from its external storage options by providing server-less code that can take input from an Azure queue and send the latest state of the data to Document DB.
-
-5. Could we consider Azure Functions as an alternative back end implementation for our APIs?
+3. Could we consider Azure Functions as an alternative back end implementation for our APIs?
 
    While it is possible to create Functions that run behind API Management endpoints, they are best employed for decoupled, asynchronous background operations that can be run at scale without concern for the specific server running that operation.
 
    In this solution, Azure Functions allowed for decoupling the location of the external storage location of orders, without the need to update Service Fabric configurations on change. It also allowed for a separate scale-out tier for that work.
 
-   In a solution such as a mobile application back end, functions could be useful if they don't need to comingle with other solutions aspects, such as acting as their own microservice with a targeted purpose.
+   In a solution such as a mobile application back end, functions could be useful if they don't need to commingle with other solutions aspects, such as acting as their own microservice with a targeted purpose.
 
-6. We would like to understand more about the benefits of Serverless architectures, in Azure does this mean only using Azure Functions or is there more to it?
+4. We would like to understand more about the benefits of Serverless architectures, in Azure does this mean only using Azure Functions or is there more to it?
 
    A Serverless Architecture, as the name implies, aims to provide a solution architecture where concern for individual servers is minimized. While the term "Serverless" has varying interpretations, it typically includes characteristics such as the extensive use of ephemeral services, a focus entirely on scaling the capabilities that support the business logic, the processing capability should be ephemeral (e.g, it can be started nearly instantaneously without preprovisioning on your part), the capability is scaled transparently at a very granular level (e.g. scaling occurs on a per request or function invocation basis and not on an all up server load basis), and the cost is typically associated with time spent supporting business logic computation and not on the time server resources are available to handle requests. In Azure, Functions is a prime component of a Serverless architecture, but not the only service that may be utilized in one. Other Azure Services that, by this definition, can be composed into a Serverless architecture include: Azure Storage Blobs, Tables and Queues, Azure Data Lake Store, API Management, CDN, Media Services, Notification Hubs, IoT Hub, and Service Bus.
 
 ## Customer quote (to be read back to the attendees at the end)
 
-"With Service Fabric we are able to move to microservices architecture without the DevOps headache. Service Fabric provides so much to support deployment, compute utilization, health monitoring and recovery -- we could leverage the same team while increasing the size of our solution and feature set!"
+"Docker is a compelling technology that allow us to build lightweight, autonomous and portable microservices that run on top of Linux or Windows.  In the other hand, Service Fabric provides so much to support deployment, compute utilization, health monitoring and recovery -- we could leverage the same team while increasing the size of our solution and feature set!"
 
 Steve Dormer, CIO at Contoso Events

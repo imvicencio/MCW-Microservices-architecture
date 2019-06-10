@@ -9,7 +9,7 @@ Whiteboard design session student guide
 </div>
 
 <div class="MCWHeader3">
-November 2018
+June 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -17,35 +17,36 @@ Information in this document, including URL and other Internet Web site referenc
 Microsoft may have patents, patent applications, trademarks, copyrights, or other intellectual property rights covering subject matter in this document. Except as expressly provided in any written license agreement from Microsoft, the furnishing of this document does not give you any license to these patents, trademarks, copyrights, or other intellectual property.
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
-© 2018 Microsoft Corporation. All rights reserved.
+
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
 **Contents**
 
-<!-- TOC -->
+<!-- Start Document Outline -->
 
-- [Microservices architecture whiteboard design session student guide](#microservices-architecture-whiteboard-design-session-student-guide)
-    - [Abstract and learning objectives](#abstract-and-learning-objectives)
-    - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
-        - [Customer situation](#customer-situation)
-        - [Customer needs](#customer-needs)
-        - [Customer objections](#customer-objections)
-        - [Infographic for common scenarios](#infographic-for-common-scenarios)
-    - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
-    - [Step 3: Present the solution](#step-3-present-the-solution)
-    - [Wrap-up](#wrap-up)
-    - [Additional references](#additional-references)
+* [Microservices architecture whiteboard design session student guide](#microservices-architecture-whiteboard-design-session-student-guide)
+	* [Abstract and learning objectives](#abstract-and-learning-objectives)
+	* [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
+		* [Customer situation](#customer-situation)
+		* [Customer needs](#customer-needs)
+		* [Customer objections](#customer-objections)
+		* [Infographic for common scenarios](#infographic-for-common-scenarios)
+	* [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
+	* [Step 3: Present the solution](#step-3-present-the-solution)
+	* [Wrap-up](#wrap-up)
+	* [Additional references](#additional-references)
 
-<!-- /TOC -->
+<!-- End Document Outline -->
 
 #  Microservices architecture whiteboard design session student guide
 
 ## Abstract and learning objectives 
 
-In this whiteboard design session, you will work in a group to design a solution that leverages aspects from microservices and serverless architectures to help an online concert ticket vendor survive the first five minutes of crushing load. You will handle the client's scaling needs through microservices built on top of Service Fabric and apply smooth updates or roll back failing updates. Finally, your group will design an implementation of load testing to optimize the architecture for handling spikes in traffic.
+In this whiteboard design session, you will work in a group to design a solution that leverages aspects from microservices and serverless architectures to help an online concert ticket vendor survive the first five minutes of crushing load. You will handle the client's scaling needs through containerized microservices running on top of Service Fabric, and delegate the workload of tickets processing by using a storage queue for asynchronous processing and a globally distributed, high-performance database.
 
-At the end of this whiteboard design session, you will better be able to design scalable microservices solutions involving Service Fabric and Azure Functions.
+At the end of this whiteboard design session, you will be able to design scalable microservices solutions involving .NET Core, Docker, Service Fabric, Azure Functions and Cosmos DB.
 
 ## Step 1: Review the customer case study 
 
@@ -69,11 +70,11 @@ Contoso Events is an online service provider for concerts, sporting and other la
 
 Contoso Events has experienced consistent growth trends and now has almost 1 million customers. They intend to further grow market share and increase sales by redesigning their current web sites to improve usability and conversion rates, improve responsiveness across devices. In addition, they will create mobile apps for iPhone, Android and Windows Phone devices. Following this, Contoso Events plans to extend its reach through partners by exposing its core event ticket sales and reporting APIs to partners. The plan is to retire and replace the existing solution to serve customers with a better experience, preserving code where possible but migrating to a decoupled design with improved business agility.
 
-To meet demand during peak periods they rely on a combination of auto-scaling and manual intervention to scale in advance of expected bursts of traffic, such as when a popular event has tickets first go on sale. The CIO, Steve Dormer, is concerned about system performance, scalability and associated costs. The company has already been experiencing more frequent, peak traffic periods and this has increased hosting costs. He would like to investigate ways to control exponential increases in hosting and related operational costs as they grow.
+To meet demand during peak periods they rely on a combination of auto-scaling and manual intervention to scale in advance of expected bursts of traffic, such as when a popular event has tickets first go on sale. The CIO, Steve Dormer, is concerned about system performance, scalability and associated costs.  In the other hand, the company is looking forward to adopt a DevOps culture by implementing modern software architectures and development platforms.
 
 The company also has challenges rolling out new features and supporting new events on demand. Features have evolved in situ to where the solution has many interdependencies that increase the risk of regressions across features when changes are introduced. This is particularly challenging with the ticket ordering process as the data model for new events is often slightly different, which means that supporting new events may have impact on the user experience and UI, the middle tier and storage. Rolling out changes that impact this area while upwards of 50,000 users are actively placing orders, has proven to be a fragile process and requires them to schedule down time to ensure safe deployment.
 
-The CIO has heard about microservices and serverless architectures, and is interested in exploring how Service Fabric and Azure Functions may help the team to be more agile in their development cycle with impact across features, support their goals for continuous delivery, help them with a lean and effective DevOps strategy, and ultimately help with cost control as they grow and support peak periods. The solution must be capable of supporting increased ongoing and peak loads yet also control costs by making better use of available infrastructure. The team also needs tools for monitoring health and more easily managing deployments, rollbacks and recovery in the event of failure.
+The CIO has heard about microservices and serverless architectures, and is interested in exploring how Docker, .NET Core, Service Fabric and Azure Functions may help the team to be more agile in their development cycle with impact across features, support their goals for continuous delivery, help them with a lean and effective DevOps strategy, and ultimately help with cost control as they grow and support peak periods. The solution must be capable of supporting increased ongoing and peak loads yet also control costs by making better use of available infrastructure.
 
 In addition, the CIO is looking for a solid strategy around securely exposing and managing solution APIs for both internal and partner consumption. For partners, he is looking for a way to support a partner ecosystem that is easy to setup and manage.
 
@@ -93,13 +94,13 @@ According to the CIO, the current system topology handles the following core use
 
         -   This is currently the focus of peak load and scale concerns.
 
-        -   The CIO believes they should implement an asynchronous ordering process with email notifications, a pattern many busy ecommerce sites follow whereby the credit card is validated, but the actual order is not confirmed until processed from a queue.
+        -   The CIO believes they should implement an asynchronous ordering process with email notifications, a pattern many busy e-commerce sites follow whereby the credit card is validated, but the actual order is not confirmed until processed from a queue.
 
     -   **Payment**: Credit card payments are handled via a third-party payment processing service.
 
 -   **Storage**: The event catalog, customer accounts, users and orders are currently stored in a relational SQL Server database.
 
-    -   The CIO feels that a solution that reduces the overhead of state management and keeps the data closer to the compute functionality for faster retrieval will help them with future scale. 
+    -   The CIO feels that a high-available and globally distributed solution will help them with future scale. 
 
 ### Customer needs
 
@@ -127,20 +128,15 @@ According to the CIO, the current system topology handles the following core use
 
 1.  While we are interested in the microservices approach, we are still comparing Service Fabric with PaaS features such as App Services and SQL DB. How mature is Service Fabric by comparison?
 
-2.  Microservices architectures are completely new to the Contoso Events team. If we were to go forward with Service Fabric, we would like to understand what skills the team can carry forward, and how much of a learning curve exists.
+2.  Microservices architectures are completely new to the Contoso Events team. If we were to go forward with containerized microservices running on Service Fabric, we would like to understand what skills the team can carry forward, and how much of a learning curve exists.
 
-3.  We would like to understand if stateful services or stateful actors will help us with ticket ordering throughput, workflow and state management, and easier rollouts of changes to this process
+3.  Could we consider Azure Functions as an alternative back end implementation for our APIs?
 
-4.  We are not clear how and where to incorporate stateful services and actors alongside other storage such as Cosmos DB. We need the ability to support robust ad-hoc queries against our system data such as events, customers, orders and related metrics -- but would like to take advantage of the performance and reliability of Service Fabric stateful options as well.
-
-5.  Could we consider Azure Functions as an alternative back end implementation for our APIs?
-
-1.  We would like to understand more about the benefits of serverless architectures. In Azure, does it mean only using Azure Functions or is there more to it?
+4.  We would like to understand more about the benefits of serverless architectures. In Azure, does it mean only using Azure Functions or is there more to it?
 
 ### Infographic for common scenarios
 
 ![This diagram represents a Service Fabric overview for the scenario. At the top of the diagram is a Microservices ribbon. Below that, a Service Fabric ribbon has three arrows that point to Azure (Windows Server, Linux), Private clouds (Windows Server, Linux), and Hosted Clouds (Windows Server, Linux). The Service Fabric ribbon includes several requirements for the service fabric such as (but not limited to) high availability, self-healing, fast startup and shutdown, low latency, and automated rollback.](media/image2.png "Common scenarios diagram")
-
 
 ![This diagram presents a comparison of monolithic versus microservices approaches, as described in the text following this diagram.](media/image3.png "Monolithic application vs. Microservices application approaches")
 
@@ -151,14 +147,6 @@ A monolithic application contains domain-specific functionality and is normally 
 A microservice application separates functionality into separate smaller services (3). The microservices approach scales out by deploying each service independently, creating instances of these services across servers/virtual machines/containers (4).
 
 Reference: [https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-overview-microservices](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-overview-microservices)
-
-![This diagram presents a comparison of State storage in monolithic versus microservices approaches, as described in the text following this graphic.](media/image4.png "State in Monolithic vs. State in Microservices approaches")
-
-***Storage State between Monolithic and Microservices Approaches***
-
-The monolithic approach has a single database and tiers of specific technologies. The microservices approach has a graph of interconnected microservices where state is typically scoped to the microservice and various approaches are used to manage state.
-
-Source: <https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-overview-microservices>
 
 ## Step 2: Design a proof of concept solution
 
@@ -190,15 +178,13 @@ Directions: With all participants at your table, respond to the following questi
 
 1.  Illustrate in more detail the Service Fabric services and components participating in a ticket order request.
 
-2.  Describe the scalability features of this design, including any partitioning strategies that are applicable.
+2.  Describe the resiliency of this use case. How can you create an asynchronous ticket order request and guarantee processing? Are there any potential points of failure? How will you address those?
 
-3.  Describe the resiliency of this use case. How can you create an asynchronous ticket order request and guarantee processing? Are there any potential points of failure? How will you address those?
-
-4.  Describe how you will enable external clients to reach stateless HTTP services exposed from the Azure load balancer.
+3.  Describe how you will enable external clients to reach stateless HTTP services exposed from the Azure Load Balancer.
 
 *Improving DevOps workflows*
 
-1.  How would you structure the Visual Studio solution so that developers can run, debug, and publish the entire solution but also be able to publish and upgrade individual microservices (could be one or more service grouped together)?
+1.  How would you structure the Visual Studio solution so that developers can run, debug, and publish the entire solution but also be able to publish and upgrade individual microservices?
 
 2.  Describe to the customer how they can upgrade services in situ and preserve state; handle rollback and roll forward; and service self-healing features.
 
@@ -266,7 +252,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 |    |            |       
 |----------|:-------------:|
 | **Description** | **Links** |
-| Service Fabric - Overview of load balancing and addressing services | <https://azure.microsoft.com/en-us/documentation/articles/service-fabric-connect-and-communicate-with-services/> |
+| Service Fabric and containers | <https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-containers-overview> |
 | Service Fabric - HA Configuration | <https://alexandrebrisebois.wordpress.com/2016/05/31/deploy-a-geo-ha-service-fabric-cluster-on-azure/> |
 | Azure Functions | <https://azure.microsoft.com/en-us/services/functions/> |
 | Cosmos DB | <https://azure.microsoft.com/en-us/documentation/articles/documentdb-introduction/> |
