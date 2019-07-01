@@ -473,7 +473,7 @@ In this exercise, you will create the Docker images for each of the microservice
 
 1.  In Visual Studio, open the Dockerfile located in the ContosoEvents.Api.Events project.
 
-2.  The Dockerfile contains all the required steps to build the Docker image for the Events microservice.  As you can see in the first line of code, it is based on the mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim Linux-based Docker image.  In the other hand, it uses the mcr.microsoft.com/dotnet/core/sdk:2.2-stretch image to compile and publish the Events microservice project.
+2.  The Dockerfile contains all the required steps to build the Docker image for the Events microservice.  As you can see in the first line of code, it is based on the mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim Linux-based Docker image.  On the other hand, it uses the mcr.microsoft.com/dotnet/core/sdk:2.2-stretch image to compile and publish the Events microservice project.
 
 3.  Open the Dockerfile located in the ContosoEvents.Api.Orders project.
 

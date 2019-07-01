@@ -266,7 +266,7 @@ In this task, you will provision a Function App using a Consumption Plan. By usi
 
     f.  Location: Select the same location as the hands-on-lab resource group.
 
-    g.  Runtime Stack: **.NET**
+    g.  Runtime Stack: **.NET Core**
 
     h.  Storage: Leave Create new selected, and accept the default name.
 
@@ -434,7 +434,7 @@ In this exercise, you will create the Docker images for each of the microservice
 
 1.  In Visual Studio, open the Dockerfile located in the ContosoEvents.Api.Events project.
 
-2.  The Dockerfile contains all the required steps to build the Docker image for the Events microservice.  As you can see in the first line of code, it is based on the mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim Linux-based Docker image.  In the other hand, it uses the mcr.microsoft.com/dotnet/core/sdk:2.2-stretch image to compile and publish the Events microservice project.
+2.  The Dockerfile contains all the required steps to build the Docker image for the Events microservice.  As you can see in the first line of code, it is based on the mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim Linux-based Docker image.  On the other hand, it uses the mcr.microsoft.com/dotnet/core/sdk:2.2-stretch image to compile and publish the Events microservice project.
 
 3.  Open the Dockerfile located in the ContosoEvents.Api.Orders project.
 
@@ -579,7 +579,125 @@ In this exercise, you will publish the Service Fabric Application to the Azure c
 
 4.  From the Visual Studio output window, validate that the deployment has completed successfully before moving on to the next task.
 
-### Task 7: Test the Events microservice by using Swagger
+## Exercise 5: Set up the Function
+
+### Task 1: Set up the function
+
+In this task, you will create a function that will be triggered by the externalization queue we created for the app. Each order that is deposited to the queue by the Orders microservice  will trigger the ProcessOrderExternalizations function. The function then persists the order to the Orders container of the Cosmos DB instance.
+
+1.  There appears to be an issue with Azure Functions detecting Storage accounts, so before creating your function, you will manually add your Storage account connection string to the Application Settings for your Function App.
+
+2.  In the Azure portal, browse to the Storage Account you created in Exercise 1, Step 5, then select Access keys under Settings on the side menu, and copy the key1 Connection String value, as you did previously.
+
+    ![In the Azure Portal, under Settings, Access keys is circled. Under Default keys, the key 1 connection string and its copy button are circled.](media/image102.png "Azure Portal")
+
+3.  Now, browse to the Function App you created in Exercise 1, Step 4.
+
+4.  Select your Function App in the side menu, then select Configuration under Configured features.
+
+    ![In the Function Apps pane, in the left column, contosoeventsfn-SUFFIX is circled. In the right, Overview column, under Configured features, Application settings is circled.](media/image103.png "Function Apps pane")
+
+5.  On the Application Settings tab, select **+New application setting**, then enter **contosoeventsstore** in the name textbox, and paste the key1 Connection String value you copied from your Storage account into the value textbox.
+
+    ![On the Application settings tab, contosoeventsstore and its corresponding connection string value are circled. At the bottom, the New application setting button is circled.](media/image104.png "Application settings tab")
+
+6.  Scroll back to the top of the Application Settings tab, and select Save to apply the change.
+
+    ![Screenshot of the Save button](media/image105.png "Save button")
+
+7.  From the menu, place your mouse cursor over Functions, then select the + to the side of Functions.
+
+    ![In the Function Apps section, Functions is selected, and the Plus symbol to its right is circled.](media/image106.png "Function Apps section")
+
+8.  Select **In-portal** as the development environment in the getting started blade, and select the **Continue** button.
+
+    ![In the getting started Choose a Development Environment step, In-portal is circled](media/create-function-choose-env.png "Getting started page")
+    
+
+9.  Select **More templates** and then select the **Finish and view templates** button.
+
+    ![More templates is circled and the Finish and view templates button is selected.](media/view-more-templates.png "View more function templates")
+
+10. Select **Azure Queue Storage trigger** and then select install when the warning that extensions are required is displayed.
+
+    ![Azure Queue Storage is circled and Install is selected within the extensions required warning screen.](media/install-extensions-warning.png "Install Queue Storage Extensions")
+
+    a. Continue to install any additional extensions required.
+
+11.  In the New Function blade, enter the following:
+    
+   a.  Name: **ProcessOrderExternalizations**
+    
+   b.  Queue name: **contosoevents-externalization-requests**
+
+   c.  Storage account connection: Select **contosoeventsstore**
+   
+   d.  Select **Create**
+    
+![The values above are entered into the Azure Queue Storage trigger settings.](media/create-queue-storage-trigger.png  "Queue trigger settings")
+
+12. Under the ProcessOrderExternalizations function, select **Integrate**.
+
+    a. On the Integrate screen, set Message parameter name to **orderItem**
+
+    b. Select **Save**.
+
+    ![The Message parameter name is set to orderItem and Save is circled. ](media/integrate-screen.png "Integrate screen")
+
+13. While still on the Integrate screen, select **+New Output**.
+
+    ![On the Integrate Screen, under Outputs, + New Output is circled.](media/image117.png "Integrate Screen")
+
+14. In the outputs box, locate and select **Azure Cosmos DB**, then choose **Select**.
+
+    ![In the Azure Cosmos DB output window, next to the Azure Cosmos DB account connection field, the Select button is circled.](media/image118.png "Azure Cosmos DB output window")
+
+ > **Note**: If prompted to install extensions, Select **Install** and wait for the extensions to finish installing.
+
+15. On the Azure Cosmos DB output screen, enter the following:
+
+    a.  Document parameter name: Enter **orderDocument**
+    
+    b.  Use function return value: Leave unchecked.
+
+    c.  Collection Name: Enter **Orders**
+
+    d.  Partition key: Leave empty.
+
+    e.  Database name: Enter **TicketManager**
+
+    f.  Azure Cosmos DB account connection: Select **new** next to the text box, and select the Cosmos DB you created in Exercise 1, Task 6.
+    
+    g.  Collection throughput: Leave empty.
+
+    ![Screenshot of Azure Cosmos DB output window with the values specified above entered into the fields.](media/cosmos-db-output-window.png "Azure Cosmos DB output window")
+   
+    f.  Select **Save**. You should now see an Azure Queue Storage trigger and an Azure Cosmos DB output on the Integrate screen.
+
+    ![In the Integrate window, the fields under both Triggers and Outputs are circled. ](media/image120.png "Integrate window")
+
+16. Next, select your function from the side menu.
+
+    ![Under Functions, ProcessOrderExternailizations is circled.](media/image121.png "Functions section")
+
+17. Now, you will retrieve the code for the function from a file in Visual Studio.
+
+18. In Visual Studio, go to Solution Explorer, and locate ProcessTicketOrderExternalizationEvent.cs in the Azure Functions folder.
+
+    ![In Solution Explorer, under Azure Functions, ProcessTicketOrderExternalizationEvent.cs is circled.](media/image122.png "Solution Explorer")
+
+19. Select all the code in that file (CTRL+A) and copy (CTRL+C) it.
+
+20. Return to your function's page in the Azure portal, and replace the code in the run.csx block with the code you just copied from Visual Studio. The run.csx code should now look like the following. Note: The ProcessOrdersExternalization function will enable you to process another order, and see that it is saved to the Orders collection of the Cosmos DB.
+
+    ![Code that was copied from Visual Studio displays in the Run.csx block.](media/image123.png "Azure Portal, Run.csx block")
+
+21. Select **Save**
+
+## Exercise 6: Placing ticket orders
+
+
+### Task 1: Test the Events microservice by using Swagger
 
 In this task, you will test the events retrieval from the application deployed in the hosted Service Fabric Cluster.
 
@@ -595,7 +713,7 @@ In this task, you will test the events retrieval from the application deployed i
 
     ![On the Swagger Endpoint webpage for Contoso Events API - Events, Execute button is circled.](media/image137.png "Swagger Endpoint webpage")
 
-### Task 8: Test the Orders microservice by using Swagger
+### Task 2: Test the Orders microservice by using Swagger
 
 In this task, you will test the orders creation from the application deployed in the hosted Service Fabric Cluster.
 
@@ -636,7 +754,7 @@ In this task, you will test the orders creation from the application deployed in
     > Note: In order to write to the Cosmos DB database, the Azure Function must be running.
 
 
-## Exercise 5: API Management
+## Exercise 7: API Management
 
 Duration: 15 minutes
 
@@ -686,7 +804,7 @@ In this task, you will import the Events API description to your API Management 
 
     > **Note**: After saving, notice the URL under "Base URL". You will use this URL in your website configuration in the next exercise.
     
-### Task 2:  Import Orders API
+### Task 2: Import Orders API
 
 In this task, you will import the Orders API description to your API Management service to create an endpoint.
 
@@ -772,7 +890,7 @@ In this task, you will provide the API Management key in a setting for the Funct
 5.  Select **Save** to apply the change.
 
 
-## Exercise 6: Configure and publish the web application
+## Exercise 8: Configure and publish the web application
 
 Duration: 15 minutes
 
