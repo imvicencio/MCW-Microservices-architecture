@@ -55,14 +55,17 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 		* [Task 4: Set the environment variables to the Orders microservice](#task-4-set-the-environment-variables-to-the-orders-microservice)
 		* [Task 5: Set the Container Registry credentials in the ApplicationManifest.xml file](#task-5-set-the-container-registry-credentials-in-the-applicationmanifestxml-file)
 		* [Task 6: Publish the Service Fabric Application](#task-6-publish-the-service-fabric-application)
-		* [Task 7: Test the Events microservice by using Swagger](#task-7-test-the-events-microservice-by-using-swagger)
-		* [Task 8: Test the Orders microservice by using Swagger](#task-8-test-the-orders-microservice-by-using-swagger)
-	* [Exercise 5: API Management](#exercise-5-api-management)
+	* [Exercise 5: Set up the Function](#exercise-5-set-up-the-function)
+		* [Task 1: Set up the function](#task-1-set-up-the-function)
+	* [Exercise 6: Placing ticket orders](#exercise-6-placing-ticket-orders)
+		* [Task 1: Test the Events microservice by using Swagger](#task-1-test-the-events-microservice-by-using-swagger)
+		* [Task 2: Test the Orders microservice by using Swagger](#task-2-test-the-orders-microservice-by-using-swagger)
+	* [Exercise 7: API Management](#exercise-7-api-management)
 		* [Task 1: Import Events API](#task-1-import-events-api)
-		* [Task 2:  Import Orders API](#task-2--import-orders-api)
+		* [Task 2: Import Orders API](#task-2-import-orders-api)
 		* [Task 3: Retrieve the user subscription key](#task-3-retrieve-the-user-subscription-key)
 		* [Task 4: Configure the Function App with the API Management key](#task-4-configure-the-function-app-with-the-api-management-key)
-	* [Exercise 6: Configure and publish the web application](#exercise-6-configure-and-publish-the-web-application)
+	* [Exercise 8: Configure and publish the web application](#exercise-8-configure-and-publish-the-web-application)
 		* [Task 1: Configure the web app settings](#task-1-configure-the-web-app-settings)
 		* [Task 2: Running the web app and creating an order](#task-2-running-the-web-app-and-creating-an-order)
 		* [Task 3: Publish the web app](#task-3-publish-the-web-app)
@@ -207,33 +210,26 @@ In these steps, you will provision a Web App in a new App Service Plan.
 
 2.  On the Create Web App blade, enter the following:
 
-    a.  App name: Enter a unique name, such as **contosoeventsweb-SUFFIX**.
-
-    b.  Subscription: Select your subscription.
-
-    c.  Resource group: Select Use existing, and select the **hands-on-lab** resource group created previously.
-
-    d.  OS: Select **Windows**.
-
-    e.  App Service plan/Location: Click to open the App Service plan blade, then select **Create new**.
-
-       - App service plan: Enter **contosoeventsplan-SUFFIX**
-
-       - Location: Select the same location you have been using for other resources in this lab.
-
-       - Pricing tier: Select **S1 Standard**.
-
-       - Select **OK**.
+    a.  Subscription: Select your subscription.
     
-    f.  Publish: Select **Code**
+    b.  Resource group: Select the **hands-on-lab** resource group created previously.
     
-    g.  Application Insights: Click to open the Application Insights blade, then select **Disable**.  Select **Apply**.
+    c.  Name: Enter a unique name, such as **contosoeventsweb-SUFFIX**
+
+    d.  Publish: Select **Code**
     
-    h.  Select **Create** to provision the Web App.
+    e.  Runtime stack: Select **ASP.NET V4.7**
+
+    f.  Operating System: Select **Windows**.
+    
+    g.  Region: Select the same location you have been using for other resources in this lab.
+
+    h.  Windows Plan / Sku and size: Leave the default values.
+    
+    i.  Select **Review and create**, and then select **Create** to provision the Web App.
 
     ![On the Create Web App blade, fields are set to the previously defined settings.](media/create-web-app.png "Create Web App blade")
     
-
 3.  You will receive a notification in the Azure portal when the Web App deployment completes. From this, select Go to resource.
 
     ![The Azure Portal Notification displays, indicating that deployment succeeded. In the top corner of the notification window, a Bell (notification) icon is circled. At the bottom of the Deployment succeeded message, the Go to resource button is circled.](media/image52.png "Azure Portal Notification")
