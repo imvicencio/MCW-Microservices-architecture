@@ -56,18 +56,20 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 		* [Task 4: Set the environment variables to the Orders microservice](#task-4-set-the-environment-variables-to-the-orders-microservice)
 		* [Task 5: Set the Container Registry credentials in the ApplicationManifest.xml file](#task-5-set-the-container-registry-credentials-in-the-applicationmanifestxml-file)
 		* [Task 6: Publish the Service Fabric Application](#task-6-publish-the-service-fabric-application)
-		* [Task 7: Test the Events microservice by using Swagger](#task-7-test-the-events-microservice-by-using-swagger)
-		* [Task 8: Test the Orders microservice by using Swagger](#task-8-test-the-orders-microservice-by-using-swagger)
-	* [Exercise 5: API Management](#exercise-5-api-management)
+	* [Exercise 5: Set up the Function](#exercise-5-set-up-the-function)
+		* [Task 1: Set up the function](#task-1-set-up-the-function)
+	* [Exercise 6: Placing ticket orders](#exercise-6-placing-ticket-orders)
+		* [Task 1: Test the Events microservice by using Swagger](#task-1-test-the-events-microservice-by-using-swagger)
+		* [Task 2: Test the Orders microservice by using Swagger](#task-2-test-the-orders-microservice-by-using-swagger)
+	* [Exercise 7: API Management](#exercise-7-api-management)
 		* [Task 1: Import Events API](#task-1-import-events-api)
-		* [Task 2:  Import Orders API](#task-2--import-orders-api)
+		* [Task 2: Import Orders API](#task-2-import-orders-api)
 		* [Task 3: Retrieve the user subscription key](#task-3-retrieve-the-user-subscription-key)
-		* [Task 4: Configure the Function App with the API Management key](#task-4-configure-the-function-app-with-the-api-management-key)
-	* [Exercise 6: Configure and publish the web application](#exercise-6-configure-and-publish-the-web-application)
+	* [Exercise 8: Configure and publish the web application](#exercise-8-configure-and-publish-the-web-application)
 		* [Task 1: Configure the web app settings](#task-1-configure-the-web-app-settings)
 		* [Task 2: Running the web app and creating an order](#task-2-running-the-web-app-and-creating-an-order)
 		* [Task 3: Publish the web app](#task-3-publish-the-web-app)
-	* [Exercise 7: Secure the web application](#exercise-7-secure-the-web-application)
+	* [Exercise 9: Secure the web application](#exercise-9-secure-the-web-application)
 		* [Task 1: Configure the Azure Active Directory B2C](#task-1-configure-the-azure-active-directory-b2c)
 		* [Task 2: Configure the web app Settings](#task-2-configure-the-web-app-settings)
 		* [Task 3: Add security features to the web application](#task-3-add-security-features-to-the-web-application)
@@ -213,32 +215,25 @@ In these steps, you will provision a Web App in a new App Service Plan.
 
 2.  On the Create Web App blade, enter the following:
 
-    a.  App name: Enter a unique name, such as **contosoeventsweb-SUFFIX**.
-
-    b.  Subscription: Select your subscription.
-
-    c.  Resource group: Select Use existing, and select the **hands-on-lab** resource group created previously.
-
-    d.  OS: Select **Windows**.
-
-    e.  App Service plan/Location: Click to open the App Service plan blade, then select **Create new**.
-
-       - App service plan: Enter **contosoeventsplan-SUFFIX**
-
-       - Location: Select the same location you have been using for other resources in this lab.
-
-       - Pricing tier: Select **S1 Standard**.
-
-       - Select **OK**.
-
-    f.  Publish: Select **Code**
+    a.  Subscription: Select your subscription.
     
-    g.  Application Insights: Click to open the Application Insights blade, then select **Disable**.  Select **Apply**.
+    b.  Resource group: Select the **hands-on-lab** resource group created previously.
+    
+    c.  Name: Enter a unique name, such as **contosoeventsweb-SUFFIX**
 
-    h.  Select **Create** to provision the Web App.
+    d.  Publish: Select **Code**
+    
+    e.  Runtime stack: Select **ASP.NET V4.7**
+
+    f.  Operating System: Select **Windows**.
+    
+    g.  Region: Select the same location you have been using for other resources in this lab.
+
+    h.  Windows Plan / Sku and size: Leave the default values.
+    
+    i.  Select **Review and create**, and then select **Create** to provision the Web App.
 
     ![On the Create Web App blade, fields are set to the previously defined settings.](media/create-web-app.png "Create Web App blade")
-
 
 3.  You will receive a notification in the Azure portal when the Web App deployment completes. From this, select Go to resource.
 
@@ -272,7 +267,7 @@ In this task, you will provision a Function App using a Consumption Plan. By usi
 
     f.  Location: Select the same location as the hands-on-lab resource group.
 
-    g.  Runtime Stack: **.NET**
+    g.  Runtime Stack: **.NET Core**
 
     h.  Storage: Leave Create new selected, and accept the default name.
 
@@ -618,7 +613,125 @@ In this exercise, you will publish the Service Fabric Application to the Azure c
 
 4.  From the Visual Studio output window, validate that the deployment has completed successfully before moving on to the next task.
 
-### Task 7: Test the Events microservice by using Swagger
+## Exercise 5: Set up the Function
+
+### Task 1: Set up the function
+
+In this task, you will create a function that will be triggered by the externalization queue we created for the app. Each order that is deposited to the queue by the Orders microservice  will trigger the ProcessOrderExternalizations function. The function then persists the order to the Orders container of the Cosmos DB instance.
+
+1.  There appears to be an issue with Azure Functions detecting Storage accounts, so before creating your function, you will manually add your Storage account connection string to the Application Settings for your Function App.
+
+2.  In the Azure portal, browse to the Storage Account you created in Exercise 1, Step 5, then select Access keys under Settings on the side menu, and copy the key1 Connection String value, as you did previously.
+
+    ![In the Azure Portal, under Settings, Access keys is circled. Under Default keys, the key 1 connection string and its copy button are circled.](media/image102.png "Azure Portal")
+
+3.  Now, browse to the Function App you created in Exercise 1, Step 4.
+
+4.  Select your Function App in the side menu, then select Configuration under Configured features.
+
+    ![In the Function Apps pane, in the left column, contosoeventsfn-SUFFIX is circled. In the right, Overview column, under Configured features, Application settings is circled.](media/image103.png "Function Apps pane")
+
+5.  On the Application Settings tab, select **+New application setting**, then enter **contosoeventsstore** in the name textbox, and paste the key1 Connection String value you copied from your Storage account into the value textbox.
+
+    ![On the Application settings tab, contosoeventsstore and its corresponding connection string value are circled. At the bottom, the New application setting button is circled.](media/image104.png "Application settings tab")
+
+6.  Scroll back to the top of the Application Settings tab, and select Save to apply the change.
+
+    ![Screenshot of the Save button](media/image105.png "Save button")
+
+7.  From the menu, place your mouse cursor over Functions, then select the + to the side of Functions.
+
+    ![In the Function Apps section, Functions is selected, and the Plus symbol to its right is circled.](media/image106.png "Function Apps section")
+
+8.  Select **In-portal** as the development environment in the getting started blade, and select the **Continue** button.
+
+    ![In the getting started Choose a Development Environment step, In-portal is circled](media/create-function-choose-env.png "Getting started page")
+    
+
+9.  Select **More templates** and then select the **Finish and view templates** button.
+
+    ![More templates is circled and the Finish and view templates button is selected.](media/view-more-templates.png "View more function templates")
+
+10. Select **Azure Queue Storage trigger** and then select install when the warning that extensions are required is displayed.
+
+    ![Azure Queue Storage is circled and Install is selected within the extensions required warning screen.](media/install-extensions-warning.png "Install Queue Storage Extensions")
+
+    a. Continue to install any additional extensions required.
+
+11.  In the New Function blade, enter the following:
+    
+   a.  Name: **ProcessOrderExternalizations**
+    
+   b.  Queue name: **contosoevents-externalization-requests**
+
+   c.  Storage account connection: Select **contosoeventsstore**
+   
+   d.  Select **Create**
+    
+![The values above are entered into the Azure Queue Storage trigger settings.](media/create-queue-storage-trigger.png  "Queue trigger settings")
+
+12. Under the ProcessOrderExternalizations function, select **Integrate**.
+
+    a. On the Integrate screen, set Message parameter name to **orderItem**
+
+    b. Select **Save**.
+
+    ![The Message parameter name is set to orderItem and Save is circled. ](media/integrate-screen.png "Integrate screen")
+
+13. While still on the Integrate screen, select **+New Output**.
+
+    ![On the Integrate Screen, under Outputs, + New Output is circled.](media/image117.png "Integrate Screen")
+
+14. In the outputs box, locate and select **Azure Cosmos DB**, then choose **Select**.
+
+    ![In the Azure Cosmos DB output window, next to the Azure Cosmos DB account connection field, the Select button is circled.](media/image118.png "Azure Cosmos DB output window")
+
+ > **Note**: If prompted to install extensions, Select **Install** and wait for the extensions to finish installing.
+
+15. On the Azure Cosmos DB output screen, enter the following:
+
+    a.  Document parameter name: Enter **orderDocument**
+    
+    b.  Use function return value: Leave unchecked.
+
+    c.  Collection Name: Enter **Orders**
+
+    d.  Partition key: Leave empty.
+
+    e.  Database name: Enter **TicketManager**
+
+    f.  Azure Cosmos DB account connection: Select **new** next to the text box, and select the Cosmos DB you created in Exercise 1, Task 6.
+    
+    g.  Collection throughput: Leave empty.
+
+    ![Screenshot of Azure Cosmos DB output window with the values specified above entered into the fields.](media/cosmos-db-output-window.png "Azure Cosmos DB output window")
+   
+    f.  Select **Save**. You should now see an Azure Queue Storage trigger and an Azure Cosmos DB output on the Integrate screen.
+
+    ![In the Integrate window, the fields under both Triggers and Outputs are circled. ](media/image120.png "Integrate window")
+
+16. Next, select your function from the side menu.
+
+    ![Under Functions, ProcessOrderExternailizations is circled.](media/image121.png "Functions section")
+
+17. Now, you will retrieve the code for the function from a file in Visual Studio.
+
+18. In Visual Studio, go to Solution Explorer, and locate ProcessTicketOrderExternalizationEvent.cs in the Azure Functions folder.
+
+    ![In Solution Explorer, under Azure Functions, ProcessTicketOrderExternalizationEvent.cs is circled.](media/image122.png "Solution Explorer")
+
+19. Select all the code in that file (CTRL+A) and copy (CTRL+C) it.
+
+20. Return to your function's page in the Azure portal, and replace the code in the run.csx block with the code you just copied from Visual Studio. The run.csx code should now look like the following. Note: The ProcessOrdersExternalization function will enable you to process another order, and see that it is saved to the Orders collection of the Cosmos DB.
+
+    ![Code that was copied from Visual Studio displays in the Run.csx block.](media/image123.png "Azure Portal, Run.csx block")
+
+21. Select **Save**
+
+## Exercise 6: Placing ticket orders
+
+
+### Task 1: Test the Events microservice by using Swagger
 
 In this task, you will test the events retrieval from the application deployed in the hosted Service Fabric Cluster.
 
@@ -634,7 +747,7 @@ In this task, you will test the events retrieval from the application deployed i
 
     ![On the Swagger Endpoint webpage for Contoso Events API - Events, Execute button is circled.](media/image137.png "Swagger Endpoint webpage")
 
-### Task 8: Test the Orders microservice by using Swagger
+### Task 2: Test the Orders microservice by using Swagger
 
 In this task, you will test the orders creation from the application deployed in the hosted Service Fabric Cluster.
 
@@ -675,7 +788,7 @@ In this task, you will test the orders creation from the application deployed in
     > Note: In order to write to the Cosmos DB database, the Azure Function must be running.
 
 
-## Exercise 5: API Management
+## Exercise 7: API Management
 
 Duration: 15 minutes
 
@@ -725,7 +838,7 @@ In this task, you will import the Events API description to your API Management 
 
     > **Note**: After saving, notice the URL under "Base URL". You will use this URL in your website configuration in the next exercise.
     
-### Task 2:  Import Orders API
+### Task 2: Import Orders API
 
 In this task, you will import the Orders API description to your API Management service to create an endpoint.
 
@@ -790,28 +903,7 @@ In this task, you will retrieve the subscription key for the client applications
 
     ![The Unlimited (default) subscription\'s Primary key now displays, and is circled.](media/image150.png "Unlimited subscription's Primary key")
 
-5.  You now have the API Management application key you will need to configure the Function App settings.
-
-### Task 4: Configure the Function App with the API Management key
-
-In this task, you will provide the API Management key in a setting for the Function App, so it can reach the Web API through the API Management service.
-
-1.  From the Azure Portal, browse to the Function App.
-
-2.  You will create an Application setting for the function to provide it with the API Management consumer key.
-
-3.  Select your Function App in the side menu, then select Application settings under Configured features.
-
-    ![In the Function Apps pane, on the left under Function Apps, contosoeventsfn-SUFFIX is circled. On the right under Configured features, Application settings is circled.](media/image103.png "Function Apps")
-
-4.  In the Application settings section, select **+New application setting**, and enter **contosoeventsapimgrkey** into the name field, and paste the API key you copied from the Developer portal above into the value field.
-
-    ![In the Application settings section, in the name field displays contosoeventsapimgrkey. At the top, the Save and +New application setting buttons are circled.](media/image151.png "Application settings section")
-
-5.  Select **Save** to apply the change.
-
-
-## Exercise 6: Configure and publish the web application
+## Exercise 8: Configure and publish the web application
 
 Duration: 15 minutes
 
@@ -830,11 +922,11 @@ In this task, you will update configuration settings to communicate with the API
     
     ![In Solution Explorer, the following folders are expanded: Web\\ContosoEvents.Web\\Web.config.](media/image152.png "Solution Explorer")
 
-2.  For the apimng:BaseUrl key, enter the base URL of the API you created in the API Management Publisher Portal (Exercise 5, Task 1, Step 5), such as <https://contosoevents-SUFFIX.azure-api.net/>
+2.  For the apimng:BaseUrl key, enter the base URL of the API you created in the API Management Publisher Portal (Exercise 7, Task 1, Step 6), such as <https://contosoevents-SUFFIX.azure-api.net/>
 
     > **Note**: Make sure to use only the domain name, and include a trailing "/" or the exercise will not work.
 
-3.  For the apimng:SubscriptionKey key, enter the subscription key you revealed in API Management developer portal (Exercise 5, Task 3, Step 3).
+3.  For the apimng:SubscriptionKey key, enter the subscription key you revealed in API Management developer portal (Exercise 7, Task 3, Step 3).
 
 4.  Save Web.config. You should have values for two of the API Management app settings.
 
@@ -908,7 +1000,7 @@ In this task, you will publish the web application to Azure.
 
 6.  When publishing is complete, your browser will launch, and navigate to the deployed web app home page. You can optionally submit another order to validate functionality works as in Task 2.
 
-##  Exercise 7: Secure the web application
+##  Exercise 9: Secure the web application
 
 If you completed the other work in good time and still have another 30 minutes, do this exercise and integrate Azure Active Directory B2C with the application. Otherwise, skip to [After the hands-on lab](#after-the-hands-on-lab).
 
