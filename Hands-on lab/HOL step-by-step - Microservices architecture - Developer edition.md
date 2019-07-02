@@ -865,27 +865,6 @@ In this task, you will retrieve the subscription key for the client applications
 
     ![The Unlimited (default) subscription\'s Primary key now displays, and is circled.](media/image150.png "Unlimited subscription's Primary key")
 
-5.  You now have the API Management application key you will need to configure the Function App settings.
-
-### Task 4: Configure the Function App with the API Management key
-
-In this task, you will provide the API Management key in a setting for the Function App, so it can reach the Web API through the API Management service.
-
-1.  From the Azure Portal, browse to the Function App.
-
-2.  You will create an Application setting for the function to provide it with the API Management consumer key.
-
-3.  Select your Function App in the side menu, then select Application settings under Configured features.
-
-    ![In the Function Apps pane, on the left under Function Apps, contosoeventsfn-SUFFIX is circled. On the right under Configured features, Application settings is circled.](media/image103.png "Function Apps")
-
-4.  In the Application settings section, select **+New application setting**, and enter **contosoeventsapimgrkey** into the name field, and paste the API key you copied from the Developer portal above into the value field.
-
-    ![In the Application settings section, in the name field displays contosoeventsapimgrkey. At the top, the Save and +New application setting buttons are circled.](media/image151.png "Application settings section")
-
-5.  Select **Save** to apply the change.
-
-
 ## Exercise 8: Configure and publish the web application
 
 Duration: 15 minutes
@@ -905,11 +884,11 @@ In this task, you will update configuration settings to communicate with the API
     
     ![In Solution Explorer, the following folders are expanded: Web\\ContosoEvents.Web\\Web.config.](media/image152.png "Solution Explorer")
 
-2.  For the apimng:BaseUrl key, enter the base URL of the API you created in the API Management Publisher Portal (Exercise 5, Task 1, Step 5), such as <https://contosoevents-SUFFIX.azure-api.net/>
+2.  For the apimng:BaseUrl key, enter the base URL of the API you created in the API Management Publisher Portal (Exercise 7, Task 1, Step 6), such as <https://contosoevents-SUFFIX.azure-api.net/>
 
     > **Note**: Make sure to use only the domain name, and include a trailing "/" or the exercise will not work.
 
-3.  For the apimng:SubscriptionKey key, enter the subscription key you revealed in API Management developer portal (Exercise 5, Task 3, Step 3).
+3.  For the apimng:SubscriptionKey key, enter the subscription key you revealed in API Management developer portal (Exercise 7, Task 3, Step 3).
 
 4.  Save Web.config. You should have values for two of the API Management app settings.
 
