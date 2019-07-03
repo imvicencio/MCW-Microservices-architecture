@@ -1,4 +1,4 @@
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
+![Microsoft Cloud Workshops](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
 Microservices architecture - Developer edition
@@ -405,11 +405,11 @@ In this section, you will provision an Azure Container Registry resource, that w
 
 2.  In the Create container registry blade, set the following property values
 
-    a.  Registry name: Enter a unique name, such as contosoeventsSUFFIX
+    a.  Registry name: Enter a unique name, such as contosoeventsSUFFIX.
     
     b.  Subscription: Select your subscription.
     
-    c.  Resource group: Select the existing **hands-on-lab** resource group previously created
+    c.  Resource group: Select the existing **hands-on-lab** resource group previously created.
     
     d.  Location: Select the same location as the hands-on-lab resource group.
     
@@ -417,7 +417,7 @@ In this section, you will provision an Azure Container Registry resource, that w
     
     f.  SKU:  Select **Standard**
     
-    g.  Select Create
+    g.  Select Create.
     
     ![On the Create container registry blade, all the property values are set and the Create button is circled.](media/acr2.png "Create container registry blade")
     
@@ -438,9 +438,9 @@ In this exercise, you will create the Docker images for each of the microservice
 
 ### Task 2: Build the Docker images
 
-1.  Open a Command Prompt by clicking the Start menu then typing cmd
+1.  Open a Command Prompt by clicking the Start menu then typing cmd.
 
-2.  Change the directory to C:\MCW-Microservices-architecture-master\Source\ContosoEventsPoC-DeveloperEdition\Src
+2.  Change the directory to C:\MCW-Microservices-architecture-master\Source\ContosoEventsPoC-DeveloperEdition\Src.
 
 3.  In the Src folder as the root, type the following command in the Command Prompt: `docker build --tag [YOUR CONTAINER REGISTRY].azurecr.io/contosoevents-events:latest --file ContosoEvents.Api.Events\Dockerfile .`  Replace [YOUR CONTAINER REGISTRY] with the container registry name that you selected in Exercise 1, Task 7, Step 2.  Press Enter to execute the command and start the Docker container image creation process for the Events microservice.
 
@@ -478,7 +478,7 @@ Duration: 15 minutes
 
     ![In the Access keys blade, the username and password are circled.](media/acr5.png "Container registry - Access keys blade")
     
-5.  Open a Command Prompt window
+5.  Open a Command Prompt window.
 
 6.  Type the following command `docker login [YOUR CONTAINER REGISTRY].azurecr.io`.  Replace [YOUR CONTAINER REGISTRY] with the name that you selected in Exercise 1, Task 7.  Press Enter to execute the command.
 
@@ -533,7 +533,7 @@ In this exercise, you will publish the Service Fabric Application to the Azure c
 
 ### Task 3: Set the environment variables to the Events microservice
 
-1.  Open the ServiceManifest.xml file located in ContosoEvents\ApplicationPackageRoot\EventsPkg
+1.  Open the ServiceManifest.xml file located in ContosoEvents\ApplicationPackageRoot\EventsPkg.
 
 2.  Locate the <ImageName> element (line 18) and replace [YOUR CONTAINER REGISTRY] with the name of your Container Registry account.  This element specifies the fully qualified name of the container image that is going to be used by the Service Fabric service.
 
@@ -543,7 +543,7 @@ In this exercise, you will publish the Service Fabric Application to the Azure c
 
 ### Task 4: Set the environment variables to the Orders microservice
 
-1.  Open the ServiceManifest.xml file located in ContosoEvents\ApplicationPackageRoot\OrdersPkg
+1.  Open the ServiceManifest.xml file located in ContosoEvents\ApplicationPackageRoot\OrdersPkg.
 
 2.  Locate the <ImageName> element (line 18) and replace [YOUR CONTAINER REGISTRY] with the name of your Container Registry account.  This element specifies the fully qualified name of the container image that is going to be used by the Service Fabric service.
 
@@ -622,19 +622,19 @@ In this task, you will create a function that will be triggered by the externali
 
 11.  In the New Function blade, enter the following:
     
-   a.  Name: **ProcessOrderExternalizations**
+     a.  Name: **ProcessOrderExternalizations**
     
-   b.  Queue name: **contosoevents-externalization-requests**
+     b.  Queue name: **contosoevents-externalization-requests**
 
-   c.  Storage account connection: Select **contosoeventsstore**
+     c.  Storage account connection: Select **contosoeventsstore**
    
-   d.  Select **Create**
+     d.  Select **Create**
     
 ![The values above are entered into the Azure Queue Storage trigger settings.](media/create-queue-storage-trigger.png  "Queue trigger settings")
 
 12. Under the ProcessOrderExternalizations function, select **Integrate**.
 
-    a. On the Integrate screen, set Message parameter name to **orderItem**
+    a. On the Integrate screen, set Message parameter name to **orderItem**.
 
     b. Select **Save**.
 
@@ -652,15 +652,15 @@ In this task, you will create a function that will be triggered by the externali
 
 15. On the Azure Cosmos DB output screen, enter the following:
 
-    a.  Document parameter name: Enter **orderDocument**
+    a.  Document parameter name: Enter **orderDocument**.
     
     b.  Use function return value: Leave unchecked.
 
-    c.  Collection Name: Enter **Orders**
+    c.  Collection Name: Enter **Orders**.
 
     d.  Partition key: Leave empty.
 
-    e.  Database name: Enter **TicketManager**
+    e.  Database name: Enter **TicketManager**.
 
     f.  Azure Cosmos DB account connection: Select **new** next to the text box, and select the Cosmos DB you created in Exercise 1, Task 6.
     
@@ -688,7 +688,7 @@ In this task, you will create a function that will be triggered by the externali
 
     ![Code that was copied from Visual Studio displays in the Run.csx block.](media/image123.png "Azure Portal, Run.csx block")
 
-21. Select **Save**
+21. Select **Save**.
 
 ## Exercise 6: Placing ticket orders
 
@@ -966,7 +966,7 @@ In this task, you will publish the web application to Azure.
 
 Duration: 10 minutes
 
-In this exercise, attendees will deprovision any Azure resources that were created in support of the lab. You should follow all steps provided after attending the Hands-on lab.
+In this exercise, attendees will deprovision any Azure resources that were created in support of the lab. 
 
 ### Task 1: Delete the resource group
 
@@ -975,3 +975,5 @@ In this exercise, attendees will deprovision any Azure resources that were creat
 2.  Search for the name of your research group, and select it from the list.
 
 3.  Select Delete in the command bar, and confirm the deletion by re-typing the Resource group name, and selecting Delete.
+
+You should follow all steps provided *after* attending the Hands-on lab.
