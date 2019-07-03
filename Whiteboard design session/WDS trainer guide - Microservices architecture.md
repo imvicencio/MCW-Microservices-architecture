@@ -196,7 +196,7 @@ Contoso Events is an online service provider for concerts, sporting and other la
 
 Contoso Events has experienced consistent growth trends and now has almost 1 million customers. They intend to further grow market share and increase sales by redesigning their current web sites to improve usability and conversion rates, improve responsiveness across devices. In addition, they will create mobile apps for iPhone, Android and Windows Phone devices. Following this, Contoso Events plans to extend its reach through partners by exposing its core event ticket sales and reporting APIs to partners. The plan is to retire and replace the existing solution to serve customers with a better experience, preserving code where possible but migrating to a decoupled design with improved business agility.
 
-To meet demand during peak periods they rely on a combination of auto-scaling and manual intervention to scale in advance of expected bursts of traffic, such as when a popular event has tickets first go on sale. The CIO, Steve Dormer, is concerned about system performance, scalability and associated costs.  In the other hand, the company is looking forward to adopt a DevOps culture by implementing modern software architectures and development platforms.
+To meet demand during peak periods they rely on a combination of auto-scaling and manual intervention to scale in advance of expected bursts of traffic, such as when a popular event has tickets first go on sale. The CIO, Steve Dormer, is concerned about system performance, scalability and associated costs.  On the other hand, the company is looking forward to adopt a DevOps culture by implementing modern software architectures and development platforms.
 
 The company also has challenges rolling out new features and supporting new events on demand. Features have evolved in situ to where the solution has many interdependencies that increase the risk of regressions across features when changes are introduced. This is particularly challenging with the ticket ordering process as the data model for new events is often slightly different, which means that supporting new events may have impact on the user experience and UI, the middle tier and storage. Rolling out changes that impact this area while upwards of 50,000 users are actively placing orders, has proven to be a fragile process and requires them to schedule down time to ensure safe deployment.
 
@@ -232,7 +232,7 @@ According to the CIO, the current system topology handles the following core use
 
 1.  Event tickets can be ordered from multiple channels: the web site, new mobile applications, and third-party site and applications via available APIs.
 
-2.  Customers must be registered or logged in to place orders, so that they can login and find their orders, and for reporting and analytics purposes.
+2.  Customers must be registered or logged in to place orders.
 
 3.  Internal staff will manage orders and view reports from the Admin site.
 
@@ -502,8 +502,6 @@ After evaluating the benefits of Service Fabric, with the team at Microsoft, Con
 
     All Web API calls go through API Management, which can be scaled within a region, or deployed to multiple regions.
 
-    The queue does not report successful receipt of the message until a quorum is reached across the queue partition replicas (more on this in Customer Objections section).
-
     The Orders microservice must confirm successfully sending the order to the Order Sync Queue.
 
     The Azure Function that processes the Order Sync Queue will remove messages from the queue if processing is successful, which means successfully writing to the Cosmos DB collection. Any messages that can't be processed are moved to a poison queue. Those messages can be retried, or code can be written to pull from the poison queue for special processing, for example to move them to a data store for analysis of issues.
@@ -611,8 +609,6 @@ After evaluating the benefits of Service Fabric, with the team at Microsoft, Con
     -   Microservices design from the ground up on a platform that is specifically designed for that purpose, with the ability to scale.
 
     -   The capability to deploy Service Fabric clusters in Azure and on-premises, across both Windows and Linux hosts.
-    
-    -   Docker containers ensure portability to another container orchestrator.
 
 2. Microservices concepts are completely new to the Contoso Events team. If we were to go forward with Service Fabric as our microservices platform, we would like to understand what skills the team can carry forward, and how much of a learning curve exists.
 
@@ -638,6 +634,6 @@ After evaluating the benefits of Service Fabric, with the team at Microsoft, Con
 
 ## Customer quote (to be read back to the attendees at the end)
 
-"Docker is a compelling technology that allow us to build lightweight, autonomous and portable microservices that run on top of Linux or Windows.  In the other hand, Service Fabric provides so much to support deployment, compute utilization, health monitoring and recovery -- we could leverage the same team while increasing the size of our solution and feature set!"
+"Docker is a compelling technology that allow us to build lightweight, autonomous and portable microservices that run on top of Linux or Windows.  On the other hand, Service Fabric provides so much to support deployment, compute utilization, health monitoring and recovery -- we could leverage the same team while increasing the size of our solution and feature set!"
 
 Steve Dormer, CIO at Contoso Events
