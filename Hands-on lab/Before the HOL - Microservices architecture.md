@@ -202,7 +202,7 @@ In this task, you will provision a virtual machine (VM) in Azure. The VM image u
 
     -   Password: Enter **Password.1!!**
 
-5.  Select Change size
+5.  Select Change size.
 
 6.  On the Select a VM Size blade, enter d4 into the search text field. Then, click the Select button to return to the Create a virtual machine blade.
 
@@ -218,7 +218,7 @@ In this task, you will provision a virtual machine (VM) in Azure. The VM image u
     
     ![The Validation screen displays the Standard B8ms offer details.](media/vm-validation-passed-create.png "Validation Passed")
 
-10.  It may take 10+ minutes for the virtual machine to complete provisioning.
+>**Note**: It may take 10+ minutes for the virtual machine to complete provisioning.
 
 ### Task 3: Connect to your lab VM
 
@@ -282,7 +282,7 @@ In this task, you will install the Google Chrome browser on your Lab VM.
 
 In this task, you will install Docker for Windows on your Lab VM.
 
-1.  On your Lab VM, open a browser and navigate to <https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe>
+1.  On your Lab VM, open a browser and navigate to: <https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe>.
 
 2.  If prompted, select Save File to download the installer on the Lab VM.
 
@@ -316,9 +316,9 @@ In this task, you will install Docker for Windows on your Lab VM.
 
 In this task, you will install the latest Service Fabric SDK for Visual Studio on your Lab VM.
 
-1.  On your Lab VM, open a browser, and navigate to <https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started>
+1.  On your Lab VM, open a browser, and navigate to: <https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started>.
 
-2.  Scroll down on the page to the Install the SDK and tools section and select **Install the Microsoft Azure Service Fabric SDK** under the To use Visual Studio 2017 heading.  Regardless of the heading, it can be intalled on Visual Studio 2019.
+2.  Scroll down on the page to the Install the SDK and tools section and select **Install the Microsoft Azure Service Fabric SDK** under the To use Visual Studio 2017 heading.  Regardless of the heading, it can be installed on Visual Studio 2019.
 
     ![In the Install the SDK and tools section, the link to Install the Microsoft Azure Service Fabric SDK is circled.](media/b4-image30.png "Install the SDK and tools section")
 
