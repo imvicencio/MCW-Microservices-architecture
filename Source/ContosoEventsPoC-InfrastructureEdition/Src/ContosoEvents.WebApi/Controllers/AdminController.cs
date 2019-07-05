@@ -45,22 +45,26 @@ namespace ContosoEvents.WebApi.Controllers
             {
                 ServiceLocationService locator = new ServiceLocationService();
                 UriBuilderService builder = new UriBuilderService(Constants.ContosoEventsApplicationInstance, Constants.ContosoEventsTicketOrderServiceName);
-                ServicePartitionList partitions = await _fabricClient.QueryManager.GetPartitionListAsync(builder.ToUri());
+
+                //TODO: Task 4.1 - Use the FabricClient to get the list of partitions for the Ticket Order Service  
+                //ServicePartitionList partitions = await _fabricClient.QueryManager.GetPartitionListAsync(builder.ToUri());
 
                 foreach (Partition p in partitions)
                 {
                     long minKey = (p.PartitionInformation as Int64RangePartitionInformation).LowKey;
                     ITicketOrderService dispenderService = locator.Create<ITicketOrderService>(minKey, builder.ToUri());
-                    infos.Add(new TicketOrderServiceInfo()
-                    {
-                        PartitionId = p.PartitionInformation.Id.ToString(),
-                        PartitionKind = p.PartitionInformation.Kind.ToString(),
-                        PartitionStatus = p.PartitionStatus.ToString(),
-                        NodeName = await dispenderService.GetNodeName(),
-                        HealthState = p.HealthState.ToString(),
-                        ServiceKind = p.ServiceKind.ToString(),
-                        ItemsInQueue = await dispenderService.GetOrdersCounter(CancellationToken.None)
-                    });
+
+                    //TODO: Task 4.2 - Collect the partition info
+                    //infos.Add(new TicketOrderServiceInfo()
+                    //{
+                    //    PartitionId = p./*...complete this...*/,
+                    //    PartitionKind = p./*...complete this...*/,
+                    //    PartitionStatus = p./*...complete this...*/,
+                    //    NodeName = await dispenderService./*...complete this...*/,
+                    //    HealthState = p./*...complete this...*/,
+                    //    ServiceKind = p./*...complete this...*/,
+                    //    ItemsInQueue = await dispenderService.GetOrdersCounter(CancellationToken.None)
+                    //});
                 }
 
                 return Ok(infos);

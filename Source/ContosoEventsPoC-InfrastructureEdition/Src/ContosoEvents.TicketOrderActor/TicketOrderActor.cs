@@ -251,21 +251,26 @@ namespace ContosoEvents.TicketOrderActor
                     return;
                 }
 
-                // Locate the event actor
-                IEventActor eventActor = this.ActorLocationService.Create<IEventActor>(new ActorId(state.EventId), Constants.ContosoEventsApplicationName);
-                await eventActor.CancelTickets(state);
+
+                //TODO: Task 1.1 - Acquire an instance of the Actor
+                //IEventActor eventActor = ...
+
+                //TODO: Task 1.2 - Invoke the CancelTicket operation with the supplied state
+                //await eventActor.CancelTickets(/*...complete this call...*/);
 
                 // Refund credit card
                 await this.PaymentProcessorService.Refund(state);
-                state.CancellationDate = DateTime.Now;
-                state.IsFulfilled = false;
-                state.IsCancelled = true;
+
+                //TODO: Task 1.3 - Update the state object to reflect that the order is cancelled
+                state.CancellationDate = //DateTime./*complete this/*;
+                state.IsFulfilled = //complete this (should not be fulfilled)
+                state.IsCancelled = //complete this (should be cancelled)
                 
                 //TODO: Exercise 6 - Task 1 
                 //state.Status = OrderStatuses.Cancelled;
 
-                // Make sure the state is saved
-                await SetEntityStateAsync(state);
+                //TODO: Task 1.4 - Save the updated state
+                //await SetEntityStateAsync(/* complete this */);
 
                 // Notify the user
                 await this.NotificationService.Notify(state);
@@ -326,7 +331,8 @@ namespace ContosoEvents.TicketOrderActor
 
         private async Task SetEntityStateAsync(TicketOrder state)
         {
-            await this.StateManager.SetStateAsync<TicketOrder>(ActorStatePropertyName, state);
+            // TODO: Task 1.5 - update the actor state with the new state by setting to the new state
+            //await this.StateManager./*...complete this...*/<TicketOrder>(ActorStatePropertyName, state);
 
             // Just to make sure though it is probably not needed
             await this.SaveStateAsync();

@@ -35,7 +35,7 @@ namespace ContosoEvents.Web.Controllers
                     UserName = ClaimsPrincipal.Current?.GetUserId(),
                     Email = ClaimsPrincipal.Current?.Identity?.Name,
                     EventId = eventData.Id,
-                    PaymentProcessorTokenId = order.PaymentProcessorToken,
+                    PaymentProcessorTokenId = string.IsNullOrWhiteSpace(order.PaymentProcessorToken) ? Guid.NewGuid().ToString(): order.PaymentProcessorToken, //We need to send a payment processor token
                     Tickets = order.TicketCount
                 };
                 if (string.IsNullOrWhiteSpace(data.Email)) data.Email = order.DeliveryEmail;
@@ -43,8 +43,9 @@ namespace ContosoEvents.Web.Controllers
                 if (string.IsNullOrWhiteSpace(data.FirstName)) data.FirstName = order.FirstName;
                 if (string.IsNullOrWhiteSpace(data.LastName)) data.LastName = order.LastName;
 
-                orderId = ContosoEventsApi.PlaceUserOrder(data);
-                result = orderId != null;
+                var placeUserOrderResult = ContosoEventsApi.PlaceUserOrder(data);
+                result = placeUserOrderResult.Item1;
+                orderId = placeUserOrderResult.Item2;
             }
 
             return View("OrderResult", new Tuple<bool, string>(result, orderId));

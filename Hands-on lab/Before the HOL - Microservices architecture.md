@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-May 2019
+June 2019
 </div>
 
 
@@ -34,9 +34,10 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
         - [Task 2: Provision a lab virtual machine (VM)](#task-2-provision-a-lab-virtual-machine-vm)
         - [Task 3: Connect to your lab VM](#task-3-connect-to-your-lab-vm)
         - [Task 4: Install Chrome on LabVM](#task-4-install-chrome-on-labvm)
-        - [Task 5: Install Service Fabric SDK for Visual Studio](#task-5-install-service-fabric-sdk-for-visual-studio)
-        - [Task 6: Setup Service Fabric certificate](#task-6-setup-service-fabric-certificate)
-        - [Task 7: Validate Service Fabric ports](#task-7-validate-service-fabric-ports)
+        - [Task 5: Install Docker for Windows on LabVM](#task-5-install-docker-for-windows)
+        - [Task 6: Install Service Fabric SDK for Visual Studio](#task-5-install-service-fabric-sdk-for-visual-studio)
+        - [Task 7: Setup Service Fabric certificate](#task-6-setup-service-fabric-certificate)
+        - [Task 8: Validate Service Fabric ports](#task-7-validate-service-fabric-ports)
 
 <!-- /TOC -->
 
@@ -50,19 +51,21 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 2.  A virtual machine configured with:
 
-    -   Visual Studio 2017 Community edition, or later
+    -   Visual Studio 2019 Community edition, or later
 
-    -   Azure Development workload enabled in Visual Studio 2017 (enabled by default on the VM)
+    -   Azure Development workload enabled in Visual Studio 2019 (enabled by default on the VM)
 
-    -   Service Fabric SDK 3.3 or later for Visual Studio 2017
-
+    -   Service Fabric SDK 3.3 or later for Visual Studio
+    
     -   Google Chrome browser (Swagger commands do not work in IE)
+    
+    -   Docker for Windows
 
     -   PowerShell 3.0 or higher (v5.1 already installed on VM)
 
 ## Before the hands-on lab
 
-Duration: 45 minutes
+Duration: 50 minutes
 
 Synopsis: In this exercise, you will set up your environment for use in the rest of the hands-on lab. You should follow all the steps provided in the Before the hands-on lab section to prepare your environment before attending the hands-on lab.
 
@@ -82,7 +85,7 @@ In this task, you will provision the Service Fabric Cluster in Azure.
 
 -   Cluster name: Enter **contosoeventssf-SUFFIX**, replacing SUFFIX with your alias, initials, or another value to make the name unique (indicated by a green check in the text box).
 
--   Operating system: Set to WindowsServer 2016-Datacenter.
+-   Operating system: Set to **UbuntuServer 16.04 LTS**
 
 -   Username: Enter **holuser**.
 
@@ -117,9 +120,7 @@ In this task, you will provision the Service Fabric Cluster in Azure.
 
     -   Initial VM scale set capacity: Leave set to **5**.
 
-    -   Custom endpoints: Enter **8082**. This will allow the Web API to be accessible through the cluster.
-
-    -   Enable reverse proxy: Leave unchecked.
+    -   Custom endpoints: Enter **8082, 8083**. This will allow the microservices to be accessible through the cluster.
 
     -   Configure advanced settings: Leave unchecked.
 
@@ -159,7 +160,7 @@ In this task, you will provision the Service Fabric Cluster in Azure.
 
         ![Basic Configuration Type is selected on the Security blade, and Edit access policies for hands-on-lab-SUFFIX is selected. Enable access to Azure Virutal Machines for deployment is checked in the Access policies blade on the right.](media/b4-image10.png "Security and Access policies blades")
 
-    -   Enter "hands-on-lab-SUFFIX" as the certificate name. Then choose OK on the Security configuration blade.
+    -   Enter **hands-on-lab-SUFFIX** as the certificate name. Then choose OK on the Security configuration blade.
 
 6.  On the Summary blade, review the summary, and select Create to begin provisioning the new cluster.
 
@@ -171,52 +172,53 @@ In this task, you will provision the Service Fabric Cluster in Azure.
 
 ### Task 2: Provision a lab virtual machine (VM)
 
-In this task, you will provision a virtual machine (VM) in Azure. The VM image used will have Visual Studio Community 2017 installed.
+In this task, you will provision a virtual machine (VM) in Azure. The VM image used will have Visual Studio Community 2019 installed.
 
 1.  Launch a web browser and navigate to the [Azure portal](https://portal.azure.com/).
 
-2.  Select +Create a Resource, then type "Visual Studio" into the search bar. Select Visual Studio Community 2017 (latest release) on Windows Server 2016 (x64) from the results.
+2.  Select +Create a Resource, then type "Visual Studio 2019" into the search bar. Select **Visual Studio 2019 Latest** from the dropdown list.
 
-    ![In the left pane of the Azure portal, Create a resource is circled. In the Marketplace blade, Everything is selected. In the Everything blade, the search field contains Visual Studio. Under Results, Visual Studio Community 2017 on Windows Server 2016 (x64) is circled.](media/b4-image12.png "Azure portal")
+    ![In the left pane of the Azure portal, Create a resource is circled. In the New blade, the search field contains Visual Studio 2019. Under the search field, a dropdown list with Visual Studio 2019 Latest is circled.](media/b4-image12.png "Azure portal")
 
-3.  On the blade that comes up, ensure the deployment model is set to Resource Manager and select Create.
+3.  On the Visual Studio 2019 Latest blade, select **Visual Studio 2019 Community (latest release) on Windows 10 Enterprise N (x64)** as the software plan and select Create.
 
-    ![Resource Manager displays in the the Select a deployment model field.](media/b4-image13.png "Select a deployment model field")
+    ![In the Visual Studio 2019 Latest blade, the Select a software plan dropdown list highlights the Visual Studio 2019 Community (latest release) on Windows 10 Enterprise N (x64) option.  At the right, the Create button is circled.](media/b4-vs2019blade.png "Azure portal")
 
 4.  Set the following configuration on the Basics tab:
 
-    -   Name: Enter LabVM.
-
-    -   VM disk type: Leave Premium SSD selected.
-
-    -   Username: Enter **holuser**.
+    -   Subscription: Select the subscription you are using for this lab.
+    
+    -   Resource group: Select Use existing, and select the **hands-on-lab** resource group created previously.
+    
+    -   Virtual machine name: Enter **LabVM**
+    
+    -   Region: Select the region you are using for resources in this lab.
+    
+    -   Availability options: Leave No infrastructure redundancy required selected.
+    
+    -   Image: Leave **Visual Studio 2019 Community (latest release) on Windows 10 Enterprise N (x64)** selected.
+    
+    -   Username: Enter **holuser**
 
     -   Password: Enter **Password.1!!**
 
-    -   Subscription: Select the subscription you are using for this lab.
+5.  Select Change size.
 
-    -   Resource group: Select Use existing, and select the hands-on-labs resource group created previously.
+6.  On the Select a VM Size blade, enter d4 into the search text field. Then, click the Select button to return to the Create a virtual machine blade.
 
-    -   Location: Select the region you are using for resources in this lab.
-
-        
-5.  Select Change Size
-
-6.  On the Select a VM Size blade, enter d2s into the search text field. This machine won't be doing much heavy lifting, so selecting D2S\_V3 Standard is a good baseline option.
-
-    ![On the Choose a size blade, d2s is entered into the search text field.](media/change-lab-vm-size.png "Choose a size blade")
+    ![On the Select a VM size blade, d4 is entered into the search text field.](media/change-lab-vm-size.png "Select a VM size blade")
     
-7.  Within the **INBOUND PORT RULES** section, choose RDP (3389) from the Select public inbound ports dropdown.
+7.  Within the **INBOUND PORT RULES** section, select the Allow selected ports option, then choose RDP (3389) from the Select  inbound ports dropdown list.
 
-8.  Accept all the remaining default values on the Basic blade and select Review + Create.
+8.  Accept all the remaining default values on the Basic blade and select Review + create.
 
     ![The Basics blade displays with the fields set to the previously stated settings.](media/lab-vm-basics-blade.png "Basics blade ")
 
-9.  Select Create on the Create blade to provision the virtual machine.
+9.  Select Create on the Create a virtual machine blade to provision the virtual machine.
     
-    ![The Validation screen displays with the Standard D2s v3 offer details.](media/vm-validation-passed-create.png "Validation Passed")
+    ![The Validation screen displays the Standard B8ms offer details.](media/vm-validation-passed-create.png "Validation Passed")
 
-10.  It may take 10+ minutes for the virtual machine to complete provisioning.
+>**Note**: It may take 10+ minutes for the virtual machine to complete provisioning.
 
 ### Task 3: Connect to your lab VM
 
@@ -224,17 +226,17 @@ In this step, you will open an RDP connection to your Lab VM and disable Interne
 
 1.  Connect to the Lab VM (If you are already connected to your Lab VM, skip to Step 9).
 
-2.  From the side menu in the Azure portal, select Resource groups, then enter your resource group name into the filter box, and select it from the list.
+2.  From the side menu in the Azure portal, select Virtual machines.
 
-    ![In the Azure Portal, Resource groups pane, hands-on is typed in the search field, and under Name, hands-on-labs is circled.](media/b4-image17.png "Azure Portal, Resource groups pane")
+    ![In the Azure Portal side menu, the Virtual machines option is circled.](media/b4-image17.png "Azure Portal side menu")
 
-3.  Next, select your lab virtual machine, LabVM, from the list.
+3.  In the Virtual machines blade, select LabVM from the list.
 
-    ![In the Name list, the LabVM Virtual Machine is circled.](media/b4-image18.png "Name list")
+    ![In the Virtual machines blade, the LabVM virtual machine is circled.](media/b4-image18.png "Virtual machines blade")
 
-4.  On your Lab VM blade, select Connect from the top menu.
+4.  In the LabVM blade, select Connect from the top menu.
 
-    ![The Connect button is circled on the lab VM blade top menu.](media/b4-image19.png "Lab VM blade top menu")
+    ![The Connect button is circled on the LabVM blade top menu.](media/b4-image19.png "LabVM blade top menu")
 
 5.  Download and open the RDP file.
 
@@ -253,20 +255,6 @@ In this step, you will open an RDP connection to your Lab VM and disable Interne
 8.  Select Yes to connect, if prompted that the identity of the remote computer cannot be verified.
 
     ![In the Remote Desktop Connection dialog box, a warning states that the identity of the remote computer cannot be verified, and asks if you want to continue anyway. At the bottom, the Yes button is circled.](media/b4-image22.png "Remote Desktop Connection dialog box")
-
-9.  Once logged in, launch the Server Manager. This should start automatically, but you can access it via the Start menu if it does not start.
-
-    ![The Server Manager tile is circled in the Start Menu.](media/b4-image23.png "Start Menu")
-
-10. Select Local Server, then select On (might also display Off) next to IE Enhanced Security Configuration.
-
-    ![In Server manager, in the left pane, Local Server is selected. In the right, Properties pane, IE Enhanced Security Configuration is circled, and a callout arrow points to On.](media/b4-image24.png "Server manager")
-
-11. In the Internet Explorer Enhanced Security Configuration dialog, select Off under Administrators and under Users, then select OK.
-
-    ![In the the Internet Explorer Enhanced Security Configuration dialog box, under Administrators and under Users, the Off button is selected and circled. ](media/b4-image25.png "Internet Explorer Enhanced Security Configuration dialog box")
-
-12. Close the Server Manager.
 
 ### Task 4: Install Chrome on LabVM
 
@@ -290,13 +278,47 @@ In this task, you will install the Google Chrome browser on your Lab VM.
 
 5.  Once the Chrome installation completes, a Chrome browser window should open. For ease, you can use the instructions in that window to make Chrome your default browser.
 
-### Task 5: Install Service Fabric SDK for Visual Studio
+### Task 5: Install Docker for Windows
 
-In this task, you will install the latest Service Fabric SDK for Visual Studio 2017 on your Lab VM.
+In this task, you will install Docker for Windows on your Lab VM.
 
-1.  On your Lab VM, open a browser, and navigate to <https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started>
+1.  On your Lab VM, open a browser and navigate to: <https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe>.
 
-2.  Scroll down on the page to the Install the SDK and tools section and select Install the Microsoft Azure Service Fabric SDK under the To use Visual Studio 2017 heading.
+2.  If prompted, select Save File to download the installer on the Lab VM.
+
+    ![In the Opening Docker for Windows Installer.exe dialog box, a message asks if you want to save the file. At the bottom, the Save File button is circled.](media/b4-dockerwin.png "Opening Docker for Windows Installer.exe dialog box")
+
+3.  When finished, open the folder where the file was downloaded.
+
+4.  Double-click the Docker for Windows Installer.exe file in order to run the installer.
+    
+    ![In the Installing Docker Desktop window, a message indicates that the Docker required files are being downloaded.](media/b4-dockerwin-install.png "Installing Docker Desktop window")
+
+5.  Follow the instructions to install the application.
+
+6.  Once the Docker for Windows installation completes, select the Close and log out button.  This action will log out the current session.
+
+7.  Reconnect to the LabVM virtual machine by repeating the step 5 in Task 3.
+
+8.  When prompted, select Ok on the Docker Desktop dialog box that asks you if you want to enable Hyper-V and Containers features.  This action will restart the virtual machine.
+
+    ![In the Docker Desktop dialog box, a message asks you if you want to enable Hyper-V and Containers features.  The Ok button is circled](media/b4-dockerwin-hyperv.png "Docker Desktop dialog box")
+    
+9. Reconnect to the LabVM virtual machine by repeating the step 5 in Task 3.
+
+10. Wait for Docker for Windows to start.  You can see its status on the icon in the tray bar.  When Docker starts successfully, it will display the Welcome window.
+
+    ![The Welcome window indicates that Docker was started successfully.](media/b4-dockerwin-started.png "Docker Welcome window")
+
+
+
+### Task 6: Install Service Fabric SDK for Visual Studio
+
+In this task, you will install the latest Service Fabric SDK for Visual Studio on your Lab VM.
+
+1.  On your Lab VM, open a browser, and navigate to: <https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started>.
+
+2.  Scroll down on the page to the Install the SDK and tools section and select **Install the Microsoft Azure Service Fabric SDK** under the To use Visual Studio 2017 heading.  Regardless of the heading, it can be installed on Visual Studio 2019.
 
     ![In the Install the SDK and tools section, the link to Install the Microsoft Azure Service Fabric SDK is circled.](media/b4-image30.png "Install the SDK and tools section")
 
@@ -317,7 +339,7 @@ In this task, you will install the latest Service Fabric SDK for Visual Studio 2
 
 7.  Restart the VM to complete the installation and start the local Service Fabric cluster service.
 
-### Task 6: Setup Service Fabric certificate
+### Task 7: Setup Service Fabric certificate
 
 When you create a new Service Fabric Cluster using the portal, a secure cluster is deployed. In order to later on be able to make use of it, a certificate setup is required.
 
@@ -391,7 +413,7 @@ In this task, you will download the required certificate and install it on your 
 
     ![Import success.](media/b4-image43.png "Import successful")
 
-### Task 7: Validate Service Fabric ports
+### Task 8: Validate Service Fabric ports
 
 Occasionally, when you create a new Service Fabric Cluster using the portal, the ports that you requested are not created. This will become evident when you try to deploy and run the Web App, because the required ports will not be accessible through the cluster.
 
@@ -407,7 +429,7 @@ In this task, you will validate that the ports are open and if not, fix the issu
 
     ![In the Settings section, Health probes is circled.](media/b4-image46.png "Settings section")
 
-4.  Verify if a probe exists for port 8082, and that it is "Used By" a load balancing rule. If both of these are true, you can skip the remainder of this task. Otherwise, proceed to the next step to create the probe and load-balancing rule.
+4.  Verify if a probe exists for ports 8082 and 8083, and that it is "Used By" a load balancing rule. If both of these are true, you can skip the remainder of this task. Otherwise, proceed to the next step to create the probe and load-balancing rule.
 
     ![In the list of health probes, three health probes display. For AppPortProbe1, its Port (8082), and Used by value (AppPortLBRule1) are circled.](media/b4-image47.png "Health probes list")
 
@@ -462,5 +484,7 @@ In this task, you will validate that the ports are open and if not, fix the issu
     ![Fields on the Add load balancing rule blade are set to the previously defined settings.](media/b4-image51.png "Add load balancing rule blade")
 
 10. If you get an error notification such as "Failure to create probe", ignore this, but just go check that the probe indeed exists. It should. You now have a cluster ready to deploy to and expose 8082 as the Web API endpoint / port.
+
+11. If necessary, repeat the same steps to create the probe for port 8083.
 
 You should follow all steps provided *before* performing the Hands-on lab.

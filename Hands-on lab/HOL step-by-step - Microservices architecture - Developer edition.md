@@ -1,4 +1,4 @@
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
+![Microsoft Cloud Workshops](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
 Microservices architecture - Developer edition
@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-May 2019
+June 2019
 </div>
     
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,58 +18,61 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2016 Microsoft Corporation. All rights reserved.
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
 **Contents**
 
-<!-- TOC -->
 
-- [Microservices architecture -- Developer edition hands-on lab step-by-step](#microservices-architecture----developer-edition-hands-on-lab-step-by-step)
-    - [Abstract and learning objectives](#abstract-and-learning-objectives)
-    - [Overview](#overview)
-    - [Solution architecture](#solution-architecture)
-    - [Requirements](#requirements)
-    - [Exercise 1: Environment setup](#exercise-1-environment-setup)
-        - [Task 1: Download and open the ContosoEventsPoC starter solution](#task-1-download-and-open-the-contosoeventspoc-starter-solution)
-        - [Task 2: API Management](#task-2-api-management)
-        - [Task 3: Web App](#task-3-web-app)
-        - [Task 4: Function App](#task-4-function-app)
-        - [Task 5: Storage account](#task-5-storage-account)
-        - [Task 6: Cosmos DB](#task-6-cosmos-db)
-    - [Exercise 2: Implementing the Service Fabric solution](#exercise-2-implementing-the-service-fabric-solution)
-        - [Task 1: Interacting with an Actor's State](#task-1-interacting-with-an-actors-state)
-        - [Task 2: Interacting with a Stateful Service](#task-2-interacting-with-a-stateful-service)
-        - [Task 3: Interacting with an Actor from a Web API Controller](#task-3-interacting-with-an-actor-from-a-web-api-controller)
-        - [Task 4: Inspecting Service Partitions](#task-4-inspecting-service-partitions)
-    - [Exercise 3: Placing ticket orders](#exercise-3-placing-ticket-orders)
-        - [Task 1: Run the solution](#task-1-run-the-solution)
-        - [Task 2: Test the application](#task-2-test-the-application)
-        - [Task 3: Service Fabric Explorer](#task-3-service-fabric-explorer)
-        - [Task 4: Set up the Ticket Order Sync queue](#task-4-set-up-the-ticket-order-sync-queue)
-        - [Task 5: Set up the functions](#task-5-set-up-the-functions)
-        - [Task 6: Test order data sync](#task-6-test-order-data-sync)
-    - [Exercise 4: Publish the Service Fabric Application](#exercise-4-publish-the-service-fabric-application)
-        - [Task 1: Publish the application](#task-1-publish-the-application)
-        - [Task 2: Test an order from the cluster](#task-2-test-an-order-from-the-cluster)
-    - [Exercise 5: API Management](#exercise-5-api-management)
-        - [Task 1: Import API](#task-1-import-api)
-        - [Task 2: Retrieve the user subscription key](#task-2-retrieve-the-user-subscription-key)
-        - [Task 3: Configure the Function App with the API Management key](#task-3-configure-the-function-app-with-the-api-management-key)
-    - [Exercise 6: Configure and publish the web application](#exercise-6-configure-and-publish-the-web-application)
-        - [Task 1: Configure the web app settings](#task-1-configure-the-web-app-settings)
-        - [Task 2: Running the web app and creating an order](#task-2-running-the-web-app-and-creating-an-order)
-        - [Task 3: Publish the web app](#task-3-publish-the-web-app)
-    - [Exercise 7: Upgrading](#exercise-7-upgrading)
-        - [Task 1: How upgrade works](#task-1-how-upgrade-works)
-        - [Task 2: Update an actor state](#task-2-update-an-actor-state)
-        - [Task 3: Perform a smooth upgrade](#task-3-perform-a-smooth-upgrade)
-        - [Task 4: Submit a new order](#task-4-submit-a-new-order)
-    - [After the hands-on lab](#after-the-hands-on-lab)
-        - [Task 1: Delete the resource group](#task-1-delete-the-resource-group)
+<!-- Start Document Outline -->
 
-<!-- /TOC -->
+* [Microservices architecture -- Developer edition hands-on lab step-by-step](#microservices-architecture----developer-edition-hands-on-lab-step-by-step)
+	* [Abstract and learning objectives](#abstract-and-learning-objectives)
+	* [Overview](#overview)
+	* [Solution architecture](#solution-architecture)
+	* [Requirements](#requirements)
+	* [Exercise 1: Environment setup](#exercise-1-environment-setup)
+		* [Task 1: Download and open the ContosoEventsPoC starter solution](#task-1-download-and-open-the-contosoeventspoc-starter-solution)
+		* [Task 2: API Management](#task-2-api-management)
+		* [Task 3: Web App](#task-3-web-app)
+		* [Task 4: Function App](#task-4-function-app)
+		* [Task 5: Storage account](#task-5-storage-account)
+		* [Task 6: Cosmos DB](#task-6-cosmos-db)
+		* [Task 7: Container Registry](#task-7-container-registry)
+	* [Exercise 2: Microservices containerization](#exercise-2-microservices-containerization)
+		* [Task 1: Inspect the Dockerfile files](#task-1-inspect-the-dockerfile-files)
+		* [Task 2: Build the Docker images](#task-2-build-the-docker-images)
+		* [Task 3: Inspect the Docker images](#task-3-inspect-the-docker-images)
+	* [Exercise 3: Push the container images to Azure Container Registry](#exercise-3-push-the-container-images-to-azure-container-registry)
+		* [Task 1: Logon into the Container Registry](#task-1-logon-into-the-container-registry)
+		* [Task 2: Push the images to the Container Registry](#task-2-push-the-images-to-the-container-registry)
+		* [Task 3: Inspect Container Registry in the Azure Portal](#task-3-inspect-container-registry-in-the-azure-portal)
+	* [Exercise 4: Publish the Service Fabric Application](#exercise-4-publish-the-service-fabric-application)
+		* [Task 1: Inspect the Cosmos DB account properties](#task-1-inspect-the-cosmos-db-account-properties)
+		* [Task 2: Inspect the Storage account properties](#task-2-inspect-the-storage-account-properties)
+		* [Task 3: Set the environment variables to the Events microservice](#task-3-set-the-environment-variables-to-the-events-microservice)
+		* [Task 4: Set the environment variables to the Orders microservice](#task-4-set-the-environment-variables-to-the-orders-microservice)
+		* [Task 5: Set the Container Registry credentials in the ApplicationManifest.xml file](#task-5-set-the-container-registry-credentials-in-the-applicationmanifestxml-file)
+		* [Task 6: Publish the Service Fabric Application](#task-6-publish-the-service-fabric-application)
+	* [Exercise 5: Set up the Function](#exercise-5-set-up-the-function)
+		* [Task 1: Set up the function](#task-1-set-up-the-function)
+	* [Exercise 6: Placing ticket orders](#exercise-6-placing-ticket-orders)
+		* [Task 1: Test the Events microservice by using Swagger](#task-1-test-the-events-microservice-by-using-swagger)
+		* [Task 2: Test the Orders microservice by using Swagger](#task-2-test-the-orders-microservice-by-using-swagger)
+	* [Exercise 7: API Management](#exercise-7-api-management)
+		* [Task 1: Import Events API](#task-1-import-events-api)
+		* [Task 2: Import Orders API](#task-2-import-orders-api)
+		* [Task 3: Retrieve the user subscription key](#task-3-retrieve-the-user-subscription-key)
+		* [Task 4: Configure the Function App with the API Management key](#task-4-configure-the-function-app-with-the-api-management-key)
+	* [Exercise 8: Configure and publish the web application](#exercise-8-configure-and-publish-the-web-application)
+		* [Task 1: Configure the web app settings](#task-1-configure-the-web-app-settings)
+		* [Task 2: Running the web app and creating an order](#task-2-running-the-web-app-and-creating-an-order)
+		* [Task 3: Publish the web app](#task-3-publish-the-web-app)
+	* [After the hands-on lab](#after-the-hands-on-lab)
+		* [Task 1: Delete the resource group](#task-1-delete-the-resource-group)
+
+<!-- End Document Outline -->
 
 # Microservices architecture -- Developer edition hands-on lab step-by-step
 
@@ -85,7 +88,7 @@ Contoso Events is an online service for concerts, sporting and other event ticke
 
 In this hands-on lab, you will construct an end-to-end POC for ticket ordering. You will leverage Service Fabric, API Management, Function Apps, Web Apps, and Cosmos DB.
 
-![The Event Ticket sales flowchart begins with Azure AD B2C, which points to Contoso Events Site Web App. A bi-directional arrow points between the Web App and API Manager, which in turn has a bi-direction arrow pointing between it and Web API (Stateless Service). An arrow points from there to Ticket Order Service (Stateful Service), which points to Ticket Order Actor (Processor). The Web API, Ticket Order Service, and Ticket Order Actor are all part of the Contoso Events Service Fabric App. from Ticket Order Actor, an arrow points to Order Externalization (Queue), then on to Process Order Externalization (Azure Function), and ends at Cosmos DB (Orders Collection). ](media/image2.png "Event Ticket sales flowchart")
+![The Event Ticket sales flowchart begins with Azure AD B2C, which points to Contoso Events Site Web App. A bi-directional arrow points between the Web App and API Manager, which in turn has bi-directional arrows pointing between it and the Events microservice and the Orders microservice. Two bi-directional arrows point from the microservices to the Container Registry.  The Orders microservice has an arrow that points to Order Externalization (Queue), then on to Process Order Externalization (Azure Function), and ends at Cosmos DB (Events and Orders). ](media/image2.png "Event Ticket sales flowchart")
 
 ## Solution architecture
 
@@ -103,13 +106,15 @@ The following figures are intended to help you keep track of all the technologie
 
 2.  A virtual machine configured with (see Before the hands-on lab):
 
-    -   Visual Studio 2017 Community edition, or later
+    -   Visual Studio 2019 Community edition, or later
 
-    -   Azure Development workload enabled in Visual Studio 2017 (enabled by default on the VM)
+    -   Azure Development workload enabled in Visual Studio 2019 (enabled by default on the VM)
 
-    -   Service Fabric SDK 3.3 or later for Visual Studio 2017
+    -   Service Fabric SDK 3.3 or later for Visual Studio
 
     -   Google Chrome browser (Swagger commands do not work in IE)
+    
+    -   Docker for Windows
     
     -   PowerShell 3.0 or higher (v5.1 already installed on VM)
 
@@ -121,7 +126,7 @@ Contoso Events has provided a starter solution for you. They have asked you to u
 
 Because this is a "born in Azure" solution, it depends on many Azure resources. You will be guided through creating those resources before you work with the solution in earnest. The following figure illustrates the resource groups and resources you will create in this exercise.
 
-![The Starter Solution begins with a Start button, with two arrows pointing to two different Resource Groups. The first Resource group includes only the Function App. The second Resource group includes the following resources: Service Fabric Cluster, API Management, Azure AD B2C, Web App, Storage Account, and Cosmos DB.](media/image42.png "Starter Solution Resources")
+![The Starter Solution begins with a Start button, with two arrows pointing to two different Resource Groups. The first Resource group includes only the Function App. The second Resource group includes the following resources: Service Fabric Cluster, API Management, Azure AD B2C, Web App, Storage Account, Cosmos DB and Container Registry.](media/image42.png "Starter Solution Resources")
 
 ### Task 1: Download and open the ContosoEventsPoC starter solution
 
@@ -129,11 +134,11 @@ Because this is a "born in Azure" solution, it depends on many Azure resources. 
     
 2.  Unzip the contents to the folder **C:\\**.
 
-3.  Locate the solution file (C:\\MCW-Microservices-architecture-master\\Source\\ContosoEventsPoC-DeveloperEdition\\Src\\ContosoEventsPOC.sln), and double-click it to open it with Visual Studio 2017.
+3.  Locate the solution file (C:\\MCW-Microservices-architecture-master\\Source\\ContosoEventsPoC-DeveloperEdition\\Src\\ContosoEventsPOC.sln), and double-click it to open it with Visual Studio 2019.
 
-4.  If prompted about how you want to open the file, select **Visual Studio 2017**, and select **OK**.
+4.  If prompted about how you want to open the file, select **Visual Studio 2019**, and select **OK**.
 
-    ![In the How do you want to open this file dialog box, Visual Studio 2017 is selected.](media/image43.png "How do you want to open this file?")
+    ![In the How do you want to open this file dialog box, Visual Studio 2019 is selected.](media/image43.png "How do you want to open this file?")
 
 5.  Log into Visual Studio or set up an account, when prompted.
 
@@ -145,11 +150,11 @@ Because this is a "born in Azure" solution, it depends on many Azure resources. 
 
 7.  If you are missing any prerequisites (listed under Requirements above), you may be prompted to install these at this point.
 
-8.  Verify your Visual Studio version is 15.9.11 or higher.
+8.  Verify your Visual Studio version is 16.1.0 or higher.
 
     a.  Click **Help** in the menu, then select **About Microsoft Visual Studio**.
 
-    b.  If the version is not 15.9.11, you will need to update it.  Click **OK**, then click **View** in the menu.  Select **Notifications**, you should see an entry for **Visual Studio Update is available***.  Select it and then click **Update** to update your instance.
+    b.  If the version is not 16.1.0, you will need to update it.  Click **OK**, then click **View** in the menu.  Select **Notifications**, you should see an entry for **Visual Studio Update is available***.  Select it and then click **Update** to update your instance.
 
 9.  Before you attempt to compile the solution, set the configuration to x64 by selecting it from the Solution Platforms drop down in the Visual Studio toolbar.
 
@@ -159,7 +164,6 @@ Because this is a "born in Azure" solution, it depends on many Azure resources. 
 
 ![The Build menu is circled on the Visual Studio menu. Under that, Build Solution is circled.](media/image47.png "Visual Studio menu")
 
-11. You will have some compile-time errors at this point. These are expected, and will be fixed as you proceed with the hands-on lab.
 
 ### Task 2: API Management
 
@@ -206,33 +210,26 @@ In these steps, you will provision a Web App in a new App Service Plan.
 
 2.  On the Create Web App blade, enter the following:
 
-    a.  App name: Enter a unique name, such as **contosoeventsweb-SUFFIX**.
-
-    b.  Subscription: Select your subscription.
-
-    c.  Resource group: Select Use existing, and select the **hands-on-lab** resource group created previously.
-
-    d.  OS: Select **Windows**.
-
-    e.  App Service plan/Location: Click to open the App Service plan blade, then select **Create new**.
-
-       - App service plan: Enter **contosoeventsplan-SUFFIX**
-
-       - Location: Select the same location you have been using for other resources in this lab.
-
-       - Pricing tier: Select **S1 Standard**.
-
-       - Select **OK**.
+    a.  Subscription: Select your subscription.
     
-    f.  Publish: Select **Code**
+    b.  Resource group: Select the **hands-on-lab** resource group created previously.
     
-    g.  Application Insights: Click to open the Application Insights blade, then select **Disable**.  Select **Apply**.
+    c.  Name: Enter a unique name, such as **contosoeventsweb-SUFFIX**
+
+    d.  Publish: Select **Code**
     
-    h.  Select **Create** to provision the Web App.
+    e.  Runtime stack: Select **ASP.NET V4.7**
+
+    f.  Operating System: Select **Windows**.
+    
+    g.  Region: Select the same location you have been using for other resources in this lab.
+
+    h.  Windows Plan / Sku and size: Leave the default values.
+    
+    i.  Select **Review and create**, and then select **Create** to provision the Web App.
 
     ![On the Create Web App blade, fields are set to the previously defined settings.](media/create-web-app.png "Create Web App blade")
     
-
 3.  You will receive a notification in the Azure portal when the Web App deployment completes. From this, select Go to resource.
 
     ![The Azure Portal Notification displays, indicating that deployment succeeded. In the top corner of the notification window, a Bell (notification) icon is circled. At the bottom of the Deployment succeeded message, the Go to resource button is circled.](media/image52.png "Azure Portal Notification")
@@ -265,7 +262,7 @@ In this task, you will provision a Function App using a Consumption Plan. By usi
 
     f.  Location: Select the same location as the hands-on-lab resource group.
 
-    g.  Runtime Stack: **.NET**
+    g.  Runtime Stack: **.NET Core**
 
     h.  Storage: Leave Create new selected, and accept the default name.
 
@@ -398,394 +395,191 @@ In this section, you will provision a Cosmos DB account, a Cosmos DB Database an
 9.  You will be able to see that the two containers exist in the new database.
 
     ![On the New Screen, under Containers, under TicketManager, the Orders and Events containers are circled.](media/image66.png "New Screen")
+    
+### Task 7: Container Registry
+In this section, you will provision an Azure Container Registry resource, that will be used to store the microservices images.
 
-## Exercise 2: Implementing the Service Fabric solution
+1.  In the Azure portal, select +Create a resource to open the New blade.  Select the Containers option from the menu, then select **Container Registry**.
 
-Duration: 60 minutes
+    ![On the New blade, the Containers option is selected and the Container Registry option is highlighted.  At the top-left, the +Create a resource button is circled.](media/acr.png "New blade")
 
-The agreed upon design with Contoso Events involves queuing ticket orders, and executing them asynchronously. A stateless Web API service receives the request, and queues it to a stateful service. An actor processes the request, and persists the order in its state.
+2.  In the Create container registry blade, set the following property values
 
-The design also calls for saving the state of the ticket order to a Cosmos DB collection for ad hoc queries. This exercise will guide you through adding configurations that will light up the actor code that externalizes its state to a storage queue. In addition, you will set up the Function App to read from the queue, and persist the order to the Orders collection of the Cosmos DB instance you created.
-
->**Note**: The code to write to the storage queue is already in place within the actor, so setting up configuration keys is the only requirement to lighting up that feature.
-
-![The Ticket Ordering flowchart starts with Web API (Stateless Service). An arrow points to Ticket Order Service (Stateful Service), then to Ticket Order Actor (Processor). These three items make up the Contoso Events Service Fabric App. From Ticket Order Actor, an arrow points to Order Externalization (Queue). The next step is Process Order Externalization (Azure Function), and ends with Cosmos DB (Orders Collection).](media/image67.png "Ticket Ordering flowchart")
-
-### Task 1: Interacting with an Actor's State
-
-In this task, you will write code to process the cancellation of an order by interacting with the Ticket Order Actor. To cancel an order, a Ticket Order Actor instance must be retrieved, and the CancelTicket operation it provides is invoked that changes the actor's state to reflect a "canceled" status.
-
-1.  On your Lab VM, with the ContosoEventsPoC solution open in Visual Studio, use the Solution Explorer to open the **TicketOrderActor.cs** file, in the Service Fabric folder, under the ContosoEvents.TicketOrderActor project.
-
-    ![In the Solution Explorer window, the following path is expanded: Service Fabric\\ContosoEvents.TicketOrderActor. Under ContosoEvents.TicketOrderActor, TicketOrderActor.cs is circled.](media/image68.png "Solution Explorer window")
-
-2.  Locate the CancelOrder method (line 239).
-
-3.  Locate the following TODO, and complete the commented line by replacing it with the following:
-
-```
-    //TODO: Task 1.1 - Acquire an instance of the Actor
-    IEventActor eventActor = this.ActorLocationService.Create<IEventActor>(new ActorId(state.EventId), Constants.ContosoEventsApplicationName);
-```
-
-4.  Locate the following TODO and complete the commented line by replacing it with the following:
-
-```
-    //TODO: Task 1.2 - Invoke the Cancel Ticket Operation with the supplied state
-    await eventActor.CancelTickets(state);
-```
-
-5.  Locate the following TODO and complete the commented lines by replacing them with the following:
-
-```
-    //TODO: Task 1.3 - Update the state object to reflect that the order is cancelled
-    state.CancellationDate = DateTime.Now;
-    state.IsFulfilled = false;
-    state.IsCancelled = true;
-```
-
-6.  Locate the following TODO and complete the commented line by replacing it with the following:
-
-```
-    //TODO: Task 1.4 - Save the updated state
-    await SetEntityStateAsync(state);
-```
-
-7.  Navigate to the SetEntityStateAsync method implementation, locate the following TODO, and complete the commented line by replacing it with the following:
-
-```
-    //TODO: Task 1.5 - update the actor state with the new state
-    await this.StateManager.SetStateAsync<TicketOrder>(ActorStatePropertyName, state);
-```
-
-8.  Save the file. At this point you have completed the code to cancel an order using the Ticket Order Actor. However, the solution is still incomplete (and will not compile if you try to). Continue to the next task.
-
-### Task 2: Interacting with a Stateful Service
-
-In this task, you will write code to enqueue an order to the Ticket Order Stateful Service whenever and order is being processed. This Order is enqueued by the Web API and then dequeued by the Ticket Order Stateful Service for processing by the Ticket Order Actor. To accomplish this, the order will be enqueued into a reliable queue.
-
-1.  Using Solution Explorer open TicketOrderService.cs under the ContosoEvents.TicketOrderService project.
-
-    ![In the Solution Explorer window, the following path is expanded: Service Fabric\\ContosoEvents.TicketOrderService. Under ContosoEvents.TicketOrderService, TicketOrderService.cs is circled.](media/image69.png "Solution Explorer window")
-
-2.  Locate the EnqueueOrder method (line 67).
-
-3.  Locate the following TODO and complete the commented line by replacing it with the following:
-
-```
-    //TODO: Task 2.1 - Get (or create) a reliable queue called ???OrderQueue??? in this partition.
-    var requests = await this.StateManager.GetOrAddAsync<IReliableQueue<TicketOrder>>(OrderQueueName);
-```
-
-4.  Locate the following TODO and complete the commented line by replacing it with the following:
-
-```
-    //TODO: Task 2.2 - Create a new transaction scope
-    using (var tx = this.StateManager.CreateTransaction())
-    {
-```
-
-5.  Locate the following TODO and complete the commented line by replacing it with the following:
-
-```
-    //TODO: Task 2.3 - Enqueue the order to the reliable queue within the transaction
-    await requests.EnqueueAsync(tx, order);
-```
-
-6.  Locate the following TODO and complete the commented line by replacing it with the following:
-
-```
-    //TODO: Task 2.4 - Commit the transaction if enqueue was successful
-    await tx.CommitAsync();
-    }
-```
-
-7.  Save the file. At this point you have completed the code to enqueue a message to the reliable queue. However, the solution is still incomplete (and will not compile if you try to). Continue to the next task.
-
-### Task 3: Interacting with an Actor from a Web API Controller
-
-In this task, you will write code that runs within the Orders Web API controller that delegates the cancellation request to the actor.
-
-1.  Using Solution Explorer, open the OrdersController.cs file, in the Controllers folder of the ContosoEvents.WebApi project.
-
-    ![In the Solution Explorer window, under the Controllers folder, OrdersController.cs is circled.](media/image70.png "Solution Explorer window")
-
-2.  Locate the CancelOrder method (line 179).
-
-3.  Locate the following TODO and complete the commented line by replacing it with the following:
-
-```
-    //TODO: Task 3.1 - Get the actor location service
-    IActorLocationService locator = ServiceFactory.GetInstance().GetActorLocationService();
-```
-
-4.  Locate the following TODO and complete the commented line by replacing it with the following:
-
-```
-    //TODO: Task 3.2 - Acquire the Order Actor instance
-    ITicketOrderActor orderActor = locator.Create<ITicketOrderActor>(new ActorId(id), Constants.ContosoEventsApplicationName);
-```
-
-5.  Locate the following TODO and complete the commented line by replacing it with the following:
-
-```
-    //TODO: Task 3.3 - Cancel the order
-    await orderActor.CancelOrder();
-```
-
-6.  Save the file. At this point you have completed the code to cancel the order in response to a request against the OrdersController CancelOrder operation. However, the solution is still incomplete (and will not compile if you try to). Continue to the next task.
-
-### Task 4: Inspecting Service Partitions
-
-In this task, you will write code that runs within the Admin Web API controller that uses the Fabric Client to get information about all the Ticket Order Service partitions.
-
-1.  Using Solution Explorer, open AdminController.cs in the Controllers folder in the ContosoEvents.WebApi project.
-
-    ![In the Solution Explorer window, under the Controllers folder, AdminController.cs is circled.](media/image71.png "Solution Explorer window")
-
-2.  Locate the GetTicketOrderPartitions method (line 37).
-
-3.  Locate the following TODO and complete the commented line by replacing it with the following:
-
-```
-    //TODO: Task 4.1 - Use the FabricClient to get the list of partitions for the Ticket Order Service  
-    ServicePartitionList partitions = await _fabricClient.QueryManager.GetPartitionListAsync(builder.ToUri());
-```
-
-4.  Locate the following TODO and complete the commented line by replacing it with the following:
-
-```
-    //TODO: Task 4.2 - Collect the partition info
-    infos.Add(new TicketOrderServiceInfo()
-    {
-    PartitionId = p.PartitionInformation.Id.ToString(),
-    PartitionKind = p.PartitionInformation.Kind.ToString(),
-    PartitionStatus = p.PartitionStatus.ToString(),
-    NodeName = await dispenderService.GetNodeName(),
-    HealthState = p.HealthState.ToString(),
-    ServiceKind = p.ServiceKind.ToString(),
-    ItemsInQueue = await dispenderService.GetOrdersCounter(CancellationToken.None)
-    });
-```
-
-5.  Save the file. At this point you have completed the code to inspect the partition information. Continue to the next exercise to run the solution and verify functionality.
-
-## Exercise 3: Placing ticket orders
-
+    a.  Registry name: Enter a unique name, such as contosoeventsSUFFIX.
+    
+    b.  Subscription: Select your subscription.
+    
+    c.  Resource group: Select the existing **hands-on-lab** resource group previously created.
+    
+    d.  Location: Select the same location as the hands-on-lab resource group.
+    
+    e.  Admin user: Select **Enable**.
+    
+    f.  SKU:  Select **Standard**
+    
+    g.  Select Create.
+    
+    ![On the Create container registry blade, all the property values are set and the Create button is circled.](media/acr2.png "Create container registry blade")
+    
+## Exercise 2: Microservices containerization
 Duration: 30 minutes
 
-In this exercise, you will test that your completed solution works by running locally on your Lab VM.
+In this exercise, you will create the Docker images for each of the microservices in the solution.
 
-### Task 1: Run the solution
+### Task 1: Inspect the Dockerfile files
 
-The purpose of this task is to make sure that the source code compiles, and that you can publish to a local cluster. To make sure that the app is running flawlessly, you will run some API tests and access the Service Fabric explorer.
+1.  In Visual Studio, open the Dockerfile located in the ContosoEvents.Api.Events project.
 
->**Note**: Not all features are in place, but you will be able to see that the application can run.
+2.  The Dockerfile contains all the required steps to build the Docker image for the Events microservice.  As you can see in the first line of code, it is based on the mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim Linux-based Docker image.  On the other hand, it uses the mcr.microsoft.com/dotnet/core/sdk:2.2-stretch image to compile and publish the Events microservice project.
 
-1.  On the Lab VM, make sure the local Service Fabric environment is running by selecting the arrow in the system tray, and checking for the appearance of the Service Fabric icon. 
+3.  Open the Dockerfile located in the ContosoEvents.Api.Orders project.
 
->**Note**: You may need to restart your VM if you've recently installed the Service Fabric Local Cluster Manager, for the icon to appear.
+4.  Likewise, this Dockerfile is based on the mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim Linux-based Docker image.  It also uses the mcr.microsoft.com/dotnet/core/sdk:2.2-stretch image to compile and publish the Orders microservice project.
 
-   ![In the Lab VM, the arrow and the Service Fabric icon are circled.](media/image72.png "Lab VM")
+### Task 2: Build the Docker images
 
-2.  If it is not there, you will need to start the local Service Fabric cluster. To do this, select the Start menu, scroll down to the apps listed under "S," and select Service Fabric Local Cluster Manager. The icon (Step 1) should now appear.
+1.  Open a Command Prompt by clicking the Start menu then typing cmd.
 
-    ![In the Start Menu, Service Fabric Local Cluster Manager is circled.](media/image73.png "Start Menu")
+2.  Change the directory to C:\MCW-Microservices-architecture-master\Source\ContosoEventsPoC-DeveloperEdition\Src.
 
-3.  Right-click the system tray icon, and select **Setup Local Cluster, 1 Node**.
+3.  In the Src folder as the root, type the following command in the Command Prompt: `docker build --tag [YOUR CONTAINER REGISTRY].azurecr.io/contosoevents-events:latest --file ContosoEvents.Api.Events\Dockerfile .`  Replace [YOUR CONTAINER REGISTRY] with the container registry name that you selected in Exercise 1, Task 7, Step 2.  Press Enter to execute the command and start the Docker container image creation process for the Events microservice.
 
-    ![In the System tray icon menu, Setup Local Cluster is selected. 1 Node is selected in the sub-menu. ](media/image74.png "System tray icon menu")
+    ![In the Command Prompt, the docker build command is executed and all the steps are being executed](media/dockerbuild-events.png "Solution Explorer window")
 
-4.  You should see a message that the local cluster is setting up.
+4.  Still in the Src folder as the root, type the following command in the Command Prompt: `docker build --tag [YOUR CONTAINER REGISTRY].azurecr.io/contosoevents-orders:latest --file ContosoEvents.Api.Orders\Dockerfile .`  Replace [YOUR CONTAINER REGISTRY] with the container registry name that you selected in Exercise 1, Task 7, Step 2.  Press Enter to execute the command and start the Docker container image creation process for the Orders microservice.
 
-    ![The Service Fabric Local Cluster Manager message says that the setting up process may take a few minutes.](media/image75.png "Service Fabric Local Cluster Manager message")
+    ![In the Command Prompt, the docker build command is executed and all the steps are being executed](media/dockerbuild-orders.png "Command Prompt window")
+    
+### Task 3: Inspect the Docker images
 
-    >**Note**: Sometimes you will see an error message appear indicating the cluster setup is retrying.
+1.  In the Command Prompt, type the following command: `docker images` and press Enter to execute.
 
-5.  Open the ContosoEventsPoc solution in Visual Studio, if it is not still open from the previous exercise.
+2.  The `images` parameter of the `docker` tool will show all the images stored in your local repository.  At this point, you should have both [YOUR CONTAINER REGISTRY].azurecr.io/contosoevents-events:latest and [YOUR CONTAINER REGISTRY].azurecr.io/contosoevents-orders:latest images at a minimum.
 
-6.  Rebuild the solution to resolve all NuGet packages, and to make sure there are no compilation errors, by selecting Build from the menu, then selecting **Rebuild Solution**.
+    ![In the Command Prompt, the docker images command is executed and all the container images stored locally are being shown.](media/dockerimages.png "Command Prompt window")
 
-    ![In Visual Studio, Rebuild Solution is circled. In the top menu, Build is circled.](media/image76.png "Visual Studio")
+## Exercise 3: Push the container images to Azure Container Registry  
 
-7.  After the rebuild, you should see a Rebuild All succeeded message in the bottom corner of Visual Studio, and that there are 0 Errors. Note: You may see some warnings, but these can be safely ignored.
+Duration: 15 minutes
 
-    ![In Visual Studio, under Error List, the 0 Errors message is circled. At the bottom, the Rebuild All succeeded message is circled.](media/image77.png "Visual Studio")
+### Task 1: Logon into the Container Registry
 
-8.  Now, you will Publish the Service Fabric app to the local cluster.
+1.  In the Azure Portal, select the Resource groups option in the side menu, then select the **hands-on-lab** resource group from the list.
 
-9. In Solution Explorer, right-click the Service Fabric Application, **ContosoEventsApp**, and select **Publish**.
+2.  In the hands-on-lab blade, select the contosoeventsSUFFIX container registry that you created on Exercise 1, Task 7.  For easy access, you can use the filter dropdown list and select only ' Container registries' option in the list.
 
-    ![In Solution Explorer, the Service Fabric folder is expanded, and ContosoEventsApp is circled. In the right-click menu, Publish is circled.](media/image78.png "Solution Explorer")
+    ![In the hands-on-lab blade, the Container registries filter is circled.  At the bottom, the contosoeventsSUFFIX Container registry is circled.](media/acr3.png "hands-on-lab blade")
+    
+3.  In the Container registry blade, select the Access keys from the menu.
 
-10. In the Publish Service Fabric Application dialog, select **PublishProfiles\\Local.1Node.xml** for the Target profile, ensure the correct account is selected, and select **Publish**.
+    ![In the Container registry blade, the Access keys menu item is circled.](media/acr4.png "Container registry blade")
+    
+4.  In the Access keys blade, copy both the username and password in a Notepad.  You will use this credential values to login on the Azure Container Registry from Docker.
 
-    ![In the Publish Service Fabric Application dialog box, the Target profile field is set to PublishProfiles\\Local.1Node.xml, and is circled.](media/image79.png "Publish Service Fabric Application dialog box")
+    ![In the Access keys blade, the username and password are circled.](media/acr5.png "Container registry - Access keys blade")
+    
+5.  Open a Command Prompt window.
 
-    > **Note**: If you have an error such as: "The project does not have a package action set." you can restart Visual Studio, re-open the solution, and this will resolve the problem.
+6.  Type the following command `docker login [YOUR CONTAINER REGISTRY].azurecr.io`.  Replace [YOUR CONTAINER REGISTRY] with the name that you selected in Exercise 1, Task 7.  Press Enter to execute the command.
 
-11. You can see the publish status in the Visual Studio output pane, at the bottom of the window. When the publish process is complete, you will see a success message in the output pane. The application is ready to be used.
+7.  When prompted, paste the username and password to login.
 
-    ![In the Visual Studio output pane, the Publish: 1 succeeded, 0 failed, 0 skipped message at the bottom is circled.](media/image80.png "Visual Studio output pane")
 
-### Task 2: Test the application
+### Task 2: Push the images to the Container Registry
 
-The Service Fabric Application includes a front-end Web API as the public-facing window to internal stateful services. In this task, you will check that you can call the Web API now that you have the application published to the local cluster. Because the app is not yet fully configured, not all Web API methods will be fully functional.
+1.  Type the following command `docker push [YOUR CONTAINER REGISTRY].azurecr.io/contosoevents-events:latest`.  Replace [YOUR CONTAINER REGISTRY] with the name that you selected in Exercise 1, Task 7.  Press Enter to execute the command.
 
-1.  On the Lab VM, open a Chrome browser, navigate to the Swagger endpoint for the Web API at: <http://localhost:8082/swagger/ui/index>. Note the three API endpoints: Admin, Events, and Orders.
+    ![In the Command Prompt window, the docker push command is circled and executed.](media/dockerpush.png "Command Prompt window")
 
-    ![In the Swagger endpoint window, under ContosoEvents.WebApi, three endpoints are circled: Admin, Events, and Orders).](media/image81.png "Swagger endpoint window")
+2.  Repeat this same process for the orders image, by typing the following command and then pressing Enter: `docker push [YOUR CONTAINER REGISTRY].azurecr.io/contosoevents-orders:latest` 
 
-2.  Select the **Admin** API, and observe the list of methods available.
+    ![In the Command Prompt window, the docker push command is circled and executed.](media/dockerpush2.png "Command Prompt window")
+   
+### Task 3: Inspect Container Registry in the Azure Portal
 
-    ![In the Swagger endpoint window, under ContosoEvents.WebApi, Admin is circled, and its list of methods display below.](media/image82.png "Swagger endpoint window")
+1.  In the Azure Portal, select the Resource groups option in the side menu, then select the **hands-on-lab** resource group from the list.
 
-3.  Select **/api/admin/partitions** endpoint, then select **Try it out**.
+2.  In the hands-on-lab blade, select the contosoeventsSUFFIX container registry that you created on Exercise 1, Task 7.  For easy access, you can use the filter dropdown list and select only ' Container registries' option in the list.
 
-    ![In the Swagger endpoint window, the /api/admin/partitions method is circled. Below that, the Model Schema displays. At the bottom, the Try it out button is circled.](media/image83.png "Swagger endpoint window, Admin method section")
+3.  In the Container registry blade, select the Repositories option from the side menu to display the container images uploaded in the Azure Container Registry account.
 
-4.  Make sure it returns a Response Code of 200, as shown in the following screen shot. This API endpoint returns the number of tickets queued across all partitions.
+    ![In the Container registry blade, the Repositories menu item is circled and seleted.  At the right side, the list of available repositories is shown and it's circled.](media/acr6.png "Container registry blade")
 
-    ![In the Swagger endpoint window, under Admin, in the /api/admin/partitions method section, the Response Code 200 is circled.](media/image84.png "Swagger endpoint window, Admin method section")
 
-5.  After viewing the Swagger definition, and receiving a success response code from the partitions method, your environment is in a good state to continue.
+## Exercise 4: Publish the Service Fabric Application
+Duration: 15 minutes
 
-### Task 3: Service Fabric Explorer
+In this exercise, you will publish the Service Fabric Application to the Azure cluster you created previously.
 
-In this task, you will browse to the Service Fabric Explorer, and view the local cluster.
+### Task 1: Inspect the Cosmos DB account properties
 
-1.  On your Lab VM, open a new tab in your Chrome browser, and navigate to the Service Fabric Explorer for the local cluster at <http://localhost:19080/Explorer/index.html>
+1.  In Azure Portal, navigate to the hands-on-lab resource group by using the Resource groups menu item in the side menu.
 
-    ![In the Service Fabric Explorer window, in the side pane, Cluster is selected. In the right, Cluster http://local host pane, on the Essentials tab, both Cluster Health State and System Application Health State are okay. On the Dashboard, circle graphs show that 1 Node, 1 Application, 4 Services, 4 partitions, and 4 replicas are all healthy, and that there are no upgrades in progress.](media/image85.png "Service Fabric Explorer")
+2.  In the hands-on-lab blade, locate and select the Azure Cosmos DB account that you created previously with the name contosoeventsdb-SUFFIX.
 
-2.  Observe that the ContosoEventsApp is deployed with the following services:
+3.  In the Cosmos DB account blade, select the Keys option from the menu.  In the Keys blade, copy the URI and PRIMARY KEY values in a Notepad.
 
-    a.  fabric:/ContosoEventsApp/EventActorService
+    ![In the Keys blade, the URI and PRIMARY KEY values are circled.](media/cosmos-db-keys.png "Cosmos DB account - Keys blade")
+    
+### Task 2: Inspect the Storage account properties
 
-    b.  fabric:/ContosoEventsApp/TicketOrderActorService
+1.  In Azure Portal, navigate to the hands-on-lab resource group by using the Resource groups menu item in the side menu.
 
-    c.  fabric:/ContosoEventsApp/TicketOrderService
+2.  In the hands-on-lab blade, locate and select the Storage account that you created previously with the name contosoeventsSUFFIX.
 
-    d.  fabric:/ContosoEventsApp/WebApi
+3.  In the Storage account blade, select the Access keys option from the menu.  Copy the Connection string value from the key1 section in a Notepad.
 
-    ![In the Service Fabric Explorer, in the tree view, the following path is expanded: Closter\\Applications\\ContosoEventsAppType\\fabric:/ContosoEventsApp. Under fabric:/ContosoEventsApp, the previously mentioned four services are circled.](media/image86.png "Service Fabric Explorer")
+    ![In the Access keys blade, the Connection string from the key1 section is circled.  At the left, the Access keys option is circled.](media/storage-account-accesskeys.png "Cosmos DB account - Keys blade")
 
-### Task 4: Set up the Ticket Order Sync queue
+### Task 3: Set the environment variables to the Events microservice
 
-In this task, you will complete features of the Contoso Events POC so that placing an order also syncs with the back-end data store. You will also update the configuration settings to reference the Azure resources you previously created correctly.
+1.  Open the ServiceManifest.xml file located in ContosoEvents\ApplicationPackageRoot\EventsPkg.
 
-1.  Return to Visual Studio, and from Solution Explorer, open **Local.1Node.xml**, located in the ApplicationParameters folder under the ContosoEventsApp project in the Service Fabric folder.
+2.  Locate the <ImageName> element (line 18) and replace [YOUR CONTAINER REGISTRY] with the name of your Container Registry account.  This element specifies the fully qualified name of the container image that is going to be used by the Service Fabric service.
 
-    ![In Solution Explorer, the following path is expanded in the tree view: Service Fabric\\ContosoEventsApp\\ApplicationParameters. In ApplicationParameters, Local.1Node.xml is circled.](media/image87.png "Solution Explorer")
+3.  Locate the **accountEndpoint** and **accountKey** environment variables inside the \<EnvironmentVariables\> element.  Set their values to the URI and Key respectively, that you copied from the Cosmos DB account properties.
 
-2.  Locate the following Parameter block in the file. In the steps below, you will retrieve the values needed to update Local.1Node.xml with your own configuration parameters.
+    ![In the ServiceManifest.xml file, the \<ImageName\> and \<EnvironmentVariable\> elements are circled.](media/servicemanifest-events.png "Cosmos DB account - Keys blade")
 
-```
-    <Parameter Name="DataStorageEndpointUri" Value="" />
-    <Parameter Name="DataStoragePrimaryKey" Value="" />
-    <Parameter Name="DataStorageDatabaseName" Value="TicketManager" />
-    <Parameter Name="DataStorageEventsCollectionName" Value="Events" />
-    <Parameter Name="DataStorageOrdersCollectionName" Value="Orders" />
-    <Parameter Name="DataStorageLogMessagesCollectionName" Value="LogMessages" />
-    <Parameter Name="StorageConnectionString" Value="" />
-    <Parameter Name="LogsStorageTableName" Value="prodlogs" />
-    <Parameter Name="ExternalizationQueueName" Value="contosoevents-externalization-requests"/>
-    <Parameter Name="SimulationQueueName" Value="contosoevents-simulation-requests" />
-```
+### Task 4: Set the environment variables to the Orders microservice
 
-**Cosmos DB settings**:
+1.  Open the ServiceManifest.xml file located in ContosoEvents\ApplicationPackageRoot\OrdersPkg.
 
-1.  In the Azure Portal, browse to the Azure Cosmos DB account you created in Exercise 1, Task 6, and select **Keys**, under Settings in the side menu.
+2.  Locate the <ImageName> element (line 18) and replace [YOUR CONTAINER REGISTRY] with the name of your Container Registry account.  This element specifies the fully qualified name of the container image that is going to be used by the Service Fabric service.
 
-    ![In the Azure Portal, Azure Cosmos DB account, under Settings, Keys is circled. In the right pane, under Read-write Keys, the URL, Primary Key, and their corresponding coopy buttons are circled.](media/image88.png "Azure Portal, Azure Cosmos DB account")
+3.  Locate the **accountEndpoint** and **accountKey** environment variables inside the \<EnvironmentVariables\> element.  Set their values to the URI and Key respectively, that you copied from the Cosmos DB account properties.
+    
+4.  Locate the **storageConnectionString** environment variable inside the \<EnvironmentVariables\> element.  Set its value to the Connection string that you copied previously from the Storage account properties.
 
-2.  Select the Copy button next to the URI value, return to the Local.1Node.xml file in Visual Studio, and paste the URI value into the value for the **DataStorageEndpointUri** parameter.
+    ![In the ServiceManifest.xml file, the \<ImageName\> and \<EnvironmentVariable\> elements are circled.](media/servicemanifest-orders.png "ServiceManifest.xml file")
+    
+### Task 5: Set the Container Registry credentials in the ApplicationManifest.xml file
 
-3.  Now, on your Cosmos DB keys blade, copy the Primary Key value, return to the Local.1Node.xml file in Visual Studio, and paste the Primary Key value into the value for the **DataStoragePrimaryKey** parameter.
+1.  Open the ApplicationManifest.xml file located in the ApplicationPackageRoot folder of the ContosoEvents project.
 
-4.  Back in the Azure portal, select **Browse** under Containers in the side menu for your Cosmos DB. The database (TicketManager) and container (Orders and Events) names are pre-set in the Local.1Node.xml file, so verify these match the collection and database names you see in the Azure portal.
+2.  Locate the **\<RepositoryCredentials\>** elements and replace the **AccountName** and **Password** attribute values with the username and password respectively that you copied previously from the Container Registry account properties.
 
-    ![In the Azure Portal, Azure Cosmos DB, in the left pane, under Containers, Browse is circled. In the right pane, the Database field is set to All Databases. Under that, the Orders and Events containers from the TicketManager database are circled.](media/image89.png "Azure Portal, Azure Cosmos DB")
+    ![In the ApplicationManifest.xml file, the \<RepositoryCredentials\> elements are circled.](media/applicationmanifest.png "ServiceManifest.xml file")
 
-5.  If you used a different database name, modify the value of the DataStorageDatabaseName parameter to reflect the Cosmos DB database name.
+### Task 6: Publish the Service Fabric Application
 
-6.  If you used different names for the Orders or Events containers, modify the values of the DataStorageEventsCollectionName and DataStorageOrdersCollectionName parameters to match your names.
+1.  From Solution Explorer, right-click the ContosoEvents project and select **Publish...**.
 
-7.  Save the Local.1Node.xml file. The Cosmos DB parameters should now resemble the following:
+2.  In the Publish Service Fabric Application dialog, set the Target profile to Cloud.xml, and select your Service Fabric Cluster endpoint from the Connection Endpoint drop down, then select **Publish**.
 
-    ![In the 1Node.xml file, the CosmosDB parameters display.](media/image90.png "1Node.xml file")
+    ![In the Publish Service Fabric Application dialog box, the Target profile, which is circled, is set to PublishProfiles\\Cloud.xml. The Connection Endpoint also is circled, and is set to contosoeventssf-SUFFIX.southcentralus.cloudapp.azure.com:19000. StoreLocation and StoreName are also circled.](media/image136.png "Publish Service Fabric Application dialog box")
 
-**Storage settings**:
+    >**Note**: Ensure that StoreLocation is CurrentUser and StoreName is My.
 
-1.  In the Azure Portal, browse to the Storage account you created in Exercise 1, Task 5, and select **Access keys** under Settings in the side menu.
+3.  Publishing to the hosted Service Fabric Cluster takes about 5 minutes. It follows the same steps as a local publish step with an alternate configuration. The Visual Studio output window keeps you updated of progress.
 
-2.  Select the copy button to the side of key1 Connection String to copy the value.
+4.  From the Visual Studio output window, validate that the deployment has completed successfully before moving on to the next task.
 
-    ![In Azure Portal, Storage account, in the left pane, under Settings, Access keys is circled. In the right pane, under Default keys, for key1, the Connection string and its corresponding copy button are circled.](media/image91.png "Azure Portal, Storage account")
+## Exercise 5: Set up the Function
 
-3.  Return to the Local.1Node.xml file in Visual Studio, and paste the key1 Connection String into the value for the **StorageConnectionString** parameter, and save Local.1Node.xml.
+### Task 1: Set up the function
 
-    ![In the 1Node.xml file, the Key 1 Connection String displays.](media/image92.png "1Node.xml file")
-
-**Test configurations**:
-
-1.  In Visual Studio, rebuild and publish the application to the local cluster using the steps you followed previously.
-
-2.  After the application is fully published, use Chrome to browse to the Swagger endpoint at <http://localhost:8082/swagger/ui/index>.
-
-3.  Select the **Orders** API methods, and select the POST operation for /api/orders.
-
-    ![In the Swagger endpoint window, Orders is circled. Below Orders, /api/orders method is circled. While the other methods have Get buttons next to them, the /api/orders method has a Post button next to it.](media/image93.png "Swagger Endpoint Window")
-
-4.  POST an order to the Contoso Events application. Copy the order request JSON below into the order value box, and select **Try it out**.
-
-    ```
-        {
-        "UserName": "johnsmith",
-        "Email": "john.smith@gmail.com",
-        "EventId": "EVENT1-ID-00001",
-        "PaymentProcessorTokenId": "YYYTT6565661652612516125",
-        "Tickets": 3
-        }
-    ```
-
-    ![In the Swagger endpoint window, the POST /api/orders section displays. The Order request JSON is circled, as is the Try it out button at the bottom.](media/image94.png "Swagger endpoint window")
-
-5.  This should return successfully, with an HTTP 200 response code. The Response Body contains a unique order id that clients could use to track the order.
-
-    ![In the Swagger endpoint window, the Response Body unique order id is circled, and the Response Code of 200 is circled.](media/image95.png "Swagger Endpoint Window")
-
-    > **Note**: This sends the order to the Web API, which in turn queues the order with the Ticket Order Processing queue. Ultimately, the Ticket Order Actor will pick up the message and process the order.
-
-6.  Now, you should have an order in the Service Fabric App, and it is being processed. In addition, the Ticket Order Actor should have sent the order to the externalization queue you set up in configuration earlier. The actor has pre-existing logic in place to write to this queue.
-
-7.  To verify that the order is in the queue, select **View -\> Cloud Explorer** from the menu in Visual Studio.
-
-    ![In Visual Studio on the menu bar View and Cloud Explorer are circled.](media/image96.png "Visual Studio menu bar")
-
-8.  In the Cloud Explorer, select the Account Management icon, and select the check box next to the subscription you are using for this lab, then select Apply. You may need to re-enter your account credentials to see the resources under the subscription.
-
-    ![In the Cloud Explorer pane, the Account Manager icon is circled.](media/image97.png "Cloud Explorer pane")
-
-9.  Now, expand Storage Accounts under your subscription in Cloud Explorer, and locate the Storage account you set up in Exercise 1, Task 5. You may need to select Load more at the bottom of the list, if you don't see the storage account. Expand the storage account, then expand **Queues**.
-
-    ![In the Cloud Explorer tree view, under contosoeventskb, Queues is selected.](media/image98.png "Cloud Explorer tree view")
-
-10. Double-click on the **contoso-externalization-requests** queue, and you should see the message you just sent from Swagger in the document window.
-
-    ![In the Cloud Explorer tree view, under Queues, Contosoeventsexternalization-requests is circled. In the Cloud Explorer document window, a line of message text is circled.](media/image99.png "Cloud Explorer document window")
-
-11. Now, double-click on the message, and you will see the contents of the message including the JSON representation of the order. Select **OK** to close the View Message dialog.
-
-    ![In the View Message section, JSON representation of the message displays.](media/image100.png "View Message section")
-
-### Task 5: Set up the functions
-
-In this task, you will create a function that will be triggered by the externalization queue we created for the app. Each order that is deposited to the queue by the TicketOrderActor type will trigger the ProcessOrderExternalizations function. The function then persists the order to the Orders collection of the Cosmos DB instance.
-
-You will also create a second function that will be used to generate load against the system at runtime. Overall, the ContosoEvents app has the following queue and function architecture. This should help you visualize how the queues and functions are related.
-
-![The ContosoEvents app architecture has two columns - Cosmos DB (Data Store), and Contoso Events (Web API). It also has three rows - Azure Functions, Azure Storage Queues, and Queue Sources. For Cosmos DB, its order of flow begins with Ticket Order Actor, Queue Source. An arrow then points up from Ticket Order Actor to Order Externalization (Its Azure Storage Queue), which then points up to Process order externalization (its Azure Function), which points to its endpoint, Cosmos DB Data Store. For Contoso Events, its order of flow begins with Service Fabric App, its Queue Source. An arrow then points up from there to Order Simulation (Its Azure Storage Queue), which then points up to Process order simulation (its Azure Function), which points to its endpoint, Contoso Events (Web API). its Azure Function is to process order simulization, Its Azure Storage Queue is Order Simulation, and its Queue Source is Service Fabric App. ](media/image101.png "ContosoEvents app architecture")
+In this task, you will create a function that will be triggered by the externalization queue we created for the app. Each order that is deposited to the queue by the Orders microservice  will trigger the ProcessOrderExternalizations function. The function then persists the order to the Orders container of the Cosmos DB instance.
 
 1.  There appears to be an issue with Azure Functions detecting Storage accounts, so before creating your function, you will manually add your Storage account connection string to the Application Settings for your Function App.
 
@@ -795,7 +589,7 @@ You will also create a second function that will be used to generate load agains
 
 3.  Now, browse to the Function App you created in Exercise 1, Step 4.
 
-4.  Select your Function App in the side menu, then select Application settings under Configured features.
+4.  Select your Function App in the side menu, then select Configuration under Configured features.
 
     ![In the Function Apps pane, in the left column, contosoeventsfn-SUFFIX is circled. In the right, Overview column, under Configured features, Application settings is circled.](media/image103.png "Function Apps pane")
 
@@ -826,15 +620,15 @@ You will also create a second function that will be used to generate load agains
 
     a. Continue to install any additional extensions required.
 
-11.  In the Create Function blade, enter the following:
+11.  In the New Function blade, enter the following:
     
-   a.  Name: **ProcessOrderExternalizations**
+     a.  Name: **ProcessOrderExternalizations**
     
-   b.  Queue name: **contosoevents-externalization-requests**
+     b.  Queue name: **contosoevents-externalization-requests**
 
-   c.  Storage account connection: Select **contosoeventsstore**
+     c.  Storage account connection: Select **contosoeventsstore**
    
-   d.  Select **Create**
+     d.  Select **Create**
     
 ![The values above are entered into the Azure Queue Storage trigger settings.](media/create-queue-storage-trigger.png  "Queue trigger settings")
 
@@ -852,7 +646,7 @@ You will also create a second function that will be used to generate load agains
 
 14. In the outputs box, locate and select **Azure Cosmos DB**, then choose **Select**.
 
-    ![In the Azure Cosmos DB output window, next to the Azure Cosmos DB account connection field, the New button is circled.](media/image118.png "Azure Cosmos DB output window")
+    ![In the Azure Cosmos DB output window, next to the Azure Cosmos DB account connection field, the Select button is circled.](media/image118.png "Azure Cosmos DB output window")
 
  > **Note**: If prompted to install extensions, Select **Install** and wait for the extensions to finish installing.
 
@@ -862,7 +656,7 @@ You will also create a second function that will be used to generate load agains
     
     b.  Use function return value: Leave unchecked.
 
-    c.  Collection name: Enter **Orders**.
+    c.  Collection Name: Enter **Orders**.
 
     d.  Partition key: Leave empty.
 
@@ -890,199 +684,46 @@ You will also create a second function that will be used to generate load agains
 
 19. Select all the code in that file (CTRL+A) and copy (CTRL+C) it.
 
-20. Return to your function's page in the Azure portal, and replace the code in the run.csx block with the code you just copied from Visual Studio, and select Save. The run.csx code should now look like the following. Note: The ProcessOrdersExternalization function will enable you to process another order, and see that it is saved to the Orders collection of the Cosmos DB.
+20. Return to your function's page in the Azure portal, and replace the code in the run.csx block with the code you just copied from Visual Studio. The run.csx code should now look like the following. Note: The ProcessOrdersExternalization function will enable you to process another order, and see that it is saved to the Orders collection of the Cosmos DB.
 
     ![Code that was copied from Visual Studio displays in the Run.csx block.](media/image123.png "Azure Portal, Run.csx block")
 
-21. Select **Save**
+21. Select **Save**.
 
-22. You will now create another function.  As before, select **+** next to Functions in the side menu.
+## Exercise 6: Placing ticket orders
 
-    ![Under Function Apps, contosoeventsfn-SUFFIX is expanded, and under it, the + icon is circled.](media/image106.png "Function Apps Section")
 
-23. In the Choose a template screen that appears, select **Data Processing** in the Scenario dropdown list.
+### Task 1: Test the Events microservice by using Swagger
 
-24. Select **Azure Queue Storage Trigger**
+In this task, you will test the events retrieval from the application deployed in the hosted Service Fabric Cluster.
 
-    ![In the Choose a template screen, Data Processing is selected in the Scenario dropdown and Azure Queue Storage Trigger is circled](media/choose-data-processing-template.png "Choose a template, Queue trigger")
-    
-    > **Note**: If the PowerShell option does not show, ensure that the Experimental Language Support is set to Enabled.
-
-25. In the Queue trigger dialog, enter the following:
-
-    a.  Name: Enter **ProcessSimulationRequests**.
-
-    b.  Queue name: Enter your simulation queue name, from Cloud explorer in Visual Studio. The value should be **contosoevents-simulation-requests**.
-
-    c.  Storage account connection: Select **contosoeventsstore** from the drop down.
-
-    d.  Select **Create** to create the new function.
-
-    ![Fields in the Queue Trigger dialog box are set to the previously defined settings.](media/new-trigger-function.png "Queue Trigger dialog box")
-   
-
-26. Select Integrate under the new **ProcessSimulationRequests** function in the menu.
-
-    ![Under Functions, under ProcessSimulation Requests, Integrate is circled.](media/image126.png "Functions section")
-
-27. Make sure Azure Queue Storage is selected under Triggers, then enter the following:
-
-    a.  Message parameter name: Enter **simulationRequest**.
-
-    b.  Storage account connection: Leave set to **contosoeventsstore**.
-
-    c.  Queue name: Leave as **contosoevents-simulation-requests**.
-
-    d.  Select **Save**.
-
-    ![In the Integrate Window, under Triggers, Azure Queue Storage (triggerInput) is circled. Under Azure Queue Storage trigger, the Message parameter name field is set to simulationRequest.](media/image127.png "Integrate window")
-
-28. Select the **ProcessSimulationRequests** function in the side menu.
-
-    ![Under Functions, ProcessSimulation Requests is circled.](media/image128.png "Functions section")
-
-29. In this step we will manually add an empty powershell file to allow us to paste in an existing powershell script for our function.
-
-    a. Scroll all the way to the right until you the View Files link is displayed.
-
-    b. Select **View Files**.
-    
-    !["An arrow pointing to the View Files link in the far corner of the screen"](media/view-files-link.png "View files link")
-
-    c. Select **+ Add**.
-
-    d. Name the new file **run.ps1**.
-
-    ![Add is selected and a file named run.ps1 has been added in the View File screen. ](media/add-file-powershell.png "Add run powershell file")
-
-    e. Select the **run.csx** file and Select **Delete**.
-
-
-28. Return to Visual Studio, and open the ProcessTicketOrderSimulationRequest.ps1 file in the Azure Functions folder.
-
-    ![In Solution Explorer, in the Azure Functions folder, ProcessTicketOrderSimulationRequest.ps1 is circled.](media/image129.png "Solution Explorer")
-
-29. Copy all the contents of this file (CTRL+A, then CTRL+C), then return to your function page in the Azure portal, and paste the code into the run.ps1 code block.
-
-30. Select **Save**.
-
-31. The final setting to update is the API Management key. You will return to set this up when you set up the API Management service.
-
-### Task 6: Test order data sync
-
-In this task, you will test the ticket order processing back-end, to validate that orders are queued and processed by the ProcessOrderExternalizations function -- ultimately saving the order to the Orders collection of the Cosmos DB instance.
-
-1.  In the Azure Portal, navigate to the Function App.
-
-2.  Select the **ProcessOrderExternalizations** function, and select **Logs** at the bottom of the screen. Leave the window open with the Logs visible.
-
-    ![At the bottom of the Run.csx block, the Logs button is circled.](media/image130.png "Azure Portal Run.csx block")
-
-3.  Repeat the steps to post an order via Swagger to the /api/orders endpoint (Task 4, Test configurations, Steps 2 -- 5).
-
-4.  As orders are processed, you will see activity in the function logs in the Azure portal.
-
-    ![In the Azure Portal function log window, the order id of the function is circled.](media/image131.png "Azure Portal function logs")
-
-5.  Copy the order id of the function just processed. You will use this information below to verify the order was persisted to the Orders collection in Cosmos DB.
-
-6.  If logs are not appearing in this view, select the Monitor tab under the ProcessOrderExternalizations function, then select a log item that has an "id" parameter value passed to the function, as shown below:
-
-    ![In the function apps pane, under Function, the ProcessOrderExternalizations ID parameter value is circled. under Logs, the same ID value is circled.](media/image132.png "Function apps pane")
-
-    >**Note**: If when selecting the Monitor tab, a request to configure Application Insights is displayed, choose Switch to classic view.
-  
-    ![In the Monitor tab, the Switch to classic view is circled.](media/image132a.png "Monitor tab Application Insights request")
-
-7.  In the Azure portal, navigate to your Cosmos DB account, and from the top menu of the Overview blade, select Data Explorer.
-
-    ![In the Azure Cosmos DB account pane, the Data Explorer button is circled.](media/image133.png "Azure Cosmos DB account pane")
-
-8.  In Cosmos DB Data Explorer, select Orders under the TicketManager database, then select New SQL Query from the toolbar, and enter the following query into the Query 1 window, replacing the ID in red with the order id you copied above.
-
-```
-    SELECT * FROM c WHERE c.id = '56dab32a-4154-4ea5-befa-2eb324e142ee'
-```
-
-9.  Select Execute Query.
-
-    ![In the Azure Cosmos DB account pane, in the left column, Data Explorer is selected. In the center column, at the top, the New SQL Query button is circled. Under Collections, TicketManager is expanded, and Orders is circled. In the right column, on the Query 1 tab, in the Query 1 field, a callout points to an ID in red, and says, \"Replace with your order ID.\" in the Results pane at the bottom, the same order ID is circled. The Execute Query button is circled as well. ](media/image134.png "Azure Cosmos DB account pane")
-
-10. If the Cosmos DB query returns the order id specified, the order has been fully processed through to the Cosmos DB.
-
-## Exercise 4: Publish the Service Fabric Application
-
-Duration: 15 minutes
-
-In this exercise, you will publish the Service Fabric Application to the Azure cluster you created previously. After it is deployed, you will validate it by sending orders through the Web API endpoints exposed from the cluster.
-
-### Task 1: Publish the application
-
-In this task, you will deploy the application to a hosted Service Fabric Cluster.
-
-1.  In Visual Studio on your Lab VM, within Solution Explorer, open **Cloud.xml** from the ApplicationParameters folder of the ContosoEventsApp project, under the Service Fabric folder. This file contains parameters we can use for publishing to the hosted cluster, as opposed to the local cluster.
-
-    ![In the Solution Explorer window, the following path is expanded: Service Fabric\\ContosoEventsApp\\ApplicationParameters. Under ApplicationParameters, Cloud.xml is circled.](media/image135.png "Solution Explorer window")
-
-2.  Open **Local.1Node.XML** from the same folder.
-
-3.  To make sure you are using the same parameters you setup earlier for the Local cluster, copy just the following parameters from Local.1Node.xml to Cloud.xml, overwriting the existing parameters in Cloud.xml, then save Cloud.xml.
-
-```
-    <Parameter Name="DataStorageEndpointUri" Value="" />
-    <Parameter Name="DataStoragePrimaryKey" Value="" />
-    <Parameter Name="DataStorageDatabaseName" Value="TicketManager" />
-    <Parameter Name="DataStorageEventsCollectionName" Value="Events" />
-    <Parameter Name="DataStorageOrdersCollectionName" Value="Orders" />
-    <Parameter Name="DataStorageLogMessagesCollectionName" Value="LogMessages" />
-    <Parameter Name="StorageConnectionString" Value="" />
-    <Parameter Name="LogsStorageTableName" Value="prodlogs" />
-    <Parameter Name="ExternalizationQueueName" Value="contosoevents-externalization-requests"/>
-    <Parameter Name="SimulationQueueName" Value="contosoevents-simulation-requests" />
-```
-
-4.  Review the settings related specifically to cloud publishing.
-
-5.  In Cloud.xml, verify the **WebAPi\_InstanceCount** parameter is set to -1. This instructs the cluster to create as many instances of the Web API as there are nodes in the cluster.
-
-6.  In Cloud.xml, verify the **TicketOrderService\_PartitionCount** parameter is set to 5.
-
-```
-    <Parameter Name="TicketOrderService_PartitionCount" Value="5" />
-    <Parameter Name="TicketOrderService_MinReplicaSetSize" Value="3" />
-    <Parameter Name="TicketOrderService_TargetReplicaSetSize" Value="3" />
-    <Parameter Name="WebApi_InstanceCount" Value="-1" />
-    <Parameter Name="TicketOrderActorService_PartitionCount" Value="5" />
-    <Parameter Name="EventActorService_PartitionCount" Value="1" />
-```
-
-7.  From Solution Explorer, right-click the ContosoEventsApp project and select **Publish**.
-
-8.  In the Publish Service Fabric Application dialog, set the Target profile to Cloud.xml, and select your Service Fabric Cluster endpoint from the Connection Endpoint drop down, then select **Publish**.
-
-    ![In the Publish Service Fabric Application dialog box, the Target profile, which is circled, is set to PublishProfiles\\Cloud.xml. The Connection Endpoint also is circled, and is set to contosoeventssf-SUFFIX.southcentralus.cloudapp.azure.com:19000. StoreLocation and StoreName are also circled.](media/image136.png "Publish Service Fabric Application dialog box")
-
-    >**Note**: Ensure that StoreLocation is LocalMachine and StoreName is My.
-
-9.  Publishing to the hosted Service Fabric Cluster takes about 5 minutes. It follows the same steps as a local publish step with an alternate configuration. The Visual Studio output window keeps you updated of progress.
-
-10. From the Visual Studio output window, validate that the deployment has completed successfully before moving on to the next task.
-
-### Task 2: Test an order from the cluster
-
-In this task, you will test an order against your application deployed to the hosted Service Fabric Cluster.
-
-1.  In a Chrome browser on your Lab VM, navigate to the Swagger endpoint for the Web API exposed by the hosted Service Fabric cluster. The URL is made of:
+1.  In a Chrome browser on your Lab VM, navigate to the Swagger endpoint for the Events microservice exposed by the hosted Service Fabric cluster. The URL is made of:
 
     > For example:
     >
-    > <http://contosoeventssf-SUFFIX.southcentralus.cloudapp.azure.com:8082/swagger/ui/index>
+    > <http://contosoeventssf-SUFFIX.southcentralus.cloudapp.azure.com:8082/swagger>
 
-2.  Expand the Orders API and expand the POST method of the /api/orders endpoint.
+2.  Expand the Events API and expand the GET method of the /api/Events endpoint.
 
-    ![On the Swagger Endpoint webpage for ContosoEvents.WebApi, Orders is circled. Under Orders, the POST method for api/orders is expanded, and the order field, which currently is empty, is circled.](media/image137.png "Swagger Endpoint webpage")
+3.  Select the Try it out button and then select the Execute button.
 
-3.  Copy the JSON below, and paste it into the order field, highlighted in the screen shot above, then select Try it out.
+    ![On the Swagger Endpoint webpage for Contoso Events API - Events, Execute button is circled.](media/image137.png "Swagger Endpoint webpage")
+
+### Task 2: Test the Orders microservice by using Swagger
+
+In this task, you will test the orders creation from the application deployed in the hosted Service Fabric Cluster.
+
+1.  In a Chrome browser on your Lab VM, navigate to the Swagger endpoint for the Orders microservice exposed by the hosted Service Fabric cluster. The URL is made of:
+
+    > For example:
+    >
+    > <http://contosoeventssf-SUFFIX.southcentralus.cloudapp.azure.com:8083/swagger>
+
+2.  In the Orders API section, expand the POST method of the /api/Orders endpoint.
+
+3.  Select the Try it out button.
+
+4.  Copy the JSON below, and paste it into the order field, highlighted in the screen shot above, then select Execute.
 
     ```
         {
@@ -1094,36 +735,36 @@ In this task, you will test an order against your application deployed to the ho
         "Tickets": 3
         }
     ```
+    ![In the POST method for api/orders section, the order field now contains the previous JSON. At the bottom, the Execute button is circled.](media/image138.png "POST api/orders section")
 
-    ![In the POST method for api/orders section, the order field now contains the previous JSON. At the bottom, the Try it out button is circled.](media/image138.png "POST api/orders section")
+5.  This should return with HTTP 200 response code. The Response Body includes a unique order id that can be used to track the order. Copy the Response Body value. It will be used to verify the order was persisted in Cosmos DB.
 
-4.  This should return with HTTP 200 response code. The Response Body includes a unique order id that can be used to track the order. Copy the Response Body value. It will be used to verify the order was persisted in Cosmos DB.
+6.  Verify that the order was persisted to the Orders collection.
 
-    ![In the Try it out section, the Response Body and unique order ID is circled, as is the Response Code (200).](media/image139.png "Try it out section")
+7.  In the Azure portal, navigate to your Cosmos DB account.
 
-5.  Verify that the order was persisted to the Orders collection.
-
-6.  In the Azure portal, navigate to your Cosmos DB account.
-
-7.  Perform a query against the Orders collection, as you did previously, to verify the order exists in the collection. Replace the id in the query with the order id you copied from the Response Body above.
+8.  Perform a query against the Orders collection, as you did previously, to verify the order exists in the collection. Replace the id in the query with the order id you copied from the Response Body above.
 
     ![In the Azure Cosmos DB account, on the top menu, the New SQL Query button is circled. In the left column, under SQL API, TicketManager is expanded, and Orders is circled. In the right column, on the Query 1 tab, in the Query 1 field, an ID in red is circled. In the Results pane at the bottom, the same order ID is circled. The Execute Query button is circled as well. ](media/image140.png "Azure Cosmos DB account")
+    
+    > Note: In order to write to the Cosmos DB database, the Azure Function must be running.
 
-## Exercise 5: API Management
+
+## Exercise 7: API Management
 
 Duration: 15 minutes
 
 In this exercise, you will configure the API Management service in the Azure portal.
 
-### Task 1: Import API
+### Task 1: Import Events API
 
-In this task, you will import the Web API description to your API Management service to create an endpoint.
+In this task, you will import the Events API description to your API Management service to create an endpoint.
 
-1.  In the Azure portal, navigate to the hands-on-lab resource group, and select your API Management Service from the list of resources.
+1.  In the Azure portal, navigate to the **hands-on-lab** resource group, and select your API Management Service from the list of resources.
 
     ![In the Resource group list of resources, the contosoevents-SUFFIX API Management service is circled.](media/image141.png "Resource group list of resources")
 
-2.  In the API Management blade, select **APIs** under Api Management.
+2.  In the API Management blade, select **APIs** under API Management.
 
     ![In the API Management blade, on the left, under Api Management, APIs is circled.](media//image142.png "API Management blade")
 
@@ -1131,9 +772,9 @@ In this task, you will import the Web API description to your API Management ser
 
     ![In the APIs blade, OpenAPI specification is circled.](media//image143.png "APIs blade")
 
-4.  Return to your Swagger browser window, and copy the URL from the textbox at the top of the screen, next to the Swagger logo, as shown in the screen shot below.
+4.  In a browser window, open the Contoso Events API - Events Swagger page, by navigating to `http://contosoeventssf-SUFFIX.southcentralus.cloudapp.azure.com:8082/swagger`.  Copy the Swagger document location by right-clicking the **/swagger/v1/swagger.json** link.
 
-    ![In the Swagger browser window, the URL is circled.](media/image144.png "Swagger browser window")
+    ![In the Swagger browser window, the Copy Link Location option is circled.](media/swagger-events.png "Swagger browser window")
 
 5.  Return to the Create from OpenAPI specification window, click the **Full** link and do the following:
 
@@ -1153,17 +794,58 @@ In this task, you will import the Web API description to your API Management ser
 
     > **Note**: You would typically create a new product for each environment in a scenario like this one. For example, Development, Testing, Acceptance and Production (DTAP) and issue a key for your internal application usage for each environment, managed accordingly.
 
-6.  Select **Settings** in the ContosoEvents.WebApi toolbar, update **Web Service URL** to point to your published API endpoint.  Ensure that it uses HTTP instead of HTTPS, and select **Save**.
+6.  Select **Settings** in the Contoso Events API - Events toolbar, update **Web Service URL** to point to your published API endpoint.  Ensure that it uses HTTP instead of HTTPS, and select **Save**.
 
-    ![On the right of ContosoEvents.WebApi api blade, the Settings tab is selected, and Web Service URL and Save are circled.](media/image145a.png "")
+    ![On the right of Contoso Events API item, the Settings tab is selected, and Web Service URL and Save are circled.](media/eventsapi-settings.png "")
 
-    > **Note**: Notice the URL under "Base URL". You will use this URL in your website configuration in the next exercise.
+    > **Note**: After saving, notice the URL under "Base URL". You will use this URL in your website configuration in the next exercise.
+    
+### Task 2: Import Orders API
 
-7.  Select **Design**. you will see your API backend endpoint.
+In this task, you will import the Orders API description to your API Management service to create an endpoint.
 
-    ![In the APIs blade, ContosoEvents.WebApi is circled. On the right, the Design tab is selected, and the ContosoEvents.WebApi Backend endpoint URL is circled.](media/image146.png "Publisher portal")
+1.  In the Azure portal, navigate to the **hands-on-lab** resource group, and select your API Management Service from the list of resources.
 
-### Task 2: Retrieve the user subscription key
+    ![In the Resource group list of resources, the contosoevents-SUFFIX API Management service is circled.](media/image141.png "Resource group list of resources")
+
+2.  In the API Management blade, select **APIs** under API Management.
+
+    ![In the API Management blade, on the left, under Api Management, APIs is circled.](media//image142.png "API Management blade")
+
+3.  In the APIs blade, select **OpenAPI**.
+
+    ![In the APIs blade, OpenAPI specification is circled.](media//image143.png "APIs blade")
+
+4.  In a browser window, open the Orders Events API - Events Swagger page, by navigating to `http://contosoeventssf-SUFFIX.southcentralus.cloudapp.azure.com:8083/swagger`.  Copy the Swagger document location by right-clicking the **/swagger/v1/swagger.json** link.
+
+    ![In the Swagger browser window, the Copy Link Location option is circled.](media/swagger-orders.png "Swagger browser window")
+
+5.  Return to the Create from OpenAPI specification window, click the **Full** link and do the following:
+
+    a. Paste the URL copied from Swagger into the OpenAPI specification textbox.
+
+    b. Select **HTTPs** as the URL scheme.
+
+    c. Enter **events** in the API URL suffix textbox.
+    
+    d. Tags: Leave empty.
+
+    e. Select **Unlimited** in the Products.
+
+    f. Select **Create**.
+    
+    ![On the Create from OpenAPI specification window, fields are set to previously defined settings.](media/ordersapi-creation.png "Create from OpenAPI specification")
+
+    > **Note**: You would typically create a new product for each environment in a scenario like this one. For example, Development, Testing, Acceptance and Production (DTAP) and issue a key for your internal application usage for each environment, managed accordingly.
+
+6.  Select **Settings** in the Contoso Events API - Orders toolbar, update **Web Service URL** to point to your published API endpoint.  Ensure that it uses HTTP instead of HTTPS, and select **Save**.
+
+    ![On the right of Contoso Events API item, the Settings tab is selected, and Web Service URL and Save are circled.](media/ordersapi-settings.png "")
+
+    > **Note**: After saving, notice the URL under "Base URL". You will use this URL in your website configuration in the next exercise.
+
+
+### Task 3: Retrieve the user subscription key
 
 In this task, you will retrieve the subscription key for the client applications to call the new API Management endpoint.
 
@@ -1183,28 +865,7 @@ In this task, you will retrieve the subscription key for the client applications
 
     ![The Unlimited (default) subscription\'s Primary key now displays, and is circled.](media/image150.png "Unlimited subscription's Primary key")
 
-5.  You now have the API Management application key you will need to configure the Function App settings.
-
-### Task 3: Configure the Function App with the API Management key
-
-In this task, you will provide the API Management key in a setting for the Function App, so it can reach the Web API through the API Management service.
-
-1.  From the Azure Portal, browse to the Function App.
-
-2.  You will create an Application setting for the function to provide it with the API Management consumer key.
-
-3.  Select your Function App in the side menu, then select Application settings under Configured features.
-
-    ![In the Function Apps pane, on the left under Function Apps, contosoeventsfn-SUFFIX is circled. On the right under Configured features, Application settings is circled.](media/image103.png "Function Apps")
-
-4.  In the Application settings section, select **+New application setting**, and enter **contosoeventsapimgrkey** into the name field, and paste the API key you copied from the Developer portal above into the value field.
-
-    ![In the Application settings section, in the name field displays contosoeventsapimgrkey. At the top, the Save and +New application setting buttons are circled.](media/image151.png "Application settings section")
-
-5.  Select **Save** to apply the change.
-
-
-## Exercise 6: Configure and publish the web application
+## Exercise 8: Configure and publish the web application
 
 Duration: 15 minutes
 
@@ -1220,14 +881,14 @@ In this task, you will update configuration settings to communicate with the API
     <add key="apimng:BaseUrl" value="" \>
     <add key="apimng:SubscriptionKey" value="" \>
     ```
-
+    
     ![In Solution Explorer, the following folders are expanded: Web\\ContosoEvents.Web\\Web.config.](media/image152.png "Solution Explorer")
 
-2.  For the apimng:BaseUrl key, enter the base URL of the API you created in the API Management Publisher Portal (Exercise 5, Task 1, Step 5), such as <https://contosoevents-SUFFIX.azure-api.net/events/>
+2.  For the apimng:BaseUrl key, enter the base URL of the API you created in the API Management Publisher Portal (Exercise 7, Task 1, Step 6), such as <https://contosoevents-SUFFIX.azure-api.net/>
 
-    > **Note**: Make sure to include a trailing "/" or the exercise will not work.
+    > **Note**: Make sure to use only the domain name, and include a trailing "/" or the exercise will not work.
 
-3.  For the apimng:SubscriptionKey key, enter the subscription key you revealed in API Management developer portal (Exercise 5, Task 2, Step 4).
+3.  For the apimng:SubscriptionKey key, enter the subscription key you revealed in API Management developer portal (Exercise 7, Task 3, Step 3).
 
 4.  Save Web.config. You should have values for two of the API Management app settings.
 
@@ -1240,6 +901,8 @@ In this task, you will test the web application calls to API Management by creat
 1.  Using Solution Explorer in Visual Studio, expand the Web folder, then right-click the ContosoEvents.Web project, select **Debug**, and then **Start new instance**.
 
     ![In Solution Explorer, ContosoEvents.Web is circled, and its right-click menu displays.](media/image154.png "Solution Explorer")
+    
+    > **Note:** If you receive an error regarding roslyn\csc.exe path, clean the Solution and rebuild.
 
 2.  If prompted about whether you would like to trust the IIS Express SSL certificate, select **Yes**, then select **Yes** again at the Security Warning prompt.
 
@@ -1299,162 +962,11 @@ In this task, you will publish the web application to Azure.
 
 6.  When publishing is complete, your browser will launch, and navigate to the deployed web app home page. You can optionally submit another order to validate functionality works as in Task 2.
 
-## Exercise 7: Upgrading
-
-Duration: 30 minutes
-
-In this task, you will make changes to the code, and deploy an update to the application to enhance functionality. Specifically, the update addresses the area of concern related to changes in the ticket order model, and the impact on the system.
-
-This task will illustrate the mechanism that Service Fabric provides for upgrading an application in production.
-
-### Task 1: How upgrade works
-
-In Service Fabric, deployments can be either regular or upgrade. A regular deployment erases any previous deployment data while the upgrade deployment preserves it. There are advantages to upgrades:
-
--   Stateful service data will not be lost during upgrade.
-
--   Availability remains during the upgrade.
-
-The following figure illustrates the deployment hierarchy:
-
-![The Deployment hierarchy diagram starts on the left with Deployment, which has two lines leading to Regular (Replaces,) and Upgrade (Preserves). Upgrade has two lines leading to Control, and Modes. Control has two lines to Health Check Policies, and Upgrade Parameters. Upgrade Parameters has two two lines to Healthy Check Retry Timeout, and Others. From Upgrade, as previously stated, the second line leads to Modes. Modes then has three lines to Monitored, which automates the upgrade and health check; Unmonitored Auto, which Automates the upgrade but skips the health check; and Unmonitored Manual, which manually upgrades each upgrade domain.](media/image166.png "Deployment hierarchy diagram")
-
-If you set the upgrade mode to Monitored, Service Fabric will be in full control of the upgrade process. There is a configurable time to wait after the upgrade has finished before Service Fabric evaluates the health of the application. This value defaults to 600 seconds.
-
-### Task 2: Update an actor state
-
-Currently, the TicketOrderActor does not have a status property to make it easier to check on the actor order status quickly. In this task, you will modify the Ticket Order State model to add a new status property.
-
-1.  In Visual Studio on the Lab VM, open **TicketOrder.cs** in the ContosoEvents.Models project, under the Common folder.
-
-    ![In Solution Explorer, under Common, under ContosoEvents.Models, TicketOrder.cs is circled.](media/image167.png "Solution Explorer")
-
-2.  Edit the TicketOrder type to include a status field based on an Enum. Uncomment all TODO: Exercise 6 -- Task 1 -- there are two places as shown below:
-
-```
-    //TODO: Exercise 6 - Task 1
-    [DataMember]
-    public OrderStatuses Status { get; set; }
-```
-
-3.  and
-
-```
-    //TODO: Exercise 6 - Task 1
-    public enum OrderStatuses
-    {
-    Fufilled,
-    TicketsExhausted,
-    CreditCardDenied,
-    Cancelled,
-    Invalid
-    }
-```
-
-4.  Save TicketOrder.cs.
-
-5.  From Solution Explorer, open TicketOrderActor.cs in the ContosoEvents.TicketOrderActor project, under the Service Fabric folder.
-
-6.  Edit the TicketOrderActor to add the new order status. Uncomment all TODO: Exercise 6 -- Task 1. The change will uncomment several lines that set the new Status field to one of the OrderStatuses enumeration values. Be sure to find all of the following comments (there are 6 total):
-
-```
-    //TODO: Exercise 6 - Task 1
-    state.Status = OrderStatuses.Invalid;
-    //TODO: Exercise 6 - Task 1
-    state.Status = OrderStatuses.Fufilled;
-    //TODO: Exercise 6 - Task 1
-    state.Status = OrderStatuses.CreditCardDenied;
-    //TODO: Exercise 6 - Task 1
-    state.Status = OrderStatuses.TicketsExhausted;
-    //TODO: Exercise 6 - Task 1
-    state.Status = OrderStatuses.Invalid;
-    //TODO: Exercise 6 - Task 1
-    state.Status = OrderStatuses.Cancelled;
-```
-
-7.  Save TicketOrderActor.cs.
-
-8.  After adding this field, the actor will now save it with each ticket order.
-
-9.  After making this change, rebuild the solution (Build menu, Rebuild solution), and verify that there are no errors.
-
-### Task 3: Perform a smooth upgrade
-
-In this task, you will configure settings for the Service Fabric application to perform an upgrade.
-
-1.  From the Visual Studio Solution Explorer, expand the Service Fabric folder, then right-click **ContosoEventsApp**, and select **Publish**.
-
-2.  In the Public Service Fabric Application dialog, select PublishProfiles\\Cloud.xml for the target profile, and check **Upgrade the Application**.
-
-    ![In the Public Service Fabric Application dialog box, in the Target profile field, PublishProfiles\\Cloud.xml is circled. The checkbox for Upgrade the Application is selected and circled.](media/image168.png "Public Service Fabric Application dialog box")
-
-3.  Select **Configure Upgrade Settings**, under Upgrade the Application. Select **Monitored** for the upgrade mode, then select **OK**.
-
-    ![In the Edit Upgrade Settings dialog box, the Upgrade mode is set to Monitored, and is circled.](media/image169.png "Edit Upgrade Settings dialog box")
-
-4.  From the Publish Service Fabric Application dialog, select **Manifest Versions**.
-
-5.  Change the **ContosoEvents.TicketOrderActorPkg\\Code -> New Version** to **1.1.0**. This change will force the actor package and the app to change to 1.1.0 as well.
-
-    ![In the Edit Versions dialog box, in the Application and Services section, ContosoEventsAppyType is expanded. Under that, ContosoEvents.TicketOrderActorPkg is expanded. Under that, the Code line is circled which shows that the current Code version is 1.0.0, and the new version is 1.1.0.](media/image170.png "Edit Versions dialog box")
-
-6.  Select **Save**.
-
-7.  Now that the upgrade configuration is set, select **Publish**.
-
-8.  Observe the Visual Studio Output window going through the upgrade process, which can take 5 minutes or more.
-
-    ![The Visual Studio Output window shows that the Upgrade completed successfully.](media/image171.png "Visual Studio Output window")
-
-9.  Navigate to the Service Fabric Explorer for the deployment using your URL, something like: <http://contosoeventssf-SUFFIX.southcentralus.cloudapp.azure.com:19080/Explorer/index.html>. You can retrieve this from the Azure portal, by navigating to your Service Fabric cluster's blade by selecting the Explorer button on the toolbar, or selecting the Service Fabric Explorer link in the Essentials area.
-
-    ![In the Service Fabric cluster pane, on the top menu, the Explorer button is circled, as is the Service Fabric Explorer URL at the bottom.](media/image172.png "Service Fabric cluster pane")
-
-10. It will show the app being upgraded one upgrade domain at a time.
-
-    ![In the Service Fabric Explorer window, a callout arrow points to the Status, which is set to Upgrading. Under Upgrade in progress, the Current Version (1.0.0) and the Target Version (1.1.0) are circled.](media/image173.png "Service Fabric Explorer window")
-
-11. When the upgrade is complete, from Service Fabric Explorer observe the new application version number.
-
-    ![In the Service Fabric Explorer window, The Application Type (ContosoEventsAppType) and Version (1.1.0) are circled. Under Services, the Version numbers are circled for the listed services.](media/image174.png "Service Fabric Explorer window")
-
-### Task 4: Submit a new order
-
-Now that the upgrade is completed successfully, you will submit a new order, and make sure that the newly submitted order has the extended state.
-
-1.  This time, you will post an order using the Web API for the deployed service. The order can be something like this:
-
-```
-    {
-    "userName": "testupgrade",
-    "email": "test.upgrade@gmail.com",
-    "eventId": "EVENT1-ID-00001",
-    "paymentProcessorTokenId": "ggashwh565-uiewuu87-ujdsk",
-    "tickets": 3
-    }
-```
-
-2.  Access the Swagger UI for your published Service Fabric Web API at a URL that looks like this: <http://contosoeventssf-SUFFIX.eastus.cloudapp.azure.com:8082/swagger/ui/index>.
-
-3.  Access the Orders API and select the POST method for the /api/orders endpoint. From there you can submit a new order using the JSON above.
-
-    ![In the POST method for api/orders section, the order field now contains the previous JSON. At the bottom, the Try it out button is circled.](media/image175.png "POST /api/orders section")
-
-4.  Once you get back a 200-response code, the order id will be returned in the Response Body.
-
-    ![In the Try it out section, the Response Body unique order ID is circled.](media/image176.png "Try it out section")
-
-5.  In the Azure portal, navigate to your Cosmos DB account.
-
-6.  Go to Cosmos DB Data Explorer, and query for the order id to see the new extended state actually persisted to the database, as you did in Exercise 3, Task 6, Steps 7-9.
-
-    ![In the Azure Cosmos DB account, on the top menu, the New SQL Query button is circled. In the left column, under SQL API, TicketManager is expanded, and Orders is circled. In one column, on the Query 1 tab, in the Query 1 field, an ID in red is circled. In the Results pane at the bottom, the same order ID is circled. The Execute Query button is circled as well. ](media/image177.png "Azure Cosmos DB account")
-
 ## After the hands-on lab
 
 Duration: 10 minutes
 
-In this exercise, attendees will deprovision any Azure resources that were created in support of the lab. You should follow all steps provided after attending the Hands-on lab.
+In this exercise, attendees will deprovision any Azure resources that were created in support of the lab. 
 
 ### Task 1: Delete the resource group
 
@@ -1463,3 +975,5 @@ In this exercise, attendees will deprovision any Azure resources that were creat
 2.  Search for the name of your research group, and select it from the list.
 
 3.  Select Delete in the command bar, and confirm the deletion by re-typing the Resource group name, and selecting Delete.
+
+You should follow all steps provided *after* attending the Hands-on lab.

@@ -1,5 +1,6 @@
 ﻿using ContosoEvents.Web.Models.Api;
 using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
@@ -37,46 +38,45 @@ namespace ContosoEvents.Web.Helpers
 
         public static IList<Event> GetEvents()
         {
-            var request = new RestRequest("api/events", Method.GET);
+            var request = new RestRequest("events/api/Events", Method.GET);
 
             return Execute<List<Event>>(request);
         }
 
         public static Event GetEvent(string id)
         {
-            var request = new RestRequest("api/events/" + id, Method.GET);
+            var request = new RestRequest("events/api/events/" + id, Method.GET);
 
             return Execute<Event>(request);
         }
 
         public static Order GetOrder(string id)
         {
-            var request = new RestRequest("api/orders/" + id, Method.GET);
+            var request = new RestRequest("orders/api/orders/" + id, Method.GET);
 
             return Execute<Order>(request);
         }
 
         public static IList<Order> GetUserOrders(string username)
         {
-            var request = new RestRequest("api/orders/user/" + username, Method.GET);
+            var request = new RestRequest("orders/api/orders/user/" + username, Method.GET);
 
             return Execute<List<Order>>(request);
         }
 
-        public static string PlaceUserOrder(OrderRequest order)
+        public static Tuple<bool, string> PlaceUserOrder(OrderRequest order)
         {
-            var request = new RestRequest("api/orders", Method.POST);
+            var request = new RestRequest("orders/api/orders", Method.POST);
             request.AddJsonBody(order);
 
             var result = Execute(request);
-            return result.StatusCode == HttpStatusCode.OK && string.IsNullOrWhiteSpace(result.Content) == false
-                ? result.Content
-                : null;
+
+            return new Tuple<bool, string>(result.StatusCode == HttpStatusCode.OK, result.Content);
         }
 
         public static bool CancelUserOrder(string id)
         {
-            var request = new RestRequest("api/orders/cancel/" + id, Method.PUT);
+            var request = new RestRequest("orders/api/orders/cancel/" + id, Method.PUT);
 
             return Execute(request).StatusCode == HttpStatusCode.OK;
         }

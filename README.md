@@ -11,28 +11,29 @@ Contoso Events is an online service for concerts, sporting and other event ticke
 
 ### Workshop
 
-In this workshop, you will look at the process of developing a proof of concept (POC) that will illustrate the use of many Azure features to support a highly scalable microservices architecture based on Service Fabric and Azure Functions.
+In this workshop, you will look at the process of developing a proof of concept (POC) that will illustrate the use of many Azure features to support a highly scalable microservices architecture based on Service Fabric containers and Azure Functions.
 
-By the end of this workshop you will be better able to design and deploy solutions based on Service Fabric and Azure Functions, in conjunction with other Azure features.
+By the end of this workshop you will be better able to design and deploy solutions based on Service Fabric containers and Azure Functions, in conjunction with other Azure features.
 
 ### Whiteboard design session
 
 In this whiteboard design session, you will work in a group to design a solution that leverages aspects from microservices and serverless architectures to help an online concert ticket vendor survive the first five minutes of crushing load. You will handle the client's scaling needs through microservices built on top of Service Fabric and apply smooth updates or roll back failing updates. Finally, your group will design an implementation of load testing to optimize the architecture for handling spikes in traffic.
 
-At the end of this whiteboard design session, you will better be able to design scalable microservices solutions involving Service Fabric and Azure Functions.
+At the end of this whiteboard design session, you will better be able to design scalable microservices solutions involving Service Fabric containers and Azure Functions.
 
 ### Hands-on lab
 
-In this hands-on lab, you will construct an end-to-end Proof of concept for ticket ordering based on a microservices architecture based on Service Fabric and Azure Functions, alongside other supporting Azure features such as API Management, Web Apps, Azure Active Directory and Cosmos DB.
+In this hands-on lab, you will construct an end-to-end Proof of concept for ticket ordering based on a microservices architecture based on Service Fabric containers and Azure Functions, alongside other supporting Azure features such as Container Registry, API Management, Web Apps, Azure Active Directory and Cosmos DB.
 
-At the end of this hands-on lab, you will better be able to build solutions that leverage these Azure features, in addition to gaining experience with deploying, scaling, upgrading and rolling back Service Fabric applications.
+At the end of this hands-on lab, you will better be able to build solutions that leverage these Azure features, in addition to gaining experience with deploying and scaling Service Fabric applications.
 
 ## Azure services and related products
 
 - Azure Service Fabric
 - Azure Resource Groups
+- Azure Container Registry
 - Azure API Management
-- Azure  API Apps
+- Azure API Apps
 - Azure Active Directory
 - Azure Web Apps
 - Azure CosmosDB
