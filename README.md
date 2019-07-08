@@ -33,14 +33,15 @@ At the end of this hands-on lab, you will better be able to build solutions that
 - Azure Resource Groups
 - Azure Container Registry
 - Azure API Management
-- Azure API Apps
-- Azure Active Directory
+- Azure Active Directory B2C
 - Azure Web Apps
 - Azure Cosmos DB
 - Azure Storage
 - Azure Load Balancer
 - Azure Queues
 - Azure Functions
+- Docker
+- .NET Core
 
 ## Azure solutions
 
